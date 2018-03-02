@@ -4,11 +4,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DynamicXmlTests
 {
     [TestClass]
-    public class UnitTest1
+    public class BreakMeTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void HappyPathTest()
         {
+            //all goes well 
         }
     }
 }
