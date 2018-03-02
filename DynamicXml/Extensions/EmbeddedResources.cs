@@ -49,7 +49,7 @@ namespace DynamicXml
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString()));
+                Debug.WriteLine(string.Format("ლ(ಠ益ಠლ) {0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString()));
                 _logger.LogError(ex);
             }
 
@@ -58,7 +58,7 @@ namespace DynamicXml
 
         public static string GetEmbeddedContent(string name)
         {
-            return EmbeddedResources.GetEmbeddedContent(typeof(EmbeddedResources).Assembly, name);
+            return GetEmbeddedContent(typeof(EmbeddedResources).Assembly, name);
         }
     }
 }

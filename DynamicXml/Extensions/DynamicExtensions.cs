@@ -28,9 +28,10 @@ namespace DynamicXml
         //todo: put in your XmlMapper class
         public static T Extract<T>(string xml, bool errorOnMismatch = false) where T : class
         {
+#if DEBUG
             var watch = new Stopwatch();
             watch.Start();
-
+#endif
             _throwErrors = errorOnMismatch;
 
             if (string.IsNullOrWhiteSpace(xml))
@@ -52,24 +53,30 @@ namespace DynamicXml
             var dictionary = xmlDocument.Root.ToDynamic() as ExpandoObject;
             var result = dictionary.ToInstance<T>();
 
+#if DEBUG
             watch.Stop();
             var elapsedTime = watch.Elapsed;
-            Debug.WriteLine("{0}() Time Elapsed: {1} ", MethodBase.GetCurrentMethod().Name, elapsedTime);
+            Debug.WriteLine($"{ MethodBase.GetCurrentMethod().Name }() Time Elapsed: {elapsedTime.TotalMilliseconds} ms");
+#endif
 
             return result as T;
         }
 
         public static T ToInstance<T>(this IDictionary<string, object> dictionary) where T : class
         {
+#if DEBUG
             var watch = new Stopwatch();
             watch.Start();
+#endif
 
             var type = typeof(T);
             var instance = (T)ToInstance(Activator.CreateInstance(type, true), dictionary, type);
 
+#if DEBUG
             watch.Stop();
             var elapsedTime = watch.Elapsed;
-            Debug.WriteLine("{0}() Time Elapsed: {1} ", System.Reflection.MethodBase.GetCurrentMethod().Name, elapsedTime);
+            Debug.WriteLine($"{ MethodBase.GetCurrentMethod().Name }() Time Elapsed: {elapsedTime.TotalMilliseconds} ms");
+#endif
 
             return instance;
         }
@@ -88,8 +95,6 @@ namespace DynamicXml
 
             var parentProprties = _properties[parentType];
             var childProperties = _properties[childType];
-
-            Debug.WriteLine($"prop count: {_properties.Count}");
 
             foreach (var pair in dictionary ?? new Dictionary<string, object>(0))
             {
@@ -154,7 +159,7 @@ namespace DynamicXml
                             var list = nextChildInstance as IEnumerable;
                             nextProperty.SetValue(parent, list);
                         }
-#endif                        
+#endif
                         else
                         {
                             nextProperty.SetValue(parent, nextChildInstance);
@@ -326,17 +331,21 @@ namespace DynamicXml
         public static T DeserializeXML<T>(this string xml)
           where T : class
         {
+#if DEBUG
             var watch = new Stopwatch();
             watch.Start();
+#endif
             T value;
             using (TextReader reader = new StringReader(xml))
             {
                 value = new XmlSerializer(typeof(T)).Deserialize(reader) as T;
             }
 
+#if DEBUG
             watch.Stop();
             var elapsedTime = watch.Elapsed;
             Debug.WriteLine("{0}() Time Elapsed: {1} ", System.Reflection.MethodBase.GetCurrentMethod().Name, elapsedTime);
+#endif
 
             return value;
         }

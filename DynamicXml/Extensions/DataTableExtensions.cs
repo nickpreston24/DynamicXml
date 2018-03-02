@@ -162,6 +162,10 @@ namespace DynamicXml
         public static List<T> ToList<T>(this DataTable table)
             where T : class, new()
         {
+#if DEBUG
+            var watch = new Stopwatch();
+            watch.Start();
+#endif
             var list = new List<T>();
 
             if (table == null || table.Rows.Count == 0)
@@ -222,7 +226,12 @@ namespace DynamicXml
 
                 list.Add(item);
             }
+#if DEBUG
 
+            watch.Stop();
+            var elapsedTime = watch.Elapsed;
+            Debug.WriteLine($"{ MethodBase.GetCurrentMethod().Name }() Time Elapsed: {elapsedTime.TotalMilliseconds} ms");
+#endif
             return list;
         }
 
@@ -253,6 +262,11 @@ namespace DynamicXml
 
         public static void FillTable(this DataTable table, string connectionString, string selectQuery)
         {
+#if DEBUG
+            var watch = new Stopwatch();
+            watch.Start();
+#endif
+
             try
             {
                 using (var da = new SqlDataAdapter(selectQuery, connectionString))
@@ -267,6 +281,11 @@ namespace DynamicXml
                 Debug.WriteLine(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.Message));
                 throw;
             }
+#if DEBUG
+            watch.Stop();
+            var elapsedTime = watch.Elapsed;
+            Debug.WriteLine($"{ MethodBase.GetCurrentMethod().Name }() Time Elapsed: {elapsedTime.TotalMilliseconds} ms");
+#endif
         }
 
     }

@@ -259,3 +259,12 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+DynamicXML.CWLoanUnderwritingTests/CWLoanUnderwritingTests.cs
+DynamicXML.CWLoanUnderwritingTests/DynamicXML.CWLoanUnderwritingTests.csproj
+DynamicXML.CWLoanUnderwritingTests/packages.config
+DynamicXML.CWLoanUnderwritingTests/Properties/AssemblyInfo.cs
+DynamicXML.CWLoanUnderwritingTests/TemplateClasses/CWSelectedOptions.cs
+DynamicXML.CWLoanUnderwritingTests/TemplateClasses/ModellicaDecisionOutput.cs
+DynamicXML.CWLoanUnderwritingTests/TemplateClasses/SelectedOptions.cs
+DynamicXml.sln
+DynamicXml.sln
