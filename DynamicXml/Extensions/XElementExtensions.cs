@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace DynamicXml.Extensions
 {
-    public static partial class MyExtensions
+    public static partial class DynamicExtensions
     {
         public static XElement GetFirstElement(this XElement xElement, string tag) => xElement.Elements(tag).FirstOrDefault() ?? xElement;
 

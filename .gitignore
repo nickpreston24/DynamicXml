@@ -268,3 +268,16 @@ DynamicXML.CWLoanUnderwritingTests/TemplateClasses/ModellicaDecisionOutput.cs
 DynamicXML.CWLoanUnderwritingTests/TemplateClasses/SelectedOptions.cs
 DynamicXml.sln
 DynamicXml.sln
+DynamicXmlTests/MockingTests.cs
+DynamicXmlTests/TestClasses/Account.cs
+DynamicXmlTests/TestClasses/AccountService.cs
+DynamicXmlTests/TestClasses/CandyShop.cs
+DynamicXmlTests/IContainer.cs
+DynamicXmlTests/TestClasses/ICandy.cs
+DynamicXmlTests/TestClasses/ICandyShop.cs
+DynamicXmlTests/TestClasses/IAccountService.cs
+DynamicXmlTests/TestClasses/ICurrencyService.cs
+DynamicXmlTests/TestClasses/IPerson.cs
+DynamicXmlTests/TestClasses/Lollipop.cs
+DynamicXmlTests/SampleMockingTests.cs
+DynamicXmlTests/ICustomerView.cs

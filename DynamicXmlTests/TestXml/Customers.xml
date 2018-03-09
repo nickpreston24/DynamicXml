@@ -1,0 +1,8 @@
+﻿<Customers>
+  <Customer>
+    <Name>Bob</Name>
+    <City>Springfield</City>
+    <Age>25</Age>
+    <State>OH</State>
+  </Customer>
+</Customers>

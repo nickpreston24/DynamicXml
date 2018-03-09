@@ -58,6 +58,7 @@ namespace DynamicXml
                     });
                 Debug.WriteLine(string.Format("{0}:\n{1}", displayName, prettyJson));
             }
+
             return obj;
         }
     }
