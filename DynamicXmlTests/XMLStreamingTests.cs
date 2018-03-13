@@ -41,9 +41,10 @@ namespace DynamicXmlTests
             //Assert:
             Assert.IsNotNull(stores);
             Assert.IsTrue(stores.Count() > 0);
-            var customers = stores.SelectMany(s => s.Customers);
-            Debug.WriteLine($"Customer count: { customers.Count()} ");
-            customers.Dump();
+            //var customers = stores.SelectMany(s => s.Customers);
+            //Debug.WriteLine($"Customer count: { customers?.Count()} ");
+            //customers.Dump();
+            stores.Dump();
         }
 
         //[TestMethod]

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace DynamicXml.Extensions
 {
@@ -19,13 +18,14 @@ namespace DynamicXml.Extensions
 
         public static IList ToTypedList(this Type type)
         {
-            Debug.WriteLine(type.ToString());
+            if (type == null)
+            {
+                return default(IList);
+            }
 
             var listType = typeof(List<>);
             var constructedListType = listType.MakeGenericType(type);
             var instance = Activator.CreateInstance(constructedListType);
-            Debug.WriteLine(listType.ToString());
-            Debug.WriteLine(constructedListType.ToString());
             return (IList)instance;
         }
     }

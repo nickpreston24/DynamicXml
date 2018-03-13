@@ -214,35 +214,29 @@ namespace DynamicXml
             return parent;
         }
 
-
         private static void AssignChild(object parent, PropertyInfo property, IDictionary<string, object> childDictionary)
         {
             var childType = property?.PropertyType;
-            Debug.WriteLine(childType.ToString());
+            var baseType = childType.BaseType ?? childType;
 
             object nextChildInstance = CreateChild(childDictionary, childType);
-            Debug.WriteLine(nextChildInstance.ToString());
 
             var childElementType = childType.GetGenericArguments().SingleOrDefault();
 
-            if (childElementType == null) property.SetValue(parent, null); //here to avoid fails, remove when done.
-
-            if (nextChildInstance is IList list)
+            if (baseType.Equals(typeof(Array)))
             {
-                var classList = childElementType.ToTypedList();
+                property.SetValue(parent, nextChildInstance);
+            }
+            else if (nextChildInstance is IList list)
+            {
+                var classList = childElementType.ToTypedList() ?? default(IList);
 
-                foreach (var product in list)
+                foreach (object product in list)
                 {
-                    //classList.Add(product.ConvertTo(childElementType));
                     classList.Add(product);
                 }
 
-                Debug.WriteLine(classList.ToString());
                 property.SetValue(parent, classList);
-
-                //property.SetValue(parent, (List<Product>)list);
-                //property.SetValue(parent, nextChildInstance as List<object>);
-                //nextProperty?.SetValue(parent, TypeDescriptor.GetConverter(nextChildType).ConvertFrom(list), null);
             }
             else
             {
@@ -268,16 +262,16 @@ namespace DynamicXml
         }
         private static object CreateChild(IDictionary<string, object> childDictionary, Type childType)
         {
-            object child = null;
-            var baseType = childType.BaseType ?? childType;
+            object child = new object();
 
-            //Debug.WriteLine(childType.Name);
-            //Debug.WriteLine(baseType?.Name);
+            var baseType = childType.BaseType ?? childType;
 
             if (baseType.Equals(typeof(Array))
                 || childType.IsIEnumerableOfT())
             {
-                var elementType = childType.BaseType.Equals(typeof(Array)) ? childType.GetElementType() : childType.GetGenericArguments().Single();
+                var elementType = baseType.Equals(typeof(Array))
+                    ? childType.GetElementType()
+                    : childType.GetGenericArguments().Single();
 
                 var list = new List<object>(childDictionary.Values.Count);
 
@@ -290,10 +284,10 @@ namespace DynamicXml
                     }
                 }
 
-                if (childType.BaseType.Equals(typeof(Array)))
+                if (baseType.Equals(typeof(Array)))
                 {
                     var childArray = Array.CreateInstance(elementType, list.Count);
-                    var source = list.Cast<object>().ToArray();
+                    object[] source = list.Cast<object>().ToArray();
                     Array.Copy(source, childArray, list.Count);
                     child = childArray;
                 }
