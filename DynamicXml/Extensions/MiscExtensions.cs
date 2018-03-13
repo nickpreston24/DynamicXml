@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -61,5 +62,24 @@ namespace DynamicXml
 
             return obj;
         }
+
+
+        //public static bool IsIEnumerableOfT(this Type type)
+        //{
+        //    return type.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+        //    //return type.GetInterfaces().Any(t => t.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+        //}
+        public static bool Implements(this Type type, Type contract)
+        {
+            return contract.IsGenericTypeDefinition
+            ? type.GetInterfaces().Any(i => i.GetGenericTypeDefinition().Equals(contract))
+            : type.GetInterfaces().Any(i => i.Equals(contract));
+        }
+
+        public static bool IsIEnumerableOfT(this Type type)
+        {
+            return type.Implements(typeof(IEnumerable<>));
+        }
+
     }
 }

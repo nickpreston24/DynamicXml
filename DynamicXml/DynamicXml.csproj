@@ -49,12 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\XmlStreamer.cs" />
     <Compile Include="Extensions\DataTableExtensions.cs" />
     <Compile Include="Extensions\DynamicExtensions.cs" />
     <Compile Include="Extensions\EmbeddedResources.cs" />
     <Compile Include="Extensions\MiscExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\PropertyCache.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Extensions\XDocumentExtensions.cs" />
     <Compile Include="Extensions\XElementExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,5 +65,12 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TestClasses\TestClasses.csproj">
+      <Project>{793D11A6-7C97-46B0-9974-DDC6B56E31FE}</Project>
+      <Name>TestClasses</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
