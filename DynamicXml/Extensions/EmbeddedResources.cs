@@ -1,5 +1,4 @@
-﻿using CottonwoodFinancial.Framework.Logging.Client;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -9,7 +8,6 @@ namespace DynamicXml
 {
     public static class EmbeddedResources
     {
-        private static IClientLogger _logger = new ClientLogger();
         public static StreamReader GetStreamReader(this Assembly assembly, string name)
         {
             try
@@ -25,7 +23,6 @@ namespace DynamicXml
             catch (Exception ex)
             {
                 Debug.WriteLine(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString()));
-                _logger.LogError(ex);
             }
 
             return null;
@@ -50,7 +47,6 @@ namespace DynamicXml
             catch (Exception ex)
             {
                 Debug.WriteLine(string.Format("ლ(ಠ益ಠლ) {0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString()));
-                _logger.LogError(ex);
             }
 
             return string.Empty;
