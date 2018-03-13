@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicXmlTests", "DynamicX
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicXML.CWLoanUnderwritingTests", "DynamicXML.CWLoanUnderwritingTests\DynamicXML.CWLoanUnderwritingTests.csproj", "{75448698-7309-48E9-AF5F-28CDB84D1876}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClasses", "TestClasses\TestClasses.csproj", "{793D11A6-7C97-46B0-9974-DDC6B56E31FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{75448698-7309-48E9-AF5F-28CDB84D1876}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75448698-7309-48E9-AF5F-28CDB84D1876}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75448698-7309-48E9-AF5F-28CDB84D1876}.Release|Any CPU.Build.0 = Release|Any CPU
+		{793D11A6-7C97-46B0-9974-DDC6B56E31FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{793D11A6-7C97-46B0-9974-DDC6B56E31FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{793D11A6-7C97-46B0-9974-DDC6B56E31FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{793D11A6-7C97-46B0-9974-DDC6B56E31FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -84,25 +84,28 @@
     <Compile Include="BreakMeTests.cs" />
     <Compile Include="IContainer.cs" />
     <Compile Include="ICustomerView.cs" />
-    <Compile Include="TestClasses\Account.cs" />
-    <Compile Include="TestClasses\AccountService.cs" />
-    <Compile Include="TestClasses\Customer.cs" />
-    <Compile Include="TestClasses\IAccountService.cs" />
-    <Compile Include="TestClasses\ICandyShop.cs" />
-    <Compile Include="TestClasses\ICandy.cs" />
+    <Compile Include="TestClasses\Mockables\Account.cs" />
+    <Compile Include="TestClasses\Mockables\AccountService.cs" />
+    <Compile Include="TestClasses\Mockables\IAccountService.cs" />
+    <Compile Include="TestClasses\Mockables\ICandyShop.cs" />
+    <Compile Include="TestClasses\Mockables\ICandy.cs" />
     <Compile Include="SampleMockingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestClasses\CandyShop.cs" />
-    <Compile Include="TestClasses\ICurrencyService.cs" />
-    <Compile Include="TestClasses\IPerson.cs" />
-    <Compile Include="TestClasses\Keyboard.cs" />
-    <Compile Include="TestClasses\Lollipop.cs" />
+    <Compile Include="TestClasses\Mockables\CandyShop.cs" />
+    <Compile Include="TestClasses\Mockables\ICurrencyService.cs" />
+    <Compile Include="TestClasses\Mockables\IPerson.cs" />
+    <Compile Include="TestClasses\Extractables\Keyboard.cs" />
+    <Compile Include="TestClasses\Mockables\Lollipop.cs" />
     <Compile Include="XMLStreamingTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DynamicXml\DynamicXml.csproj">
       <Project>{7EA28498-12CB-465C-A535-43DE488734E5}</Project>
       <Name>DynamicXml</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestClasses\TestClasses.csproj">
+      <Project>{793d11a6-7c97-46b0-9974-ddc6b56e31fe}</Project>
+      <Name>TestClasses</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -111,7 +114,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="TestXml\Customers.xml" />
+    <EmbeddedResource Include="TestXml\Customers.xml" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

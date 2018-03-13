@@ -1,13 +1,10 @@
 ﻿using DynamicXml;
-using DynamicXmlTests.TestClasses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.Dynamic;
-using System.IO;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Xml;
-using System.Xml.Linq;
+using TestClasses;
 
 namespace DynamicXmlTests
 {
@@ -15,31 +12,53 @@ namespace DynamicXmlTests
     public class XMLStreamingTests
     {
         Assembly assembly = Assembly.GetExecutingAssembly();
+        private string xmlFilePath;
 
         [TestInitialize]
         public void Init()
         {
+            xmlFilePath = @"../../TestXml/Customers.xml";
         }
 
         [TestMethod]
-        public void CanStreamInstancesFromFile()
+        public void CanStreamCompositeClassFromFile()
         {
-            string xmlFilePath = @"../../TestXml/Customers.xml";
-            var streamQuery = from c in StreamElements(xmlFilePath, "Customer")
-                              select c;
-            //var document = XDocument.Load(xmlFilePath);
+#if DEBUG
+            var watch = new Stopwatch();
+            watch.Start();
+#endif
+            //Assemble
+            var xmlStreamer = new XmlStreamer(xmlFilePath);
 
-            List<Customer> customers = new List<Customer>();
-            foreach (var element in streamQuery)
-            {
-                var customer = (element.ToDynamic() as ExpandoObject).ToInstance<Customer>();
-                customers.Add(customer);
-            }
-
-            Assert.IsNotNull(customers);
-            Assert.IsTrue(customers.Count > 0);
-
+            //Act
+            IEnumerable<Store> stores = xmlStreamer.StreamInstance<Store>();
+            //IEnumerable<Store> stores = XmlStreamer.StreamInstance<Store>(xmlFilePath);
+#if DEBUG
+            watch.Stop();
+            var elapsedTime = watch.Elapsed;
+            Debug.WriteLine($"{ MethodBase.GetCurrentMethod().Name }() Time Elapsed: {elapsedTime.TotalMilliseconds} ms");
+#endif
+            //Assert:
+            Assert.IsNotNull(stores);
+            Assert.IsTrue(stores.Count() > 0);
+            var customers = stores.SelectMany(s => s.Customers);
+            Debug.WriteLine($"Customer count: { customers.Count()} ");
+            customers.Dump();
         }
+
+        //[TestMethod]
+        //public void CanStreamInstancesFromFile()
+        //{
+        //    var streamQuery = from customer in XmlStreamer.StreamXmlFile(xmlFilePath, "Customer")
+        //                      select customer;
+
+        //    List<Customer> customers = XmlStreamer.StreamToListOf<Customer>(streamQuery);
+
+        //    Assert.IsNotNull(customers);
+        //    Assert.IsTrue(customers.Count > 0);
+
+        //    customers.Dump();
+        //}
 
         [TestMethod]
         public void CanStreamInstancesFromXmlString()
@@ -47,38 +66,10 @@ namespace DynamicXmlTests
             string customerXml = assembly.GetEmbeddedContent("Customers.xml");
 
             var streamQuery =
-  from c in StreamElements("Customers.xml", "Customer")
-  where (string)c.Attribute("Country") == "UK"
-  select c;
-
-
+                  from c in XmlStreamer.StreamFile("Customers.xml", "Customer")
+                  where (string)c.Attribute("Country") == "USA"
+                  select c;
         }
 
-
-        public static IEnumerable<XElement> StreamElement(string xml, string elementName)
-        {
-            using (var reader = XmlReader.Create(new StringReader(xml)))
-            {
-                while (reader.Name == elementName || reader.ReadToFollowing(elementName))
-                    yield return (XElement)XNode.ReadFrom(reader);
-            }
-        }
-
-        private IEnumerable<XElement> StreamElements(string filePath, string elementName)
-        {
-            using (var xmlReader = XmlReader.Create(filePath))
-            {
-                xmlReader.MoveToContent();
-                while (xmlReader.Read())
-                {
-                    if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == elementName))
-                    {
-                        var item = XNode.ReadFrom(xmlReader) as XElement;
-                        yield return item;
-                    }
-                }
-                xmlReader.Close();
-            }
-        }
     }
 }
