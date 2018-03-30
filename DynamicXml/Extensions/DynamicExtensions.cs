@@ -18,6 +18,7 @@ namespace DynamicXml
 {
     /// <summary>
     /// <references>
+    /// Convert XML text directly into dynamic objects or defined POCO classes.
     /// https://stackoverflow.com/questions/13171525/converting-xml-to-a-dynamic-c-sharp-object
     /// https://www.codeproject.com/Articles/461677/Creating-a-dynamic-object-from-XML-using-ExpandoOb
     /// </references>
@@ -66,6 +67,57 @@ namespace DynamicXml
 
             return result as T;
         }
+
+        public static dynamic ToDynamic(this XDocument xDocument) => xDocument.Root.ToDynamic() as IDictionary<string, object>;
+
+        public static dynamic ToDynamic(this XElement node)
+        {
+            var parent = new ExpandoObject();
+            return node.ToDynamic(parent);
+        }
+
+        private static dynamic ToDynamic(this XElement node, dynamic parent)
+        {
+            if (node.HasElements)
+            {
+                if (node.Elements(node.Elements().First().Name.LocalName).Count() > 1)
+                {
+                    var item = new ExpandoObject();
+                    var list = new List<dynamic>();
+                    foreach (var element in node.Elements())
+                    {
+                        ToDynamic(element, list);
+                    }
+
+                    AddProperty(item, node.Elements().First().Name.LocalName, list);
+                    AddProperty(parent, node.Name.ToString(), item);
+                }
+                else
+                {
+                    var item = new ExpandoObject();
+
+                    foreach (var attribute in node.Attributes())
+                    {
+                        AddProperty(item, attribute.Name.ToString(), attribute.Value.Trim());
+                    }
+
+                    foreach (var element in node.Elements())
+                    {
+                        ToDynamic(element, item);
+                    }
+
+                    AddProperty(parent, node.Name.ToString(), item);
+                }
+            }
+            else
+            {
+                AddProperty(parent, node.Name.ToString(), node.Value.Trim());
+            }
+
+            return parent;
+        }
+
+
         public static T ToInstance<T>(this IDictionary<string, object> dictionary) where T : class
         {
 #if DEBUG
@@ -84,19 +136,11 @@ namespace DynamicXml
 
             return instance;
         }
+
         public static object ToInstance(this IDictionary<string, object> dictionary, Type type)
         {
-            //todo: check whether type is a class            
-            object instance = ToInstance(Activator.CreateInstance(type, true), dictionary, type);
-            return instance;
+            return (type.IsClass) ? ToInstance(Activator.CreateInstance(type, true), dictionary, type) : new Dictionary<string, object>(0);
         }
-        public static dynamic ToDynamic(this XDocument xDocument) => xDocument.Root.ToDynamic() as IDictionary<string, object>;
-        public static dynamic ToDynamic(this XElement node)
-        {
-            var parent = new ExpandoObject();
-            return node.ToDynamic(parent);
-        }
-
 
         private static object ToInstance(object parent, IDictionary<string, object> dictionary, Type childType)
         {
@@ -123,6 +167,14 @@ namespace DynamicXml
                         if (string.IsNullOrWhiteSpace(value.ToString()))
                         {
                             value = GetDefaultValue(nextProperty.PropertyType);
+                        }
+
+                        if (value == null)
+                        {
+#if DEBUG
+                            Debug.WriteLine($"[Warning!]: Property '{nextProperty.Name}', of type '{nextProperty.PropertyType.Name}' is null and could not be assigned!");
+#endif
+                            continue;
                         }
 
                         nextProperty?.SetValue(parent, TypeDescriptor.GetConverter(nextProperty.PropertyType)
@@ -173,93 +225,8 @@ namespace DynamicXml
 
             return parent;
         }
-        private static dynamic ToDynamic(this XElement node, dynamic parent)
-        {
-            if (node.HasElements)
-            {
-                if (node.Elements(node.Elements().First().Name.LocalName).Count() > 1)
-                {
-                    var item = new ExpandoObject();
-                    var list = new List<dynamic>();
-                    foreach (var element in node.Elements())
-                    {
-                        ToDynamic(element, list);
-                    }
 
-                    AddProperty(item, node.Elements().First().Name.LocalName, list);
-                    AddProperty(parent, node.Name.ToString(), item);
-                }
-                else
-                {
-                    var item = new ExpandoObject();
 
-                    foreach (var attribute in node.Attributes())
-                    {
-                        AddProperty(item, attribute.Name.ToString(), attribute.Value.Trim());
-                    }
-
-                    foreach (var element in node.Elements())
-                    {
-                        ToDynamic(element, item);
-                    }
-
-                    AddProperty(parent, node.Name.ToString(), item);
-                }
-            }
-            else
-            {
-                AddProperty(parent, node.Name.ToString(), node.Value.Trim());
-            }
-
-            return parent;
-        }
-
-        private static void AssignChild(object parent, PropertyInfo property, IDictionary<string, object> childDictionary)
-        {
-            var childType = property?.PropertyType;
-            var baseType = childType.BaseType ?? childType;
-
-            object nextChildInstance = CreateChild(childDictionary, childType);
-
-            var childElementType = childType.GetGenericArguments().SingleOrDefault();
-
-            if (baseType.Equals(typeof(Array)))
-            {
-                property.SetValue(parent, nextChildInstance);
-            }
-            else if (nextChildInstance is IList list)
-            {
-                var classList = childElementType.ToClassList() ?? default(IList);
-
-                foreach (object product in list)
-                {
-                    classList.Add(product);
-                }
-
-                property.SetValue(parent, classList);
-            }
-            else
-            {
-                property.SetValue(parent, nextChildInstance);
-            }
-        }
-        private static object CastListToType(IList list, Type type)
-        {
-            var converter = TypeDescriptor.GetConverter(type);
-
-            var list2 = new List<object>(list.Count);
-
-            foreach (var item in list)
-            {
-                //var value = Convert.ChangeType(item, type);
-                //list2.Add(converter.ConvertFrom(item));
-                var value = Activator.CreateInstance(type);
-
-                list2.Add(value);
-            }
-
-            return list2;
-        }
         private static object CreateChild(IDictionary<string, object> childDictionary, Type childType)
         {
             object child = new object();
@@ -304,6 +271,37 @@ namespace DynamicXml
 
             return child;
         }
+
+        private static void AssignChild(object parent, PropertyInfo property, IDictionary<string, object> childDictionary)
+        {
+            var childType = property?.PropertyType;
+            var baseType = childType.BaseType ?? childType;
+
+            object nextChildInstance = CreateChild(childDictionary, childType);
+
+            var childElementType = childType.GetGenericArguments().SingleOrDefault();
+
+            if (baseType.Equals(typeof(Array)))
+            {
+                property.SetValue(parent, nextChildInstance);
+            }
+            else if (nextChildInstance is IList list)
+            {
+                var classList = childElementType.ToListType() ?? default(IList);
+
+                foreach (object product in list)
+                {
+                    classList.Add(product);
+                }
+
+                property.SetValue(parent, classList);
+            }
+            else
+            {
+                property.SetValue(parent, nextChildInstance);
+            }
+        }
+
         private static void AddProperty(dynamic parent, string name, object value)
         {
             if (parent is List<dynamic> list)
@@ -315,11 +313,14 @@ namespace DynamicXml
                 (parent as IDictionary<string, object>)[name] = value;
             }
         }
-        private static object GetDefaultValue(Type type) => (type.IsValueType) ? Activator.CreateInstance(type) : null;
 
+        private static object GetDefaultValue(Type type) => (type.IsValueType) ? Activator.CreateInstance(type) : null;
 
     }
 
+    /// <summary>
+    /// Extra extensions from the web which may or may not be useful
+    /// </summary>
     public static partial class DynamicExtensions
     {
         #region Need Testing
@@ -349,7 +350,7 @@ namespace DynamicXml
         }
         public static DataTable ToDataTable(this List<dynamic> list)
         {
-            DataTable table = new DataTable();
+            var table = new DataTable();
             var properties = list.GetType().GetProperties();
             properties = properties.ToList().GetRange(0, properties.Count() - 1).ToArray();
             properties.ToList().ForEach(p => table.Columns.Add(p.Name, typeof(string)));
@@ -359,6 +360,9 @@ namespace DynamicXml
         #endregion Need Testing
     }
 
+    /// <summary>
+    /// The old standard of Serializing and Deserializing POCO
+    /// </summary>
     public static partial class DynamicExtensions
     {
         /// <summary>
@@ -409,6 +413,9 @@ namespace DynamicXml
         }
     }
 
+    /// <summary>
+    /// Probably garbage idea.  Safe to remove or ignore.
+    /// </summary>
     public class DynamicAliasAttribute : Attribute
     {
         private string alias;

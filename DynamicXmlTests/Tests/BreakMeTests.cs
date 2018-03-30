@@ -1,7 +1,8 @@
 ﻿using DynamicXml;
+using DynamicXmlTests.Classes.Extractables;
 using DynamicXmlTests.TestClasses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics;
+using System.Linq;
 
 namespace DynamicXmlTests
 {
@@ -19,15 +20,19 @@ namespace DynamicXmlTests
                     <Price>229.99</Price>
                 </Keyboard>";
 
-            var keyboard = DynamicExtensions.Extract<Keyboard>(xml);
-
-            Debug.WriteLine(keyboard.Name);
-            Debug.WriteLine(keyboard.SwitchType);
-            Debug.WriteLine(keyboard.Company);
-            Debug.WriteLine(keyboard.Price);
+            var keyboard = XmlStreamer.StreamInstances<Keyboard>(xml).First();
 
             Assert.IsNotNull(keyboard);
         }
-    }
 
+        [TestMethod]
+        public void CanUseEnumerables()
+        {
+            string xml = ""; //get Containers.xml
+
+            var containers = XmlStreamer.StreamInstances<Containers>(xml).FirstOrDefault();
+
+            Assert.IsNotNull(containers);
+        }
+    }
 }

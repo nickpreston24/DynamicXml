@@ -27,9 +27,10 @@ namespace DynamicXml
 
         public IEnumerable<XElement> StreamXmlFile(string elementName) => StreamFile(xmlFilePath, elementName);
         public IEnumerable<XElement> StreamXmlFile(FileInfo xmlFile) => StreamFile(xmlFilePath, xmlFile.FullName);
-        public IEnumerable<T> StreamInstance<T>() where T : class => StreamInstance<T>(XmlFile) ?? StreamInstance<T>(xmlFilePath);
 
-        public static IEnumerable<T> StreamInstance<T>(string xml) where T : class
+        //public IEnumerable<T> StreamInstance<T>() where T:
+        public IEnumerable<T> StreamInstances<T>() where T : class => StreamInstances<T>(XmlFile) ?? StreamInstances<T>(xmlFilePath);
+        public static IEnumerable<T> StreamInstances<T>(string xml) where T : class
         {
             var streamIterator = from element in Stream(xml, typeof(T).Name)
                                  select element;
@@ -39,7 +40,7 @@ namespace DynamicXml
                 yield return (rootElement.ToDynamic() as ExpandoObject).ToInstance<T>();
             }
         }
-        public static IEnumerable<T> StreamInstance<T>(FileInfo file) where T : class
+        public static IEnumerable<T> StreamInstances<T>(FileInfo file) where T : class
         {
             string xmlFilePath = file.FullName;
             var streamIterator = from element in StreamFile(xmlFilePath, typeof(T).Name)
