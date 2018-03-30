@@ -229,7 +229,7 @@ namespace DynamicXml
             }
             else if (nextChildInstance is IList list)
             {
-                var classList = childElementType.ToTypedList() ?? default(IList);
+                var classList = childElementType.ToClassList() ?? default(IList);
 
                 foreach (object product in list)
                 {

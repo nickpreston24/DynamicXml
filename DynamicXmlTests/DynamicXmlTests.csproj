@@ -82,14 +82,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BreakMeTests.cs" />
-    <Compile Include="IContainer.cs" />
-    <Compile Include="ICustomerView.cs" />
     <Compile Include="TestClasses\Mockables\Account.cs" />
     <Compile Include="TestClasses\Mockables\AccountService.cs" />
     <Compile Include="TestClasses\Mockables\IAccountService.cs" />
     <Compile Include="TestClasses\Mockables\ICandyShop.cs" />
     <Compile Include="TestClasses\Mockables\ICandy.cs" />
-    <Compile Include="SampleMockingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestClasses\Mockables\CandyShop.cs" />
     <Compile Include="TestClasses\Mockables\ICurrencyService.cs" />

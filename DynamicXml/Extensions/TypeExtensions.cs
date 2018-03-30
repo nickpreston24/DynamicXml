@@ -16,16 +16,27 @@ namespace DynamicXml.Extensions
             return Convert.ChangeType(value, type);
         }
 
-        public static IList ToTypedList(this Type type)
+        public static object ToClassInstance(this Type type)
         {
-            if (type == null)
+            if (type == null && type.IsClass)
+            {
+                return default(object);
+            }
+
+            var constructedType = type.MakeGenericType(type);
+            return Activator.CreateInstance(constructedType);
+        }
+
+        public static IList ToClassList(this Type type)
+        {
+            if (type == null && type.IsClass)
             {
                 return default(IList);
             }
 
             var listType = typeof(List<>);
             var constructedListType = listType.MakeGenericType(type);
-            var instance = Activator.CreateInstance(constructedListType);
+            object instance = Activator.CreateInstance(constructedListType);
             return (IList)instance;
         }
     }
