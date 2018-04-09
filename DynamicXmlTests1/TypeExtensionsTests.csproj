@@ -65,6 +65,10 @@
       <Project>{7EA28498-12CB-465C-A535-43DE488734E5}</Project>
       <Name>DynamicXml</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{81DAE6A6-91D5-44EA-A777-A4B96CA17134}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

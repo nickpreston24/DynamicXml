@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Shared;
 using System.Diagnostics;
 
 namespace DynamicXml.Extensions.Tests

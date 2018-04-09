@@ -109,6 +109,10 @@
       <Project>{7EA28498-12CB-465C-A535-43DE488734E5}</Project>
       <Name>DynamicXml</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{81dae6a6-91d5-44ea-a777-a4b96ca17134}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicXML.CWLoanUnderwriti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeExtensionsTests", "DynamicXmlTests1\TypeExtensionsTests.csproj", "{94A134DE-3DEA-4D66-97CD-D8C75148F5DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{81DAE6A6-91D5-44EA-A777-A4B96CA17134}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{94A134DE-3DEA-4D66-97CD-D8C75148F5DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94A134DE-3DEA-4D66-97CD-D8C75148F5DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94A134DE-3DEA-4D66-97CD-D8C75148F5DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81DAE6A6-91D5-44EA-A777-A4B96CA17134}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81DAE6A6-91D5-44EA-A777-A4B96CA17134}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81DAE6A6-91D5-44EA-A777-A4B96CA17134}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81DAE6A6-91D5-44EA-A777-A4B96CA17134}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
