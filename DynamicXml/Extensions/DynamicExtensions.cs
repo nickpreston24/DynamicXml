@@ -225,8 +225,7 @@ namespace DynamicXml
 
             return parent;
         }
-
-
+        
         private static object CreateChild(IDictionary<string, object> childDictionary, Type childType)
         {
             object child = new object();
@@ -241,16 +240,17 @@ namespace DynamicXml
                     : childType.GetGenericArguments().Single();
 
                 var list = new List<object>(childDictionary.Values.Count);
-
+                
+                //1.
                 foreach (IEnumerable expandos in childDictionary.Values)
                 {
-                    foreach (ExpandoObject expando in expandos)
+                    foreach (ExpandoObject expando in expandos) //todo: fix issue where a string is percieved as an expando of chars.
                     {
                         object next = ToInstance(expando, elementType);
                         list.Add(next);
                     }
                 }
-
+                //2.
                 if (baseType.Equals(typeof(Array)))
                 {
                     var childArray = Array.CreateInstance(elementType, list.Count);
