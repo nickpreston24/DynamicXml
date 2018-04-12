@@ -14,14 +14,54 @@ namespace DynamicXmlTests
     public class XMLStreamingTests
     {
         Assembly assembly = Assembly.GetExecutingAssembly();
-        private string xmlFilePath;
+        private string[] testFiles;
 
         [TestInitialize]
         public void Init()
         {
-            xmlFilePath = Directory.GetFiles(@"../../TestXml", "*.xml").FirstOrDefault();
-            Debug.WriteLine(xmlFilePath);
+            testFiles = Directory.GetFiles(@"../../TestXml", "*.xml");
         }
+
+        [TestMethod]
+        public void CanStreamOutArrayOfStrings()
+        {
+            var file = new FileInfo(testFiles.First(fileName => fileName.Contains("Details.xml")));
+            var streamer = new XmlStreamer(file);
+            var details = streamer.StreamInstances<ScenarioDetails>();
+            Assert.IsNotNull(details);
+            details.Dump("scenario details");
+        }
+
+        [TestMethod]
+        public void CanStreamOutIEnumerablesUsingStandardDeserialization()
+        {
+            var file = new FileInfo(testFiles.First(fileName => fileName.Contains("Town.xml")));
+            var streamer = new XmlStreamer(file);
+            var result = streamer.StreamInstances<Town>();
+            Assert.IsNotNull(result);
+            result.Dump();
+        }
+
+        internal class Town
+        {
+            public string Name { get; set; }
+            public IEnumerable<Person> People { get; set; }
+            public IEnumerable<string> Districts { get; set; }
+        }
+        internal class Person
+        {
+            public string Name { get; set; }
+        }
+
+
+        internal class ScenarioDetails
+        {
+            public string Name { get; set; }
+            public string[] Groups { get; set; }
+            //public List<string> Groups { get; set; }
+            public string AliasReference { get; set; }
+        }
+
 
         [TestMethod]
         public void CanStreamCompositeClassFromFile()
@@ -54,6 +94,7 @@ namespace DynamicXmlTests
         private IEnumerable<Store> StreamFromFile()
         {
             //Assemble
+            string xmlFilePath = testFiles.First(fileName => fileName.Contains("Store.xml"));
             var xmlStreamer = new XmlStreamer(xmlFilePath);
 #if DEBUG
             var watch = new Stopwatch();
