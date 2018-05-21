@@ -10,11 +10,11 @@ namespace DynamicXml.Extensions.Tests
         [TestMethod()]
         public void GetDefaultValueTest()
         {
-            var a = new MyClass<Civilian>();
+            var civilian = new MyClass<Civilian>();
 
-            Debug.WriteLine((a.MyGenericTypeDefinitionInstance as Civilian).Name);
+            Debug.WriteLine((civilian?.MyGenericTypeDefinitionInstance as Civilian).Name);
 
-            Assert.IsNotNull(a);
+            Assert.IsNotNull(civilian);
         }
 
         [TestMethod()]
@@ -28,7 +28,7 @@ namespace DynamicXml.Extensions.Tests
         /// Multiple implicit operators! :D yay!
         /// </summary>
         [TestMethod]
-        public void MulitpleImplicitTypesTest()
+        public void CanConvert_MulitpleImplicitTypes()
         {
             /*PROMOTING*/
 
