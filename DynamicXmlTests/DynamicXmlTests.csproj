@@ -51,6 +51,7 @@
     <Reference Include="FakeItEasy, Version=4.0.0.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
       <HintPath>..\packages\FakeItEasy.4.5.1\lib\net45\FakeItEasy.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Moq, Version=4.8.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.8.2\lib\net45\Moq.dll</HintPath>
@@ -123,7 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Extractables\Containers.cs" />
-    <Compile Include="Tests\BreakMeTests.cs" />
+    <Compile Include="Tests\BreakingTests.cs" />
     <Compile Include="Classes\Extractables\Keyboard.cs" />
     <Compile Include="Classes\IContainer.cs" />
     <Compile Include="Classes\ICustomerView.cs" />

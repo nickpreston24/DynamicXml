@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shared;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -162,75 +163,72 @@ namespace DynamicXml
         public static List<T> ToList<T>(this DataTable table)
             where T : class, new()
         {
-#if DEBUG
-            var watch = new Stopwatch();
-            watch.Start();
-#endif
             var list = new List<T>();
-
-            if (table == null || table.Rows.Count == 0)
+#if DEBUG
+            using (var timer = new TimeIt())
             {
-                return list;
-            }
+#endif
 
-            var properties = _properties[typeof(T)];
-
-            if (properties == null || properties.Length == 0)
-            {
-                return list;
-            }
-
-            var tableColumnNames = table.GetColumnNames();
-
-            string propertyName = "";
-
-            foreach (var row in table.AsEnumerable())
-            {
-                var item = new T();
-
-                foreach (var property in properties ?? Enumerable.Empty<PropertyInfo>())
+                if (table == null || table.Rows.Count == 0)
                 {
-                    try
-                    {
-                        propertyName = property.Name;
+                    return list;
+                }
 
-                        if (!tableColumnNames.Contains(propertyName, StringComparer.OrdinalIgnoreCase))
+                var properties = _properties[typeof(T)];
+
+                if (properties == null || properties.Length == 0)
+                {
+                    return list;
+                }
+
+                var tableColumnNames = table.GetColumnNames();
+
+                string propertyName = "";
+
+                foreach (var row in table.AsEnumerable())
+                {
+                    var item = new T();
+
+                    foreach (var property in properties ?? Enumerable.Empty<PropertyInfo>())
+                    {
+                        try
+                        {
+                            propertyName = property.Name;
+
+                            if (!tableColumnNames.Contains(propertyName, StringComparer.OrdinalIgnoreCase))
+                            {
+                                continue;
+                            }
+
+                            object value = row[propertyName];
+
+                            if (value == DBNull.Value)
+                            {
+                                property.SetValue(item, null, null);
+                            }
+
+                            //TODO: place a condition for handling Enums, here.
+                            else if (property.PropertyType.Equals(typeof(SqlDbType)))
+                            {
+                                var dbType = (SqlDbType)Enum.Parse(typeof(SqlDbType), value.ToString(), true);
+                                property.SetValue(item, dbType, null);
+                            }
+
+                            else
+                            {
+                                property.SetValue(item, Convert.ChangeType(value, property.PropertyType), null);
+                            }
+                        }
+                        catch (Exception)
                         {
                             continue;
                         }
-
-                        object value = row[propertyName];
-
-                        if (value == DBNull.Value)
-                        {
-                            property.SetValue(item, null, null);
-                        }
-
-                        //TODO: place a condition for handling Enums, here.
-                        else if (property.PropertyType.Equals(typeof(SqlDbType)))
-                        {
-                            var dbType = (SqlDbType)Enum.Parse(typeof(SqlDbType), value.ToString(), true);
-                            property.SetValue(item, dbType, null);
-                        }
-
-                        else
-                        {
-                            property.SetValue(item, Convert.ChangeType(value, property.PropertyType), null);
-                        }
                     }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
+
+                    list.Add(item);
                 }
-
-                list.Add(item);
-            }
 #if DEBUG
-
-            watch.Stop();
-            var elapsedTime = watch.Elapsed;
-            Debug.WriteLine($"{ MethodBase.GetCurrentMethod().Name }() Time Elapsed: {elapsedTime.TotalMilliseconds} ms");
+            }
 #endif
             return list;
         }

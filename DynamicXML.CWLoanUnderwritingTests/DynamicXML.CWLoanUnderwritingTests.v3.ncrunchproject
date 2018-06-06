@@ -1,0 +1,12 @@
+﻿<ProjectConfiguration>
+  <Settings>
+    <IgnoredTests>
+      <NamedTestSelector>
+        <TestName>DynamicXML.CWLoanUnderwritingTests.CWLoanUnderwritingTests.DynamicXmlExtractionTest</TestName>
+      </NamedTestSelector>
+      <NamedTestSelector>
+        <TestName>DynamicXML.CWLoanUnderwritingTests.CWLoanUnderwritingTests.DynamicXmlStreamingTest</TestName>
+      </NamedTestSelector>
+    </IgnoredTests>
+  </Settings>
+</ProjectConfiguration>

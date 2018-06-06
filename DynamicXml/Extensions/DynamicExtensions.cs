@@ -1,4 +1,5 @@
 ﻿using DynamicXml.Extensions;
+using Shared;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace DynamicXml
     /// Convert XML text directly into dynamic objects or defined POCO classes.
     /// https://stackoverflow.com/questions/13171525/converting-xml-to-a-dynamic-c-sharp-object
     /// https://www.codeproject.com/Articles/461677/Creating-a-dynamic-object-from-XML-using-ExpandoOb
+    /// https://codereview.stackexchange.com/questions/1002/mapping-expandoobject-to-another-object-type Todo: read the class comments in the 1st response example.  If true, don't need to create Dictionary<string, PropertyInfo>
     /// </references>
     /// </summary>
     public static partial class DynamicExtensions
@@ -33,38 +35,32 @@ namespace DynamicXml
         /// </summary>
         public static T Extract<T>(string xml, bool errorOnMismatch = false) where T : class
         {
-#if DEBUG
-            var watch = new Stopwatch();
-            watch.Start();
-#endif
+            T result = default(T);
 
-            if (string.IsNullOrWhiteSpace(xml))
+            using (var timer = new TimeIt())
             {
-                return default(T);
+                if (string.IsNullOrWhiteSpace(xml))
+                {
+                    return default(T);
+                }
+
+                string className = typeof(T).Name;
+                var xmlDocument = XDocument.Parse(xml);
+                string node = xmlDocument.GetFirstNode(className);
+
+                if (node == null)
+                {
+                    throw new Exception($"Could not find element '{className}'");
+                }
+
+                //Todo: replace the following segment with code that goes from the first node.
+                xmlDocument = null;
+                xmlDocument = XDocument.Parse(node);
+
+                var dictionary = xmlDocument.Root.ToDynamic() as ExpandoObject;
+                result = dictionary.ToInstance<T>();
+
             }
-
-            string className = typeof(T).Name;
-            var xmlDocument = XDocument.Parse(xml);
-            string node = xmlDocument.GetFirstNode(className);
-
-            if (node == null)
-            {
-                throw new Exception($"Could not find element '{className}'");
-            }
-
-            //Todo: replace the following segment with code that goes from the first node.
-            xmlDocument = null;
-            xmlDocument = XDocument.Parse(node);
-
-            var dictionary = xmlDocument.Root.ToDynamic() as ExpandoObject;
-            var result = dictionary.ToInstance<T>();
-
-#if DEBUG
-            watch.Stop();
-            var elapsedTime = watch.Elapsed;
-            Debug.WriteLine($"{ MethodBase.GetCurrentMethod().Name }() Time Elapsed: {elapsedTime.TotalMilliseconds} ms");
-#endif
-
             return result as T;
         }
 
@@ -120,20 +116,18 @@ namespace DynamicXml
 
         public static T ToInstance<T>(this IDictionary<string, object> dictionary) where T : class
         {
+            T instance = default(T);
 #if DEBUG
-            var watch = new Stopwatch();
-            watch.Start();
+            using (var timer = new TimeIt())
+            {
 #endif
 
-            var type = typeof(T);
-            var instance = (T)ToInstance(Activator.CreateInstance(type, true), dictionary, type);
+                var type = typeof(T);
+                instance = (T)ToInstance(Activator.CreateInstance(type, true), dictionary, type);
 
 #if DEBUG
-            watch.Stop();
-            var elapsedTime = watch.Elapsed;
-            Debug.WriteLine($"{ MethodBase.GetCurrentMethod().Name }() Time Elapsed: {elapsedTime.TotalMilliseconds} ms");
+            }
 #endif
-
             return instance;
         }
 
@@ -225,7 +219,7 @@ namespace DynamicXml
 
             return parent;
         }
-        
+
         private static object CreateChild(IDictionary<string, object> childDictionary, Type childType)
         {
             object child = new object();
@@ -240,7 +234,7 @@ namespace DynamicXml
                     : childType.GetGenericArguments().Single();
 
                 var list = new List<object>(childDictionary.Values.Count);
-                
+
                 //1.
                 foreach (IEnumerable expandos in childDictionary.Values)
                 {

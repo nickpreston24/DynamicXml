@@ -121,10 +121,7 @@ namespace DynamicXml.Extensions.Tests
     {
         public virtual string Rank { get; set; }
 
-        protected MilitaryPersonnel(string rank)
-        {
-            Rank = rank;
-        }
+        protected MilitaryPersonnel(string rank) => Rank = rank;
 
         public override string ToString() => $"{base.ToString()}\nRank: {Rank}";
     }
