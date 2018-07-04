@@ -30,14 +30,12 @@ namespace DynamicXml
             return @object.GetType().GetProperties().Where(property => property.GetValue(@object, null) == null);
         }
 
-        
-
-
         //public static bool IsIEnumerableOfT(this Type type)
         //{
         //    return type.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IEnumerable<>));
         //    //return type.GetInterfaces().Any(t => t.GetGenericTypeDefinition() == typeof(IEnumerable<>));
         //}
+
         public static bool Implements(this Type type, Type contract)
         {
             return contract.IsGenericTypeDefinition

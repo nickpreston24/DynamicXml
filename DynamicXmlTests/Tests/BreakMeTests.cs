@@ -2,14 +2,10 @@
 using DynamicXmlTests.Classes.Extractables;
 using DynamicXmlTests.TestClasses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+using Shared;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Xml.Linq;
-using Microsoft.CSharp;
-using System.Dynamic;
-using Shared;
 
 namespace DynamicXmlTests
 {
@@ -61,7 +57,7 @@ namespace DynamicXmlTests
             using (var timer = new TimeIt())
             {
                 //ExpandoObject dynamicKeyboard = XDocument.Parse(xml).ToDynamic();
-                dynamic dynamicKeyboard = new Keyboard() { Name = "Corsair K70", Price = 255 };
+                dynamic dynamicKeyboard = new Keyboard() { Name = "Corsair K70", Price = 255, Company = "Corsair", SwitchType = "topre red" };
                 Keyboard convertedKeyboard = dynamicKeyboard as dynamic;
 
                 Assert.IsNotNull(convertedKeyboard);

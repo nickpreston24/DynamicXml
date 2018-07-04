@@ -96,40 +96,28 @@ namespace DynamicXmlTests
             //Assemble
             string xmlFilePath = testFiles.First(fileName => fileName.Contains("Store.xml"));
             var xmlStreamer = new XmlStreamer(xmlFilePath);
-#if DEBUG
-            var watch = new Stopwatch();
-            watch.Start();
-#endif
-            //Act
-            IEnumerable<Store> stores = xmlStreamer.StreamInstances<Store>();
-#if DEBUG
-            watch.Stop();
-            var elapsedTime = watch.Elapsed;
-            Debug.WriteLine($"{ MethodBase.GetCurrentMethod().Name }() Time Elapsed: {elapsedTime.TotalMilliseconds} ms");
-#endif
-            //Assert:
-            Assert.IsNotNull(stores);
-            Assert.IsTrue(stores.Count() > 0);
 
-            return stores.Dump();
+            //Act
+            using (var timer = new TimeIt())
+            {
+                IEnumerable<Store> stores = xmlStreamer.StreamInstances<Store>();
+                //Assert:
+                Assert.IsNotNull(stores);
+                Assert.IsTrue(stores.Count() > 0);
+                Debug.WriteLine(stores.Count());
+                return stores;
+            }
         }
 
         private static IEnumerable<Store> StreamFromString()
         {
             string xml = XmlData.XML;
-#if DEBUG
-            var watch = new Stopwatch();
-            watch.Start();
-#endif
-
-            var stores = XmlStreamer.StreamInstances<Store>(xml);
-
-#if DEBUG
-            watch.Stop();
-            var elapsedTime = watch.Elapsed;
-            Debug.WriteLine($"{ MethodBase.GetCurrentMethod().Name }() Time Elapsed: {elapsedTime.TotalMilliseconds} ms");
-#endif
-            return stores.Dump();
+            using (var timer = new TimeIt())
+            {
+                var stores = XmlStreamer.StreamInstances<Store>(xml);
+                Debug.WriteLine(stores.Count());
+                return stores;
+            }
         }
     }
     internal static class XmlData

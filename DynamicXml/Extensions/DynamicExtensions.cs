@@ -14,6 +14,7 @@ using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using static DynamicXml.FunctionalExtensions;
 
 namespace DynamicXml
 {
@@ -117,17 +118,11 @@ namespace DynamicXml
         public static T ToInstance<T>(this IDictionary<string, object> dictionary) where T : class
         {
             T instance = default(T);
-#if DEBUG
             using (var timer = new TimeIt())
             {
-#endif
-
                 var type = typeof(T);
                 instance = (T)ToInstance(Activator.CreateInstance(type, true), dictionary, type);
-
-#if DEBUG
             }
-#endif
             return instance;
         }
 
@@ -165,9 +160,7 @@ namespace DynamicXml
 
                         if (value == null)
                         {
-#if DEBUG
                             Debug.WriteLine($"[Warning!]: Property '{nextProperty.Name}', of type '{nextProperty.PropertyType.Name}' is null and could not be assigned!");
-#endif
                             continue;
                         }
 
@@ -190,8 +183,8 @@ namespace DynamicXml
                     else
                     {
                         var nextProperty = childProperties
-                            .SingleOrDefault(pi => pi.Name.Equals(propertyName, _comparison)
-                                || pi.PropertyType.Name.Equals(propertyName, _comparison));
+                            .SingleOrDefault(property => property.Name.Equals(propertyName, _comparison)
+                                || property.PropertyType.Name.Equals(propertyName, _comparison));
 
                         if (nextProperty == null)
                         {
@@ -362,28 +355,16 @@ namespace DynamicXml
         /// <summary>
         /// Slower and misses chars.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="object"></param>
-        /// <returns></returns>
         [Obsolete]
         public static T DeserializeXML<T>(this string xml)
           where T : class
         {
-#if DEBUG
-            var watch = new Stopwatch();
-            watch.Start();
-#endif
             T value;
+            using (var timer = new TimeIt())
             using (TextReader reader = new StringReader(xml))
             {
                 value = new XmlSerializer(typeof(T)).Deserialize(reader) as T;
             }
-
-#if DEBUG
-            watch.Stop();
-            var elapsedTime = watch.Elapsed;
-            Debug.WriteLine("{0}() Time Elapsed: {1} ", System.Reflection.MethodBase.GetCurrentMethod().Name, elapsedTime);
-#endif
 
             return value;
         }

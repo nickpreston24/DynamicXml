@@ -62,24 +62,17 @@ namespace DynamicXml.Extensions
         //todo: still not working, returns null for a class type!
         public static object GetDefault(this Type type)
         {
-            // Validate parameters.
             if (type == null)
             {
                 throw new ArgumentNullException("type");
             }
 
             // We want an Func<object> which returns the default.
-            // Create that expression here.
-            var e = Expression.Lambda<Func<object>>(
-                // Have to convert to object.
-                Expression.Convert(
-                    // The default value, always get what the *code* tells us.
-                    Expression.Default(type), typeof(object)
-                )
-            );
+            // Create that expression here:
+            var expression = Expression.Lambda<Func<object>>(
+                Expression.Convert(Expression.Default(type), typeof(object)));
 
-            // Compile and return the value.
-            return e.Compile()();
+            return expression.Compile()();
         }
 
         #region Mine

@@ -124,7 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Extractables\Containers.cs" />
-    <Compile Include="Tests\BreakingTests.cs" />
+    <Compile Include="Tests\BreakMeTests.cs" />
     <Compile Include="Classes\Extractables\Keyboard.cs" />
     <Compile Include="Classes\IContainer.cs" />
     <Compile Include="Classes\ICustomerView.cs" />

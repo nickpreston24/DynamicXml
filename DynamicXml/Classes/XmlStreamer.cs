@@ -9,30 +9,27 @@ namespace DynamicXml
 {
     public class XmlStreamer
     {
-        private string _xmlFilePath;
-        public string XmlFilePath { get => _xmlFilePath; }
-
-        private FileInfo _xmlFile;
-        public FileInfo XmlFile { get => _xmlFile; private set => _xmlFile = value; }
+        public string FilePath { get; }
+        public FileInfo XmlFile { get; private set; }
 
         public XmlStreamer(string xmlFilePath)
         {
-            _xmlFilePath = !File.Exists(xmlFilePath)
+            FilePath = !File.Exists(xmlFilePath)
                  ? throw new FileNotFoundException(xmlFilePath)
                  : xmlFilePath;
 
-            XmlFile = new FileInfo(_xmlFilePath);
+            XmlFile = new FileInfo(FilePath);
         }
         public XmlStreamer(FileInfo xmlFile)
         {
-            _xmlFile = xmlFile;
-            _xmlFilePath = xmlFile.FullName;
+            XmlFile = xmlFile;
+            FilePath = xmlFile.FullName;
         }
 
-        public IEnumerable<XElement> StreamXmlFile(string elementName) => StreamXElementsFromFile(_xmlFilePath, elementName);
-        public IEnumerable<XElement> StreamXmlFile(FileInfo xmlFile) => StreamXElementsFromFile(_xmlFilePath, xmlFile.FullName);
-        
-        public IEnumerable<T> StreamInstances<T>() where T : class => StreamInstances<T>(XmlFile) ?? StreamInstances<T>(_xmlFilePath);
+        public IEnumerable<XElement> StreamXmlFile(string elementName) => StreamXElementsFromFile(FilePath, elementName);
+        public IEnumerable<XElement> StreamXmlFile(FileInfo xmlFile) => StreamXElementsFromFile(FilePath, xmlFile.FullName);
+
+        public IEnumerable<T> StreamInstances<T>() where T : class => StreamInstances<T>(XmlFile) ?? StreamInstances<T>(FilePath);
         public static IEnumerable<T> StreamInstances<T>(string xml) where T : class
         {
             var streamIterator = from element in StreamXElements(xml, typeof(T).Name)
@@ -72,13 +69,12 @@ namespace DynamicXml
 
             using (var xmlReader = XmlReader.Create(xmlFilePath))
             {
-                //xmlReader.MoveToContent();
                 while (xmlReader.Read())
                 {
                     if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == elementName))
                     {
-                        var item = XNode.ReadFrom(xmlReader) as XElement;
-                        yield return item;
+                        var element = XNode.ReadFrom(xmlReader) as XElement;
+                        yield return element;
                     }
                 }
             }

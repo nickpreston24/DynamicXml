@@ -54,19 +54,19 @@ namespace DynamicXml
                     yield break;
                 }
 
-                var q = new Queue<TSource>(count);
+                var queue = new Queue<TSource>(count);
 
                 foreach (var item in source)
                 {
-                    if (q.Count == count)
+                    if (queue.Count == count)
                     {
-                        q.Dequeue();
+                        queue.Dequeue();
                     }
 
-                    q.Enqueue(item);
+                    queue.Enqueue(item);
                 }
 
-                foreach (var item in q)
+                foreach (var item in queue)
                 {
                     yield return item;
                 }

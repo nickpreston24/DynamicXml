@@ -53,8 +53,11 @@
     <Compile Include="Extensions\IPerson.cs" />
     <Compile Include="Extensions\IPersonnel.cs" />
     <Compile Include="Extensions\Person.cs" />
+    <Compile Include="FluentInterfaces.cs" />
+    <Compile Include="TestClasses\FluentEmployee.cs" />
+    <Compile Include="TestClasses\FluentView.cs" />
     <Compile Include="TestClasses\MyClass.cs" />
-    <Compile Include="Extensions\TypeExtensionsTests.cs" />
+    <Compile Include="TypeExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

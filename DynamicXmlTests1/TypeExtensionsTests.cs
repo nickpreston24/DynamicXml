@@ -12,7 +12,7 @@ namespace DynamicXml.Extensions.Tests
         {
             var civilian = new MyClass<Civilian>();
 
-            Debug.WriteLine((civilian?.MyGenericTypeDefinitionInstance as Civilian).Name);
+            Debug.WriteLine((civilian.MyGenericTypeDefinitionInstance as Civilian).Name);
 
             Assert.IsNotNull(civilian);
         }
