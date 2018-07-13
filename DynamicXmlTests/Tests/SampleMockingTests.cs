@@ -69,7 +69,7 @@ namespace DynamicXmlTests
         public void FakeItAgain()
         {
             var candy = A.Fake<ICandy>();
-            candy.Dump();
+            //candy.Dump();
         }
 
     }

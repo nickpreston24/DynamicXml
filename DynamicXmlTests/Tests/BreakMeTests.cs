@@ -31,14 +31,25 @@ namespace DynamicXmlTests
         }
 
         [TestMethod]
-        public void CanUseEnumerables()
+        public void CanStreamEnumerables()
         {
-            string xml = File.ReadAllText(@"..\..\TestXml\Containers.xml"); //get Containers.xml
-
-            var containers = XmlStreamer.StreamInstances<Containers>(xml).FirstOrDefault();
+            string xml = File.ReadAllText(@"..\..\TestXml\Containers.xml");
+            var containers = XmlStreamer.StreamInstances<EnumerableSets>(xml).FirstOrDefault();
 
             Assert.IsFalse(containers.HasNullProperties());
             Assert.IsNotNull(containers);
+            containers.Dump();
+        }
+
+        [TestMethod]
+        public void CanStreamArrays()
+        {
+            string xml = File.ReadAllText(@"..\..\TestXml\Containers.xml");
+            var containers = XmlStreamer.StreamInstances<ArraySets>(xml).FirstOrDefault();
+
+            Assert.IsFalse(containers.HasNullProperties());
+            Assert.IsNotNull(containers);
+            containers.Dump();
         }
 
         [TestMethod]
@@ -62,6 +73,7 @@ namespace DynamicXmlTests
 
                 Assert.IsNotNull(convertedKeyboard);
                 Assert.IsFalse(convertedKeyboard.HasNullProperties());
+                convertedKeyboard.Dump();
             }
         }
     }
