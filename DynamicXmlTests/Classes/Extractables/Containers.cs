@@ -2,7 +2,7 @@
 
 namespace DynamicXmlTests.Classes.Extractables
 {
-    public class Containers
+    public class EnumerableSets
     {
         IEnumerable<string> StringSet { get; set; }
         IEnumerable<int> IntSet { get; set; }
@@ -10,4 +10,14 @@ namespace DynamicXmlTests.Classes.Extractables
         IEnumerable<double> DoubleSet { get; set; }
         IEnumerable<float> FloatSet { get; set; }
     }
+
+    public class ArraySets
+    {
+        string[] StringSet { get; set; }
+        int[] IntSet { get; set; }
+        char[] CharSet { get; set; }
+        double[] DoubleSet { get; set; }
+        float[] FloatSet { get; set; }
+    }
+
 }
