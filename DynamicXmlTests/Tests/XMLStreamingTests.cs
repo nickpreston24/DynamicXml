@@ -11,7 +11,7 @@ using System.Reflection;
 namespace DynamicXmlTests
 {
     [TestClass]
-    public class XMLStreamingTests
+    public partial class XMLStreamingTests
     {
         Assembly assembly = Assembly.GetExecutingAssembly();
         private string[] testFiles;
@@ -29,7 +29,7 @@ namespace DynamicXmlTests
             var streamer = new XmlStreamer(file);
             var details = streamer.StreamInstances<ScenarioDetails>();
             Assert.IsNotNull(details);
-            details.Dump("scenario details");
+            //details.Dump("scenario details");
         }
 
         [TestMethod]
@@ -39,29 +39,8 @@ namespace DynamicXmlTests
             var streamer = new XmlStreamer(file);
             var result = streamer.StreamInstances<Town>();
             Assert.IsNotNull(result);
-            result.Dump();
+            //result.Dump();
         }
-
-        internal class Town
-        {
-            public string Name { get; set; }
-            public IEnumerable<Person> People { get; set; }
-            public IEnumerable<string> Districts { get; set; }
-        }
-        internal class Person
-        {
-            public string Name { get; set; }
-        }
-
-
-        internal class ScenarioDetails
-        {
-            public string Name { get; set; }
-            public string[] Groups { get; set; }
-            //public List<string> Groups { get; set; }
-            public string AliasReference { get; set; }
-        }
-
 
         [TestMethod]
         public void CanStreamCompositeClassFromFile()
