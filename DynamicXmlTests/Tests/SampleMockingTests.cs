@@ -1,7 +1,6 @@
 ﻿using DynamicXmlTests.TestClasses;
 using FakeItEasy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Shared;
 using JustMock = Telerik.JustMock;
 
 namespace DynamicXmlTests

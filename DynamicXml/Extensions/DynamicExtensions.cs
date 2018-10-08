@@ -146,7 +146,7 @@ namespace DynamicXml
 
                 try
                 {
-                    Debug.WriteLine($"Class: {parentTypeName}\nElement: {pair.Key.ToString()} raw Value: {value.ToString()}\ntype: {type.Name}\n");
+                    //Debug.WriteLine($"Class: {parentTypeName}\nElement: {pair.Key.ToString()} raw Value: {value.ToString()}\ntype: {type.Name}\n");
 
                     if (!type.Name.Equals(nameof(ExpandoObject)))
                     {

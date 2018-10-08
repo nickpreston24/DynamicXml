@@ -5,6 +5,7 @@ namespace DynamicXmlTests
 {
     internal class Store : IEquatable<Store>
     {
+        public string Name { get; set; }
         public Product[] Products { get; set; }
         public Customer[] Customers { get; set; }
 
@@ -12,7 +13,8 @@ namespace DynamicXmlTests
         {
             return other != null
                 && Products.SequenceEqual(other.Products)
-                && Customers.SequenceEqual(other.Customers);
+                && Customers.SequenceEqual(other.Customers)
+                /*&& Name.Equals(other.Name)*/;
         }
 
         public override bool Equals(object obj)
@@ -33,6 +35,11 @@ namespace DynamicXmlTests
             }
 
             return Equals(obj as Store);
+        }
+
+        public override string ToString()
+        {
+            return $"{Name}\n Products: {Products.Length}\n Customers: {Customers.Length}";
         }
     }
 

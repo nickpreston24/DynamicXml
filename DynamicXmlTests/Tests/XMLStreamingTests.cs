@@ -1,5 +1,4 @@
 ﻿using DynamicXml;
-using DynamicXmlTests.Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shared;
 using System.Collections.Generic;
@@ -94,6 +93,12 @@ namespace DynamicXmlTests
             using (var timer = new TimeIt())
             {
                 var stores = XmlStreamer.StreamInstances<Store>(xml);
+
+                foreach (var store in stores)
+                {
+                    Debug.WriteLine(store.ToString());
+                }
+
                 Debug.WriteLine(stores.Count());
                 return stores;
             }

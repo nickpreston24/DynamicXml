@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shared;
+using System;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace DynamicXml.Extensions.Tests
 {
@@ -10,7 +12,7 @@ namespace DynamicXml.Extensions.Tests
         [TestMethod()]
         public void GetDefaultValueTest()
         {
-            var civilian = new MyClass<Civilian>();
+            var civilian = new Wrapper<Civilian>();
 
             Debug.WriteLine((civilian.MyGenericTypeDefinitionInstance as Civilian).Name);
 
@@ -20,8 +22,8 @@ namespace DynamicXml.Extensions.Tests
         [TestMethod()]
         public void ToListTypeTest()
         {
-
-
+            //throw new NotImplementedException(MethodBase.GetCurrentMethod().Name);
+            //Assert.Inconclusive();
         }
 
         /// <summary>
