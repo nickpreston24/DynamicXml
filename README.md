@@ -1,11 +1,11 @@
 # DynamicXml
 [Dynamically Deserialize XML](https://github.com/MikePreston17/DynamicXml) to typed C# classes (POCOs) by use of the dynamic keyword - without the use of the default Serialization library!
 
-## Purpose
+## Purpose :8ball:
 This library is intended as a proof-of-concept substitute for the XMLSerializer from System.Xml.Serialization and can be used for extracting streams of POCOs from long swathes of XML in real time.
 
 
-## Most Basic Usage
+## Most Basic Usage :wrench:
 
 Say we have a C# class, Store:
 
