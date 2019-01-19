@@ -39,9 +39,13 @@ foreach (var store in stores)
 }
 ```
 
-## Limitations
+## Limitations :thumbsdown:
 * No support for Streams.
 * No support for attributes and none planned in the future (though conceiveably possible).
 
-## Additional Notes
+## Additional Notes :star:
 Folders 'DynamicXmlTests1' and 'DynamicXMLTests2' both do not exist in my local repo, but exist here.  Ignore #2.  #1 has some useful tests.
+
+## Future Support
+- [ ] In-file multi-threaded parsing (see: [Fastest Way to Read in C#](https://cc.davelozinski.com/c-sharp/the-fastest-way-to-read-and-process-text-files) and [Reading and Processing in Parallel](https://cc.davelozinski.com/code/c-sharp-code/read-lines-in-batches-process-in-parallel)) and conversion for optimal speed. :camel:
+- [ ] [De]serialize JSON to CS objects. :apple:
