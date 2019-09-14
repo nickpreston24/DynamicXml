@@ -97,19 +97,4 @@ namespace DynamicXml
         //    return customers;
         //}
     }
-
-    //Builder -> CreateFrom([fileinfo|xmlstr]).OnSomeIAction(..).StreamXml(..).ToFile(..);
-    //Builder -> CreateFrom([fileinfo|xmlstr]).OnSomeIAction(..).StreamXml(..).ToStream(..);
-    //Builder -> CreateFrom([fileinfo|xmlstr]).OnSomeIAction(..).StreamXml(..).ToJson(..); //Transform
-
-    //Builder -> CreateFrom([fileinfo|jsonobj]).OnSomeIAction(..).StreamJson(..).ToFile(..);
-    //Builder -> CreateFrom([fileinfo|jsonobj]).OnSomeIAction(..).StreamJson(..).ToStream(..);
-    //Builder -> CreateFrom([fileinfo|jsonobj]).OnSomeIAction(..).StreamJson(..).ToXml(..);
-
-    public sealed class DeserializerBuilder
-    {
-        private DeserializerBuilder()
-        {
-        }
-    }
 }

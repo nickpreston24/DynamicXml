@@ -161,7 +161,7 @@ namespace DynamicXml
             where T : class, new()
         {
             var list = new List<T>();
-            using (var timer = new TimeIt())
+            using (var timer = TimeIt.GetTimer())
             {
                 if (table == null || table.Rows.Count == 0)
                 {
@@ -259,7 +259,7 @@ namespace DynamicXml
         {
             try
             {
-                using (var timer = new TimeIt())
+                using (var timer = TimeIt.GetTimer())
                 using (var da = new SqlDataAdapter(selectQuery, connectionString))
                 {
                     da.SelectCommand.CommandTimeout = 180;

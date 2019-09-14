@@ -6,7 +6,7 @@ namespace DynamicXml.Classes
 {
     public struct Maybe<T>
     {
-        readonly IEnumerable<T> values;
+        private readonly IEnumerable<T> values;
         public bool HasValue => values != null && values.Any();
         public T Value => (HasValue) ? values.Single() : throw new InvalidOperationException($"Maybe<{typeof(T).Name}> does not have a value!");
         public static Maybe<T> None => new Maybe<T>(new T[0]);
@@ -19,10 +19,8 @@ namespace DynamicXml.Classes
         public static Maybe<IEnumerable<T>> Some(IEnumerable<T> values) => (values != null) ?
             new Maybe<IEnumerable<T>>(new[] { values }) : throw new InvalidCastException();
 
-        public Maybe<U> Map<U>(Func<T, U> mapper) => this.HasValue ? Maybe<U>.Some(mapper(Value)) : Maybe<U>.None;
+        public Maybe<U> Map<U>(Func<T, U> mapper) => HasValue ? Maybe<U>.Some(mapper(Value)) : Maybe<U>.None;
 
-        public U Case<U>(Func<T, U> some, Func<U> none) => this.HasValue ? some(this.Value) : none();
-
+        public U Case<U>(Func<T, U> some, Func<U> none) => HasValue ? some(Value) : none();
     }
 }
-

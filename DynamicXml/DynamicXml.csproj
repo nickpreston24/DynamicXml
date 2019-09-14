@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Maybe.cs" />
+    <Compile Include="PocoBuilder\Interfaces\IDynamicPoco.cs" />
+    <Compile Include="PocoBuilder\Interfaces\IRead.cs" />
+    <Compile Include="PocoBuilder\Interfaces\ISerializeAction.cs" />
+    <Compile Include="PocoBuilder\Interfaces\IWrite.cs" />
+    <Compile Include="PocoBuilder\PocoBuilder.cs" />
     <Compile Include="Classes\XmlStreamer.cs" />
     <Compile Include="Extensions\DataTableExtensions.cs" />
     <Compile Include="Extensions\DynamicExtensions.cs" />
@@ -57,6 +63,8 @@
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Extensions\XDocumentExtensions.cs" />
     <Compile Include="Extensions\XElementExtensions.cs" />
+    <Compile Include="PocoBuilder\Constants\OutputFormat.cs" />
+    <Compile Include="PocoBuilder\Constants\TransformationType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,5 +77,6 @@
       <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

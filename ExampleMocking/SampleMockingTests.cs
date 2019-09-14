@@ -6,7 +6,7 @@ using JustMock = Telerik.JustMock;
 namespace DynamicXmlTests
 {
     [TestClass]
-    class SampleMockingTests
+    internal class SampleMockingTests
     {
         [TestMethod]
         public void EasyMockTest()
@@ -19,7 +19,6 @@ namespace DynamicXmlTests
         {
             var mockContainer = new Moq.Mock<IContainer>();
             var mockView = new Moq.Mock<ICustomerView>();
-
         }
 
         [TestMethod]
@@ -64,13 +63,12 @@ namespace DynamicXmlTests
             //A.CallTo(() => shop.BuyCandy(lollipop)).MustHaveHappened();
             //A.CallTo(() => developer.BuyTastiestCandy(shop)).MustHaveHappened();
         }
+
         [TestMethod]
         public void FakeItAgain()
         {
             var candy = A.Fake<ICandy>();
             //candy.Dump();
         }
-
     }
-
 }

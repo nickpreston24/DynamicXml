@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DynamicXmlTests.TestClasses
+﻿namespace ExampleMocking.TestClasses
 {
     public class CandyShop : ICandyShop
     {
@@ -15,7 +9,6 @@ namespace DynamicXmlTests.TestClasses
         public void BuyCandy(ICandy lollipop)
         {
             //throw new NotImplementedException();
-
         }
 
         public ICandy GetLollipop()
@@ -28,7 +21,6 @@ namespace DynamicXmlTests.TestClasses
             var lolli = new Lollipop();
             BuyCandy(lolli);
             return lolli;
-
         }
     }
 

@@ -1,5 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Shared;
+﻿using DynamicXml;
+using DynamicXmlTests.TestClasses;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DynamicXmlTests.Tests
 {
@@ -7,11 +8,11 @@ namespace DynamicXmlTests.Tests
     public class BuilderTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void CanBuildExtractor()
         {
-            using (var timer = new TimeIt())
-            {
-            }
+            PocoBuilder<Keyboard>.Create()
+               .Extract(XmlData.Keyboards)
+               .ToFile("@/Product.cs");
         }
     }
 }

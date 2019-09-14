@@ -1,4 +1,4 @@
-﻿namespace DynamicXmlTests
+﻿namespace ExampleMocking
 {
     internal interface ICustomerView
     {

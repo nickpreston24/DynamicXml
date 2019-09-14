@@ -76,6 +76,7 @@ namespace DynamicXml.Extensions
         }
 
         #region Mine
+
         //todo: got error:  "MakeGenericType may only be called on a type for which Type.IsGenericTypeDefinition is true."
         //public static object GetDefault(this Type type)
         //{
@@ -97,6 +98,7 @@ namespace DynamicXml.Extensions
         #endregion Mine
 
         #region SO's
+
         //https://stackoverflow.com/questions/325426/programmatic-equivalent-of-defaulttype
         //public static object GetDefault(this Type type)
         //{
@@ -113,7 +115,7 @@ namespace DynamicXml.Extensions
         //{
         //    return default(T);
         //}
-        #endregion SO's
 
+        #endregion SO's
     }
 }

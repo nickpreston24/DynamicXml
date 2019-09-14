@@ -155,25 +155,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Extractables\Containers.cs" />
+    <Compile Include="Classes\Extractables\Customer.cs" />
+    <Compile Include="Classes\Extractables\Product.cs" />
     <Compile Include="Tests\BreakingTests.cs" />
     <Compile Include="Classes\Extractables\Keyboard.cs" />
     <Compile Include="Classes\IContainer.cs" />
-    <Compile Include="Classes\ICustomerView.cs" />
-    <Compile Include="Classes\Mocks\Account.cs" />
-    <Compile Include="Classes\Mocks\AccountService.cs" />
-    <Compile Include="Classes\Mocks\CandyShop.cs" />
-    <Compile Include="Classes\Mocks\IAccountService.cs" />
-    <Compile Include="Classes\Mocks\ICandy.cs" />
-    <Compile Include="Classes\Mocks\ICandyShop.cs" />
-    <Compile Include="Classes\Mocks\ICurrencyService.cs" />
-    <Compile Include="Classes\Mocks\IPerson.cs" />
-    <Compile Include="Classes\Mocks\Lollipop.cs" />
     <Compile Include="Classes\Extractables\Person.cs" />
-    <Compile Include="Tests\SampleMockingTests.cs" />
     <Compile Include="Classes\Extractables\Store.cs" />
     <Compile Include="Classes\Extractables\Town.cs" />
     <Compile Include="Classes\Extractables\ScenarioDetails.cs" />
     <Compile Include="Tests\BuilderTests.cs" />
+    <Compile Include="Classes\XmlData.cs" />
     <Compile Include="Tests\XMLStreamingTests.cs" />
   </ItemGroup>
   <ItemGroup>

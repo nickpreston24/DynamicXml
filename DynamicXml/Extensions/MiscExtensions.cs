@@ -8,6 +8,7 @@ namespace DynamicXml
     public static partial class DynamicExtensions
     {
         private static PropertyCache _properties { get; } = new PropertyCache();
+
         public static bool HasNullProperties(this object @object)
         {
             var properties = @object.GetType().GetProperties();
@@ -43,10 +44,9 @@ namespace DynamicXml
             : type.GetInterfaces().Any(i => i.Equals(contract));
         }
 
-        public static bool IsIEnumerableOfT(this Type type)
+        public static bool IsIEnumerableOfType(this Type type)
         {
             return type.Implements(typeof(IEnumerable<>));
         }
-
     }
 }

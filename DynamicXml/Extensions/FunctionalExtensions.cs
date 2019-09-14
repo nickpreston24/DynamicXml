@@ -7,10 +7,10 @@ namespace DynamicXml
         /// <summary>
         /// Chain an action to an object T
         /// </summary>
-        public static T Tee<T>(this T @this, Action<T> action)
+        public static T With<T>(this T item, Action<T> action)
         {
-            action(@this);
-            return @this;
+            action(item);
+            return item;
         }
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿namespace DynamicXmlTests.TestClasses
+﻿namespace ExampleMocking.TestClasses
 {
     internal class Lollipop : ICandy
     {

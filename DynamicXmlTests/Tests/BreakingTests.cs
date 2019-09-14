@@ -15,15 +15,7 @@ namespace DynamicXmlTests
         [TestMethod]
         public void HappyPathTest()
         {
-            string xml = @"
-                <Keyboard>
-                    <Name>K70</Name>
-                    <SwitchType>Cherry MX Red</SwitchType>
-                    <Company>Corsair</Company>
-                    <Price>229.99</Price>
-                </Keyboard>";
-
-            var keyboard = XmlStreamer.StreamInstances<Keyboard>(xml).First();
+            var keyboard = XmlStreamer.StreamInstances<Keyboard>(XmlData.Keyboards).First();
 
             Debug.WriteLine(keyboard.Name);
             Debug.WriteLine(keyboard.Price);
@@ -34,7 +26,8 @@ namespace DynamicXmlTests
         public void CanStreamEnumerables()
         {
             string xml = File.ReadAllText(@"..\..\TestXml\Containers.xml");
-            var containers = XmlStreamer.StreamInstances<EnumerableSets>(xml).FirstOrDefault();
+            var containers = XmlStreamer.StreamInstances<EnumerableSets>(xml)
+                .FirstOrDefault();
 
             Assert.IsFalse(containers.HasNullProperties());
             Assert.IsNotNull(containers);
@@ -45,7 +38,8 @@ namespace DynamicXmlTests
         public void CanStreamArrays()
         {
             string xml = File.ReadAllText(@"..\..\TestXml\Containers.xml");
-            var containers = XmlStreamer.StreamInstances<ArraySets>(xml).FirstOrDefault();
+            var containers = XmlStreamer.StreamInstances<ArraySets>(xml)
+                .FirstOrDefault();
 
             Assert.IsFalse(containers.HasNullProperties());
             Assert.IsNotNull(containers);
@@ -56,17 +50,15 @@ namespace DynamicXmlTests
         //https://dotnetcodr.com/2017/02/07/convert-a-dynamic-type-to-a-concrete-object-in-net-c/
         public void DynamicToConcrete()
         {
-            string xml = @"
-                <Keyboard>
-                    <Name>K70</Name>
-                    <SwitchType>Cherry MX Red</SwitchType>
-                    <Company>Corsair</Company>
-                    <Price>229.99</Price>
-                </Keyboard>";
-
-            using (var timer = new TimeIt())
+            using (var timer = TimeIt.GetTimer())
             {
-                dynamic dynamicKeyboard = new Keyboard() { Name = "Corsair K70", Price = 255, Company = "Corsair", SwitchType = "topre red" };
+                dynamic dynamicKeyboard = new Keyboard()
+                {
+                    Name = "Corsair K70",
+                    Price = 255,
+                    Company = "Corsair",
+                    SwitchType = "topre red"
+                };
                 Keyboard convertedKeyboard = dynamicKeyboard as dynamic;
 
                 Assert.IsNotNull(convertedKeyboard);
