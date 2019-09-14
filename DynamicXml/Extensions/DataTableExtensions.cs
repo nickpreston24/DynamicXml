@@ -47,7 +47,6 @@ namespace DynamicXml
                         {
                             property.SetValue(obj, Convert.ChangeType(value, property.PropertyType), null);
                         }
-
                     }
                     catch (Exception)
                     {
@@ -59,7 +58,6 @@ namespace DynamicXml
             }
 
             return observableCollection;
-
         }
 
         public static List<T> AddRowsByAction<T>(this DataTable table, Func<DataRow, T> rowAdditionAction)
@@ -151,7 +149,6 @@ namespace DynamicXml
                 {
                     table.Columns.Remove(columnName);
                 }
-
             }
             catch (Exception ex)
             {
@@ -164,11 +161,8 @@ namespace DynamicXml
             where T : class, new()
         {
             var list = new List<T>();
-#if DEBUG
             using (var timer = new TimeIt())
             {
-#endif
-
                 if (table == null || table.Rows.Count == 0)
                 {
                     return list;
@@ -213,7 +207,6 @@ namespace DynamicXml
                                 var dbType = (SqlDbType)Enum.Parse(typeof(SqlDbType), value.ToString(), true);
                                 property.SetValue(item, dbType, null);
                             }
-
                             else
                             {
                                 property.SetValue(item, Convert.ChangeType(value, property.PropertyType), null);
@@ -227,9 +220,8 @@ namespace DynamicXml
 
                     list.Add(item);
                 }
-#if DEBUG
             }
-#endif
+
             return list;
         }
 
@@ -247,8 +239,13 @@ namespace DynamicXml
         private sealed class DynamicRow : DynamicObject
         {
             private readonly DataRow _row;
-            internal DynamicRow(DataRow row) { _row = row; }
-            // Interprets a member-access as an indexer-access on the 
+
+            internal DynamicRow(DataRow row)
+            {
+                _row = row;
+            }
+
+            // Interprets a member-access as an indexer-access on the
             // contained DataRow.
             public override bool TryGetMember(GetMemberBinder binder, out object result)
             {
@@ -260,13 +257,9 @@ namespace DynamicXml
 
         public static void FillTable(this DataTable table, string connectionString, string selectQuery)
         {
-#if DEBUG
-            var watch = new Stopwatch();
-            watch.Start();
-#endif
-
             try
             {
+                using (var timer = new TimeIt())
                 using (var da = new SqlDataAdapter(selectQuery, connectionString))
                 {
                     da.SelectCommand.CommandTimeout = 180;
@@ -279,14 +272,6 @@ namespace DynamicXml
                 Debug.WriteLine(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.Message));
                 throw;
             }
-#if DEBUG
-            watch.Stop();
-            var elapsedTime = watch.Elapsed;
-            Debug.WriteLine($"{ MethodBase.GetCurrentMethod().Name }() Time Elapsed: {elapsedTime.TotalMilliseconds} ms");
-#endif
         }
-
     }
-
 }
-

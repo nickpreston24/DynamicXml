@@ -30,7 +30,7 @@ namespace FluentInterfaces
             string hex = "#777777";
             var view = new ViewBuilder("Main")
                 .SetBackground(hex)
-                .ToView();
+                .Instance();
             view.Dump();
 
             Assert.IsNotNull(view);

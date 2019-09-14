@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DynamicXmlTests1.TestClasses
+﻿namespace DynamicXmlTests1.TestClasses
 {
     internal class FluentView : IView
     {
@@ -25,7 +18,6 @@ namespace DynamicXmlTests1.TestClasses
 
         //static Builder Get()
         //{
-
         //}
 
         //protected internal class Builder
@@ -43,7 +35,7 @@ namespace DynamicXmlTests1.TestClasses
 
     internal class ViewBuilder
     {
-        FluentView view = new FluentView();
+        private FluentView view = new FluentView();
 
         public ViewBuilder(string name)
         {
@@ -56,7 +48,7 @@ namespace DynamicXmlTests1.TestClasses
             return this;
         }
 
-        public FluentView ToView()
+        public FluentView Instance()
         {
             return view ?? new FluentView();
         }
@@ -64,7 +56,7 @@ namespace DynamicXmlTests1.TestClasses
 
     internal class IViewBuilder
     {
-        IView view = new FluentView();
+        private IView view = new FluentView();
 
         public IViewBuilder(string name)
         {
@@ -82,5 +74,4 @@ namespace DynamicXmlTests1.TestClasses
             return (view ?? new FluentView()) as IView;
         }
     }
-
 }

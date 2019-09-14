@@ -12,7 +12,7 @@ namespace DynamicXmlTests
     [TestClass]
     public partial class XMLStreamingTests
     {
-        Assembly assembly = Assembly.GetExecutingAssembly();
+        private Assembly assembly = Assembly.GetExecutingAssembly();
         private string[] testFiles;
 
         [TestInitialize]
@@ -81,7 +81,7 @@ namespace DynamicXmlTests
                 IEnumerable<Store> stores = xmlStreamer.StreamInstances<Store>();
                 //Assert:
                 Assert.IsNotNull(stores);
-                Assert.IsTrue(stores.Count() > 0);
+                Assert.IsTrue(stores.Any());
                 Debug.WriteLine(stores.Count());
                 return stores;
             }
@@ -104,6 +104,7 @@ namespace DynamicXmlTests
             }
         }
     }
+
     internal static class XmlData
     {
         public static string XML =
@@ -175,6 +176,5 @@ namespace DynamicXmlTests
                         </Customers>
                       </Store>
                     </Root>";
-
     }
 }

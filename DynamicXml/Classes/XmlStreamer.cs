@@ -20,6 +20,7 @@ namespace DynamicXml
 
             XmlFile = new FileInfo(FilePath);
         }
+
         public XmlStreamer(FileInfo xmlFile)
         {
             XmlFile = xmlFile;
@@ -27,9 +28,11 @@ namespace DynamicXml
         }
 
         public IEnumerable<XElement> StreamXmlFile(string elementName) => StreamXElementsFromFile(FilePath, elementName);
+
         public IEnumerable<XElement> StreamXmlFile(FileInfo xmlFile) => StreamXElementsFromFile(FilePath, xmlFile.FullName);
 
         public IEnumerable<T> StreamInstances<T>() where T : class => StreamInstances<T>(XmlFile) ?? StreamInstances<T>(FilePath);
+
         public static IEnumerable<T> StreamInstances<T>(string xml) where T : class
         {
             var streamIterator = from element in StreamXElements(xml, typeof(T).Name)
@@ -40,6 +43,7 @@ namespace DynamicXml
                 yield return (rootElement.ToDynamic() as ExpandoObject).ToInstance<T>();
             }
         }
+
         public static IEnumerable<T> StreamInstances<T>(FileInfo file) where T : class
         {
             string xmlFilePath = file.FullName;
@@ -60,6 +64,7 @@ namespace DynamicXml
                     yield return (XElement)XNode.ReadFrom(xmlReader);
             }
         }
+
         public static IEnumerable<XElement> StreamXElementsFromFile(string xmlFilePath, string elementName)
         {
             if (!File.Exists(xmlFilePath))
@@ -91,5 +96,20 @@ namespace DynamicXml
 
         //    return customers;
         //}
+    }
+
+    //Builder -> CreateFrom([fileinfo|xmlstr]).OnSomeIAction(..).StreamXml(..).ToFile(..);
+    //Builder -> CreateFrom([fileinfo|xmlstr]).OnSomeIAction(..).StreamXml(..).ToStream(..);
+    //Builder -> CreateFrom([fileinfo|xmlstr]).OnSomeIAction(..).StreamXml(..).ToJson(..); //Transform
+
+    //Builder -> CreateFrom([fileinfo|jsonobj]).OnSomeIAction(..).StreamJson(..).ToFile(..);
+    //Builder -> CreateFrom([fileinfo|jsonobj]).OnSomeIAction(..).StreamJson(..).ToStream(..);
+    //Builder -> CreateFrom([fileinfo|jsonobj]).OnSomeIAction(..).StreamJson(..).ToXml(..);
+
+    public sealed class DeserializerBuilder
+    {
+        private DeserializerBuilder()
+        {
+        }
     }
 }

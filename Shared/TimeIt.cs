@@ -7,7 +7,7 @@ namespace Shared
     public class TimeIt : IDisposable
     {
         private readonly string name;
-        private readonly Stopwatch watch;
+        private Stopwatch watch;
         public TimeSpan Elapsed { get; private set; }
 
         public TimeIt([CallerMemberName] string name = "")

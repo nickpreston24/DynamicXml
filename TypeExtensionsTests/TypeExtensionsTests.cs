@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shared;
-using System;
 using System.Diagnostics;
-using System.Reflection;
 
 namespace DynamicXml.Extensions.Tests
 {
@@ -85,9 +83,10 @@ namespace DynamicXml.Extensions.Tests
         }
     }
 
-    class Officer : Civilian
+    internal class Officer : Civilian
     {
         public new string Rank { get; set; } = nameof(Officer);
+
         public string Designation
         {
             get => $"{Rank} {Name}";
@@ -95,27 +94,40 @@ namespace DynamicXml.Extensions.Tests
         }
 
         public static implicit operator Private(Officer officer) => new Private { Name = officer.Name, Rank = nameof(Private) };
+
         public override string ToString() => base.ToString();
     }
-    class Private : MilitaryPersonnel
+
+    internal class Private : MilitaryPersonnel
     {
-        public Private() : base(nameof(Private)) { }
+        public Private() : base(nameof(Private))
+        {
+        }
 
         public new string Rank { get; set; } = nameof(Private);
+
         public static implicit operator Officer(Private @private) => new Officer { Name = @private.Name, Age = @private.Age };
+
         public override string ToString() => base.ToString();
     }
-    class Recruit : MilitaryPersonnel
+
+    internal class Recruit : MilitaryPersonnel
     {
-        public Recruit() : base(nameof(Recruit)) { }
+        public Recruit() : base(nameof(Recruit))
+        {
+        }
 
         public static implicit operator Private(Recruit recruit) => new Private { Name = recruit.Name, Age = recruit.Age };
+
         public static implicit operator Recruit(Civilian civilian) => new Recruit() { Name = civilian.Name, Age = civilian.Age }; //recruited!
+
         public override string ToString() => $"{base.ToString()}\nRank: {Rank}";
     }
+
     public class Civilian : Person
     {
         public string Rank = nameof(Civilian);
+
         public override string ToString() => $"{base.ToString()}\nRank: {Rank}";
     }
 

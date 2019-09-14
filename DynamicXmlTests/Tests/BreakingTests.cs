@@ -64,10 +64,8 @@ namespace DynamicXmlTests
                     <Price>229.99</Price>
                 </Keyboard>";
 
-
             using (var timer = new TimeIt())
             {
-                //ExpandoObject dynamicKeyboard = XDocument.Parse(xml).ToDynamic();
                 dynamic dynamicKeyboard = new Keyboard() { Name = "Corsair K70", Price = 255, Company = "Corsair", SwitchType = "topre red" };
                 Keyboard convertedKeyboard = dynamicKeyboard as dynamic;
 
