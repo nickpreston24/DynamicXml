@@ -11,10 +11,11 @@ namespace DynamicXmlTests
 
         public bool Equals(Store other)
         {
-            return other != null
-                && Products.SequenceEqual(other.Products)
-                && Customers.SequenceEqual(other.Customers)
-                /*&& Name.Equals(other.Name)*/;
+            return Products == null || Customers == null || string.IsNullOrWhiteSpace(Name)
+                || other != null
+                && Products.SequenceEqual(other?.Products)
+                && Customers.SequenceEqual(other?.Customers)
+                && Name.Equals(other?.Name);
         }
 
         public override bool Equals(object obj)
@@ -39,7 +40,7 @@ namespace DynamicXmlTests
 
         public override string ToString()
         {
-            return $"{Name}\n Products: {Products.Length}\n Customers: {Customers.Length}";
+            return $"{Name}\n Products: {Products?.Length ?? 0}\n Customers: {Customers?.Length ?? 0}";
         }
     }
 }

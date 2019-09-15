@@ -9,18 +9,16 @@ namespace DynamicXml
     {
         private static PropertyCache _properties { get; } = new PropertyCache();
 
-        public static bool HasNullProperties(this object @object)
+        public static bool HasNullProperties(this object instance)
         {
-            var properties = @object.GetType().GetProperties();
+            var properties = instance.GetType().GetProperties();
 
             foreach (var property in properties)
             {
-                object value = property.GetValue(@object, null);
+                var value = property.GetValue(instance, null);
 
                 if (value == null)
-                {
                     return true;
-                }
             }
 
             return false;
@@ -28,23 +26,20 @@ namespace DynamicXml
 
         public static IEnumerable<PropertyInfo> GetNullProperties(this object @object)
         {
-            return @object.GetType().GetProperties().Where(property => property.GetValue(@object, null) == null);
+            return @object.GetType()
+                .GetProperties()
+                .Where(property => property.GetValue(@object, null) == null);
         }
-
-        //public static bool IsIEnumerableOfT(this Type type)
-        //{
-        //    return type.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IEnumerable<>));
-        //    //return type.GetInterfaces().Any(t => t.GetGenericTypeDefinition() == typeof(IEnumerable<>));
-        //}
 
         public static bool Implements(this Type type, Type contract)
         {
+            var interfaces = type.GetInterfaces();
             return contract.IsGenericTypeDefinition
-            ? type.GetInterfaces().Any(i => i.GetGenericTypeDefinition().Equals(contract))
-            : type.GetInterfaces().Any(i => i.Equals(contract));
+                ? interfaces.Any(interfaceType => interfaceType.GetGenericTypeDefinition() == contract)
+                : interfaces.Any(interfaceType => interfaceType == contract);
         }
 
-        public static bool IsIEnumerableOfType(this Type type)
+        public static bool IsIEnumerable(this Type type)
         {
             return type.Implements(typeof(IEnumerable<>));
         }

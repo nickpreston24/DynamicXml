@@ -141,17 +141,13 @@
       <Project>{7EA28498-12CB-465C-A535-43DE488734E5}</Project>
       <Name>DynamicXml</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Shared\Shared.csproj">
-      <Project>{81dae6a6-91d5-44ea-a777-a4b96ca17134}</Project>
-      <Name>Shared</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="TestXml\Store.xml" />
+    <EmbeddedResource Include="Files\Store.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Extractables\Containers.cs" />
@@ -166,15 +162,17 @@
     <Compile Include="Classes\Extractables\ScenarioDetails.cs" />
     <Compile Include="Tests\BuilderTests.cs" />
     <Compile Include="Classes\XmlData.cs" />
+    <Compile Include="Tests\MaybeExtensionsTests.cs" />
     <Compile Include="Tests\XMLStreamingTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestXml\Containers.xml">
+    <Content Include="Files\Containers.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="TestXml\Details.xml" />
-    <EmbeddedResource Include="TestXml\Town.xml" />
+    <Content Include="Files\Details.xml" />
+    <EmbeddedResource Include="Files\Town.xml" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\SharedProject\SharedProject.projitems" Label="Shared" />
 </Project>

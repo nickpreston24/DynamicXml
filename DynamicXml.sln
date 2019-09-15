@@ -7,11 +7,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicXml", "DynamicXml\Dy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicXmlTests", "DynamicXmlTests\DynamicXmlTests.csproj", "{F12B3790-68B2-4CBB-B721-30483B49DF54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{81DAE6A6-91D5-44EA-A777-A4B96CA17134}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Maybe", "..\DesignPatterns\Maybe\Maybe.shproj", "{75CDF10E-151A-41F9-9636-6EAC6F2DB24F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleMocking", "ExampleMocking\ExampleMocking.csproj", "{70EF37EE-12CD-4F56-B462-ADF140E56959}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Utilities", "SharedProject\Utilities.shproj", "{A41CF97B-495E-48A6-8218-A9555EEA18F8}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\DesignPatterns\Maybe\Maybe.projitems*{75cdf10e-151a-41f9-9636-6eac6f2db24f}*SharedItemsImports = 13
+		..\DesignPatterns\Maybe\Maybe.projitems*{7ea28498-12cb-465c-a535-43de488734e5}*SharedItemsImports = 4
+		SharedProject\SharedProject.projitems*{7ea28498-12cb-465c-a535-43de488734e5}*SharedItemsImports = 4
+		SharedProject\SharedProject.projitems*{a41cf97b-495e-48a6-8218-a9555eea18f8}*SharedItemsImports = 13
+		SharedProject\SharedProject.projitems*{f12b3790-68b2-4cbb-b721-30483b49df54}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -25,14 +32,6 @@ Global
 		{F12B3790-68B2-4CBB-B721-30483B49DF54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F12B3790-68B2-4CBB-B721-30483B49DF54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F12B3790-68B2-4CBB-B721-30483B49DF54}.Release|Any CPU.Build.0 = Release|Any CPU
-		{81DAE6A6-91D5-44EA-A777-A4B96CA17134}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81DAE6A6-91D5-44EA-A777-A4B96CA17134}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81DAE6A6-91D5-44EA-A777-A4B96CA17134}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81DAE6A6-91D5-44EA-A777-A4B96CA17134}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70EF37EE-12CD-4F56-B462-ADF140E56959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70EF37EE-12CD-4F56-B462-ADF140E56959}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70EF37EE-12CD-4F56-B462-ADF140E56959}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70EF37EE-12CD-4F56-B462-ADF140E56959}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

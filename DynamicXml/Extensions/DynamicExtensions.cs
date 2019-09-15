@@ -1,5 +1,6 @@
 ﻿using DynamicXml.Extensions;
 using Shared;
+using Shared.Diagnostics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,14 +8,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Dynamic;
-using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
-using System.Xml.Serialization;
-using static DynamicXml.FunctionalExtensions;
 
 namespace DynamicXml
 {
@@ -28,7 +26,7 @@ namespace DynamicXml
     /// </summary>
     public static partial class DynamicExtensions
     {
-        private static StringComparison _comparison = StringComparison.OrdinalIgnoreCase;
+        private static StringComparison comparison = StringComparison.OrdinalIgnoreCase;
 
         /// <summary>
         /// Caches xml inside an XDocument, creating some overhead.
@@ -38,24 +36,18 @@ namespace DynamicXml
         {
             T result;
 
-            using (var timer = TimeIt.GetTimer())
+            using (TimeIt.GetTimer())
             {
                 if (string.IsNullOrWhiteSpace(xml))
-                {
-                    return default(T);
-                }
+                    return default;
 
                 string className = typeof(T).Name;
                 var xmlDocument = XDocument.Parse(xml);
                 string node = xmlDocument.GetFirstNode(className);
 
                 if (node == null)
-                {
                     throw new Exception($"Could not find element '{className}' in xml");
-                }
 
-                //Todo: replace the following segment with code that goes from the first node.
-                xmlDocument = null;
                 xmlDocument = XDocument.Parse(node);
 
                 var dictionary = xmlDocument.Root.ToDynamic() as ExpandoObject;
@@ -74,51 +66,10 @@ namespace DynamicXml
             return node.ToDynamic(parent);
         }
 
-        private static dynamic ToDynamic(this XElement node, dynamic parent)
-        {
-            if (node.HasElements)
-            {
-                if (node.Elements(node.Elements().First().Name.LocalName).Count() > 1)
-                {
-                    var item = new ExpandoObject();
-                    var list = new List<dynamic>();
-                    foreach (var element in node.Elements())
-                    {
-                        ToDynamic(element, list);
-                    }
-
-                    AddProperty(item, node.Elements().First().Name.LocalName, list);
-                    AddProperty(parent, node.Name.ToString(), item);
-                }
-                else
-                {
-                    var item = new ExpandoObject();
-
-                    foreach (var attribute in node.Attributes())
-                    {
-                        AddProperty(item, attribute.Name.ToString(), attribute.Value.Trim());
-                    }
-
-                    foreach (var element in node.Elements())
-                    {
-                        ToDynamic(element, item);
-                    }
-
-                    AddProperty(parent, node.Name.ToString(), item);
-                }
-            }
-            else
-            {
-                AddProperty(parent, node.Name.ToString(), node.Value.Trim());
-            }
-
-            return parent;
-        }
-
         public static T ToInstance<T>(this IDictionary<string, object> dictionary) where T : class
         {
-            T instance = default(T);
-            using (var timer = TimeIt.GetTimer())
+            T instance;
+            using (TimeIt.GetTimer())
             {
                 var type = typeof(T);
                 instance = (T)ToInstance(Activator.CreateInstance(type, true), dictionary, type);
@@ -134,137 +85,18 @@ namespace DynamicXml
                 : new Dictionary<string, object>(0);
         }
 
-        private static object ToInstance(object parent, IDictionary<string, object> dictionary, Type childType)
+        private static void AddProperty(dynamic parent, string name, object value)
         {
-            var parentType = parent.GetType();
-            string parentTypeName = parentType.Name;
-
-            var parentProprties = _properties[parentType];
-            var childProperties = _properties[childType];
-
-            foreach (var pair in dictionary ?? new Dictionary<string, object>(0))
+            switch (parent)
             {
-                object value = pair.Value;
-                var type = value.GetType();
+                case ICollection<dynamic> list:
+                    list.Add(value);
+                    break;
 
-                try
-                {
-                    //Debug.WriteLine($"Class: {parentTypeName}\nElement: {pair.Key.ToString()} raw Value: {value.ToString()}\ntype: {type.Name}\n");
-
-                    if (!type.Name.Equals(nameof(ExpandoObject)))
-                    {
-                        var nextProperty = childProperties
-                            .SingleOrDefault(childProperty => childProperty.Name.Equals(pair.Key, _comparison));
-
-                        if (string.IsNullOrWhiteSpace(value.ToString()))
-                        {
-                            value = GetDefaultValue(nextProperty.PropertyType);
-                        }
-
-                        if (value == null)
-                        {
-                            Debug.WriteLine(
-                                $"[Warning!]: Property '{nextProperty.Name}', of type '{nextProperty.PropertyType.Name}' is null and could not be assigned!");
-                            continue;
-                        }
-
-                        nextProperty?.SetValue(parent, TypeDescriptor.GetConverter(nextProperty.PropertyType)
-                            .ConvertFrom(value), null);
-
-                        continue;
-                    }
-
-                    IDictionary<string, object> nextChildDictionary = value as ExpandoObject;
-                    string propertyName = pair.Key.ToString();
-
-                    if (propertyName.Equals(parentTypeName, _comparison))
-                    {
-                        object childTemplate = Activator.CreateInstance(childType, true);
-                        object child = ToInstance(parent: childTemplate, dictionary: nextChildDictionary,
-                            childType: childType);
-
-                        parent = child;
-                    }
-                    else
-                    {
-                        var nextProperty = childProperties
-                            .SingleOrDefault(property => property.Name.Equals(propertyName, _comparison)
-                                                         || property.PropertyType.Name.Equals(propertyName,
-                                                             _comparison));
-
-                        if (nextProperty == null)
-                        {
-                            Debug.WriteLine($"Info: Could not find property '{propertyName}'");
-                            continue;
-                        }
-
-                        var nextChildType = nextProperty?.PropertyType;
-
-                        AssignChild(parent, nextProperty, nextChildDictionary);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    string message = new StringBuilder()
-                        .AppendFormat($"Encountered an error when populating an instance of '{parentTypeName}'")
-                        .AppendFormat($"with element '{pair.Key.ToString()}':\n {ex.ToString()}")
-                        .AppendFormat($"\nEnsure XML elements match the instance schema!")
-                        .ToString();
-
-                    Debug.WriteLine(message);
-                    continue;
-                }
+                default:
+                    ((IDictionary<string, object>)parent)[name] = value;
+                    break;
             }
-
-            return parent;
-        }
-
-        private static object CreateChild(IDictionary<string, object> childDictionary, Type childType)
-        {
-            object child = new object();
-
-            var baseType = childType.BaseType ?? childType;
-
-            if (baseType.Equals(typeof(Array))
-                || childType.IsIEnumerableOfType())
-            {
-                var elementType = baseType.Equals(typeof(Array))
-                    ? childType.GetElementType()
-                    : childType.GetGenericArguments().Single();
-
-                var list = new List<object>(childDictionary.Values.Count);
-
-                //1.
-                foreach (IEnumerable expandos in childDictionary.Values)
-                {
-                    foreach (ExpandoObject expando in expandos
-                    ) //todo: fix issue where a string is percieved as an expando of chars.
-                    {
-                        object next = ToInstance(expando, elementType);
-                        list.Add(next);
-                    }
-                }
-
-                //2.
-                if (baseType.Equals(typeof(Array)))
-                {
-                    var childArray = Array.CreateInstance(elementType, list.Count);
-                    object[] source = list.Cast<object>().ToArray();
-                    Array.Copy(source, childArray, list.Count);
-                    child = childArray;
-                }
-                else
-                {
-                    child = list;
-                }
-            }
-            else
-            {
-                object parent = Activator.CreateInstance(childType, true);
-                child = ToInstance(parent, childDictionary, childType) ?? Activator.CreateInstance(childType);
-            }
-
-            return child;
         }
 
         private static void AssignChild(object parent, PropertyInfo property,
@@ -301,21 +133,162 @@ namespace DynamicXml
                 }
         }
 
-        private static void AddProperty(dynamic parent, string name, object value)
+        private static object CreateChild(IDictionary<string, object> childDictionary, Type childType)
         {
-            switch (parent)
-            {
-                case ICollection<dynamic> list:
-                    list.Add(value);
-                    break;
+            var baseType = childType.BaseType ?? childType;
+            var parent = Activator.CreateInstance(childType, true);
 
-                default:
-                    ((IDictionary<string, object>)parent)[name] = value;
-                    break;
+            object child;
+            if (baseType == typeof(Array) || childType.IsIEnumerable())
+            {
+                var elementType = baseType == typeof(Array)
+                    ? childType.GetElementType()
+                    : childType.GetGenericArguments().Single();
+
+                var list = new List<object>(childDictionary.Values.Count);
+
+                list.AddRange(from IEnumerable expandoCollection in childDictionary.Values
+                              from ExpandoObject dictionary in expandoCollection
+                              let next = ToInstance(dictionary, elementType)
+                              select next);
+
+                if (baseType != typeof(Array))
+                {
+                    child = list;
+                }
+                else
+                {
+                    var childArray = Array.CreateInstance(elementType, list.Count);
+                    var source = list.Cast<object>().ToArray();
+                    Array.Copy(source, childArray, list.Count);
+                    child = childArray;
+                }
             }
+            else
+            {
+                child = ToInstance(parent, childDictionary, childType) ?? Activator.CreateInstance(childType);
+            }
+
+            return child;
         }
 
         private static object GetDefaultValue(Type type) => (type.IsValueType) ? Activator.CreateInstance(type) : null;
+
+        private static dynamic ToDynamic(this XElement node, dynamic parent)
+        {
+            if (!node.HasElements)
+            {
+                AddProperty(parent, node.Name.ToString(), node.Value.Trim());
+            }
+            else if (node.Elements(node.Elements().First().Name.LocalName).Count() > 1)
+            {
+                var item = new ExpandoObject();
+                var list = new List<dynamic>();
+                foreach (var element in node.Elements())
+                {
+                    ToDynamic(element, list);
+                }
+
+                AddProperty(item, node.Elements().First().Name.LocalName, list);
+                AddProperty(parent, node.Name.ToString(), item);
+            }
+            else
+            {
+                var item = new ExpandoObject();
+
+                foreach (var attribute in node.Attributes())
+                {
+                    AddProperty(item, attribute.Name.ToString(), attribute.Value.Trim());
+                }
+
+                foreach (var element in node.Elements())
+                {
+                    ToDynamic(element, item);
+                }
+
+                AddProperty(parent, node.Name.ToString(), item);
+            }
+
+            return parent;
+        }
+
+        private static object ToInstance(object parent, IDictionary<string, object> dictionary, Type childType)
+        {
+            var parentType = parent.GetType();
+            string parentTypeName = parentType.Name;
+
+            var childProperties = _properties[childType];
+            StringBuilder errorMessages = new StringBuilder();
+
+            foreach (var pair in dictionary ?? new Dictionary<string, object>(0))
+            {
+                var value = pair.Value;
+                var type = value.GetType();
+
+                try
+                {
+                    if (!type.Name.Equals(nameof(ExpandoObject)))
+                    {
+                        var nextProperty = childProperties
+                            .SingleOrDefault(childProperty => childProperty.Name.Equals(pair.Key, comparison));
+
+                        if (string.IsNullOrWhiteSpace(value.ToString()))
+                            value = GetDefaultValue(nextProperty.PropertyType);
+
+                        if (value == null)
+                        {
+                            Debug.WriteLine($"[Warning!]: Property '{nextProperty.Name}', " +
+                                                     $"of type '{nextProperty.PropertyType.Name}' is null and could not be assigned!");
+                            continue;
+                        }
+
+                        nextProperty?.SetValue(parent, TypeDescriptor.GetConverter(nextProperty.PropertyType)
+                            .ConvertFrom(value), null);
+
+                        continue;
+                    }
+
+                    IDictionary<string, object> nextChildDictionary = value as ExpandoObject;
+                    string propertyName = pair.Key;
+
+                    if (propertyName.Equals(parentTypeName, comparison))
+                    {
+                        var nextParent = Activator.CreateInstance(childType, true);
+                        var child = ToInstance(nextParent, nextChildDictionary,
+                            childType);
+
+                        parent = child;
+                    }
+                    else
+                    {
+                        var nextProperty = childProperties
+                            .SingleOrDefault(property =>
+                                property.Name.Equals(propertyName, comparison)
+                                || property.PropertyType.Name.Equals(propertyName, comparison));
+
+                        if (nextProperty == null)
+                        {
+                            Debug.WriteLine($"Info: Could not find property '{propertyName}' in class {parentTypeName}");
+                            continue;
+                        }
+
+                        AssignChild(parent, nextProperty, nextChildDictionary);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string message = new StringBuilder()
+                        .AppendFormat($"Encountered an error when populating an instance of '{parentTypeName}' ")
+                        .AppendFormat($"with element '{pair.Key}':\n {ex}")
+                        .AppendFormat("\nEnsure XML elements match the instance schema!")
+                        .ToString();
+
+                    Debug.WriteLine(message);
+                }
+            }
+
+            return parent;
+        }
     }
 
     /// <summary>
@@ -323,6 +296,16 @@ namespace DynamicXml
     /// </summary>
     public static partial class DynamicExtensions
     {
+        public static DataTable ToDataTable(this List<dynamic> list)
+        {
+            var table = new DataTable();
+            var properties = list.GetType().GetProperties();
+            properties = properties.ToList().GetRange(0, properties.Count() - 1).ToArray();
+            properties.ToList().ForEach(p => table.Columns.Add(p.Name, typeof(string)));
+            list.ForEach(x => table.Rows.Add(x.Name, x.Phone));
+            return table;
+        }
+
         public static dynamic ToDynamic(this IDictionary<string, object> dictionary)
         {
             dynamic expando = new ExpandoObject();
@@ -347,66 +330,7 @@ namespace DynamicXml
                 expando.Add(propertyInfo.Name.ToLower(), currentValue);
             }
 
-            return expando as ExpandoObject;
-        }
-
-        public static DataTable ToDataTable(this List<dynamic> list)
-        {
-            var table = new DataTable();
-            var properties = list.GetType().GetProperties();
-            properties = properties.ToList().GetRange(0, properties.Count() - 1).ToArray();
-            properties.ToList().ForEach(p => table.Columns.Add(p.Name, typeof(string)));
-            list.ForEach(x => table.Rows.Add(x.Name, x.Phone));
-            return table;
-        }
-    }
-
-    /// <summary>
-    /// The old standard of Serializing and Deserializing POCO
-    /// </summary>
-    public static partial class DynamicExtensions
-    {
-        //[Obsolete (Slower and misses chars.)]
-        //public static T DeserializeXML<T>(this string xml)
-        //  where T : class
-        //{
-        //    T value;
-        //    using (var timer = TimeIt.GetTimer())
-        //    using (TextReader reader = new StringReader(xml))
-        //    {
-        //        value = new XmlSerializer(typeof(T)).Deserialize(reader) as T;
-        //    }
-        //    return value;
-        //}
-
-        //        public static string SerializeAsXml<T>(this T @object)
-        //            where T : class
-        //        {
-        //            var serializer = new XmlSerializer(typeof(T));
-        //            using (var writer = new StringWriter())
-        //            {
-        //                serializer.Serialize(writer, @object);
-        //                return writer.ToString();
-        //            }
-        //        }
-    }
-
-    /// <summary>
-    /// Probably garbage idea.  Safe to remove or ignore.
-    /// </summary>
-    public class DynamicAliasAttribute : Attribute
-    {
-        private string alias;
-
-        public string Alias
-        {
-            get => alias;
-            set => alias = value;
-        }
-
-        public DynamicAliasAttribute(string alias)
-        {
-            this.alias = alias;
+            return (ExpandoObject)expando;
         }
     }
 }

@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Maybe.cs" />
+    <Compile Include="Extensions\ExpandoObjectExtensions.cs" />
     <Compile Include="PocoBuilder\Interfaces\IDynamicPoco.cs" />
     <Compile Include="PocoBuilder\Interfaces\IRead.cs" />
     <Compile Include="PocoBuilder\Interfaces\ISerializeAction.cs" />
@@ -71,12 +71,8 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Shared\Shared.csproj">
-      <Project>{81dae6a6-91d5-44ea-a777-a4b96ca17134}</Project>
-      <Name>Shared</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
+  <Import Project="..\SharedProject\SharedProject.projitems" Label="Shared" />
+  <Import Project="..\..\DesignPatterns\Maybe\Maybe.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

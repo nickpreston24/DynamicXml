@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Shared.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace Shared
+namespace Shared.Diagnostics
 {
     public class TimeIt : IDisposable
     {
@@ -18,8 +19,7 @@ namespace Shared
         public static TimeIt GetTimer(
             TimeSpanUnit timeSpanUnit = TimeSpanUnit.Milliseconds,
             [CallerMemberName] string name = ""
-        )
-        => new TimeIt(timeSpanUnit, name);
+        ) => new TimeIt(timeSpanUnit, name);
 
         private TimeIt()
         {
@@ -63,7 +63,7 @@ namespace Shared
 
         public override string ToString()
         {
-            string unitName = timeSpanUnit.GetDescription();
+            string unitName = Enum.GetName(typeof(TimeSpanUnit), timeSpanUnit);
             return $"{name} took {units} {unitName}";
         }
 
@@ -75,6 +75,29 @@ namespace Shared
             Seconds,
             Milliseconds,
             //Ticks,
+        }
+    }
+
+    public static class TimeItExtensions
+    {
+        /* Basic support for diagnosing funcs, lambdas, etc. */
+        public static void WithTimer(this Action action)
+        {
+            using (TimeIt.GetTimer())
+                action();
+        }
+        public static T WithTimer<T>(this Func<T> action)
+        {
+            using (TimeIt.GetTimer())
+                return action();
+        }
+
+        public static TResult WithTimer<T, TResult>(this Func<T, TResult> action, T value)
+        {
+            using (TimeIt.GetTimer())
+            {
+                return action(value);
+            }
         }
     }
 }

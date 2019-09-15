@@ -2,48 +2,40 @@
 using DynamicXmlTests.Classes.Extractables;
 using DynamicXmlTests.TestClasses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Shared;
+using Shared.Diagnostics;
+using Shared.Extensions;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Maybe;
 
 namespace DynamicXmlTests
 {
     [TestClass]
-    public class BreakMeTests
+    public class BreakingTests
     {
-        [TestMethod]
-        public void HappyPathTest()
-        {
-            var keyboard = XmlStreamer.StreamInstances<Keyboard>(XmlData.Keyboards).First();
+        private readonly Scenario Scenario1 = new Scenario("Containers.xml");
 
-            Debug.WriteLine(keyboard.Name);
-            Debug.WriteLine(keyboard.Price);
-            Assert.IsNotNull(keyboard);
+        [TestMethod]
+        public void CanStreamArrays()
+        {
+            string xml = Scenario1.Xml;
+            Validate(action: () =>
+                 XmlStreamer.StreamInstances<ArraySets>(xml)
+            );
+            Debug.WriteLine(xml);
         }
 
         [TestMethod]
         public void CanStreamEnumerables()
         {
-            string xml = File.ReadAllText(@"..\..\TestXml\Containers.xml");
-            var containers = XmlStreamer.StreamInstances<EnumerableSets>(xml)
-                .FirstOrDefault();
-
-            Assert.IsFalse(containers.HasNullProperties());
-            Assert.IsNotNull(containers);
-            containers.Dump();
-        }
-
-        [TestMethod]
-        public void CanStreamArrays()
-        {
-            string xml = File.ReadAllText(@"..\..\TestXml\Containers.xml");
-            var containers = XmlStreamer.StreamInstances<ArraySets>(xml)
-                .FirstOrDefault();
-
-            Assert.IsFalse(containers.HasNullProperties());
-            Assert.IsNotNull(containers);
-            containers.Dump();
+            string xml = Scenario1.Xml;
+            Validate(action: () =>
+                XmlStreamer.StreamInstances<EnumerableSets>(xml)
+            );
+            Debug.WriteLine(xml);
         }
 
         [TestMethod]
@@ -63,8 +55,44 @@ namespace DynamicXmlTests
 
                 Assert.IsNotNull(convertedKeyboard);
                 Assert.IsFalse(convertedKeyboard.HasNullProperties());
-                convertedKeyboard.Dump();
+                //convertedKeyboard.Dump();
             }
+        }
+
+        [TestMethod]
+        public void HappyPathTest()
+        {
+            var keyboard = XmlStreamer.StreamInstances<Keyboard>(XmlData.Keyboards).First();
+
+            Debug.WriteLine(keyboard.Name);
+            Debug.WriteLine(keyboard.Price);
+            Assert.IsNotNull(keyboard);
+        }
+
+        private void Validate<T>(Func<IEnumerable<T>> action)
+        {
+            var sets = action().ToList();
+            var maybe = sets.ToMaybe();
+            //maybe.Case(
+            //    some: values => values.Dump(),
+            //    none: () => Console.WriteLine($"No values of type '{nameof(EnumerableSets)}' discovered.."));
+            Assert.IsNotNull(sets);
+            Assert.IsTrue(sets.Any());
+            Assert.IsFalse(sets.HasNullProperties());
+        }
+
+        private class Scenario
+        {
+            private const string testDirectory = @"..\..\Files";
+
+            public Scenario(string fileName) => FileName = fileName;
+
+            public static string TestDirectory => testDirectory;
+
+            public string FileName { get; }
+
+            public string TestFilePath => $@"{testDirectory}\{FileName}";
+            public string Xml => File.ReadAllText(TestFilePath);
         }
     }
 }

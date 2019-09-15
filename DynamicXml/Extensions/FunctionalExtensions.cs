@@ -27,9 +27,6 @@ namespace DynamicXml
             }
         }
 
-        public static TResult Map<TSource, TResult>(this TSource @this, Func<TSource, TResult> function)
-        {
-            return function(@this);
-        }
+        public static TResult Map<TSource, TResult>(this TSource source, Func<TSource, TResult> map) => map(source);
     }
 }

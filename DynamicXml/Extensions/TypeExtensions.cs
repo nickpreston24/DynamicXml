@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
@@ -8,8 +7,36 @@ namespace DynamicXml.Extensions
 {
     public static partial class DynamicExtensions
     {
-        private static ConcurrentDictionary<Type, object> typeDefaults = new ConcurrentDictionary<Type, object>();
+        public static bool IsNullable(this Type type)
+        {
+            type = type ?? throw new ArgumentNullException(nameof(type));
+            return type.IsGenericType 
+                   && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+        }
 
+        public static bool IsNullAssignable(this Type type)
+        {
+            type = type ?? throw new ArgumentNullException(nameof(type));
+            return type.IsNullable() || !type.IsValueType;
+        }
+
+        public static object ChangeType(this Type type, object instance)
+        {
+            type = type ?? throw new ArgumentNullException(nameof(type));
+            
+            if (!type.IsNullAssignable())
+                throw new InvalidCastException($"{type.FullName} is not null-assignable");
+            
+            if (instance == null)
+                return null;
+
+            if (!type.IsNullable()) 
+                return Convert.ChangeType(instance, type);
+            
+            type = Nullable.GetUnderlyingType(type);
+            return Convert.ChangeType(instance, type);
+        }
+        
         public static T ConvertTo<T>(this object value) where T : class
         {
             return (T)Convert.ChangeType(value, typeof(T));
@@ -23,99 +50,42 @@ namespace DynamicXml.Extensions
         public static IEnumerable ToEnumerableType(this Type type)
         {
             if (type == null || !type.IsClass)
-            {
-                return default(IEnumerable);
-            }
+                return default;
 
             var enumerableType = typeof(IEnumerable<>);
             var constructedListType = enumerableType.MakeGenericType(type);
-            object instance = Activator.CreateInstance(constructedListType);
+            
+            var instance = Activator.CreateInstance(constructedListType);
             return (IList)instance;
         }
 
         public static IList ToListType(this Type type)
         {
             if (type == null || !type.IsClass)
-            {
-                return default(IList);
-            }
+                return default;
 
             var listType = typeof(List<>);
             var constructedListType = listType.MakeGenericType(type);
-            object instance = Activator.CreateInstance(constructedListType);
+            var instance = Activator.CreateInstance(constructedListType);
             return (IList)instance;
         }
 
+        /// <summary>
+        /// Creates a Default Expression that has the Type property set to the specified type.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static T GetDefault<T>()
         {
-            // We want an Func<T> which returns the default.
-            // Create that expression here.
-            var e = Expression.Lambda<Func<T>>(
-                // The default value, always get what the *code* tells us.
-                Expression.Default(typeof(T))
-            );
-
-            // Compile and return the value.
-            return e.Compile()();
-        }
-
-        //todo: still not working, returns null for a class type!
-        public static object GetDefault(this Type type)
-        {
-            if (type == null)
-            {
-                throw new ArgumentNullException("type");
-            }
-
-            // We want an Func<object> which returns the default.
-            // Create that expression here:
-            var expression = Expression.Lambda<Func<object>>(
-                Expression.Convert(Expression.Default(type), typeof(object)));
-
+            var expression = Expression.Lambda<Func<T>>(Expression.Default(typeof(T)));
             return expression.Compile()();
         }
 
-        #region Mine
-
-        //todo: got error:  "MakeGenericType may only be called on a type for which Type.IsGenericTypeDefinition is true."
-        //public static object GetDefault(this Type type)
-        //{
-        //    return type.IsValueType
-        //      ? typeDefaults.GetOrAdd(type, Activator.CreateInstance)
-        //      : null;
-
-        //    //return (type.IsValueType) ? Activator.CreateInstance(type) : null;
-
-        //    //if (type == null || !type.IsClass)
-        //    //{
-        //    //    return default(object);
-        //    //}
-
-        //    //var constructedType = type.MakeGenericType(type);
-        //    //return Activator.CreateInstance(constructedType);
-        //}
-
-        #endregion Mine
-
-        #region SO's
-
-        //https://stackoverflow.com/questions/325426/programmatic-equivalent-of-defaulttype
-        //public static object GetDefault(this Type type)
-        //{
-        //    Func<object> func = GetDefaultGeneric<object>;
-        //    return func.Method.GetGenericMethodDefinition().MakeGenericMethod(type).Invoke(null, null);
-        //}
-
-        //public static object GetDefault(this Type type)
-        //{
-        //    return type.GetType().GetMethod(nameof(GetDefaultGeneric)).MakeGenericMethod(type).Invoke(null, null);
-        //}
-
-        //public static T GetDefaultGeneric<T>()
-        //{
-        //    return default(T);
-        //}
-
-        #endregion SO's
+        public static object GetDefault(this Type type)
+        {
+            if (type == null) throw new ArgumentNullException("type");
+            var expression = Expression.Lambda<Func<object>>(Expression.Convert(Expression.Default(type), type));
+            return expression.Compile()();
+        }
     }
 }
