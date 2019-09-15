@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-
-namespace Shared.Extensions
+﻿namespace Shared.Extensions
 {
     public static class EnumExtensions
     {

@@ -1,15 +1,15 @@
 ﻿using DynamicXml;
 using DynamicXmlTests.Classes.Extractables;
 using DynamicXmlTests.TestClasses;
+using Maybe;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shared.Diagnostics;
-using Shared.Extensions;
+using Shared.Maybe;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Maybe;
 
 namespace DynamicXmlTests
 {
@@ -42,7 +42,7 @@ namespace DynamicXmlTests
         //https://dotnetcodr.com/2017/02/07/convert-a-dynamic-type-to-a-concrete-object-in-net-c/
         public void DynamicToConcrete()
         {
-            using (var timer = TimeIt.GetTimer())
+            using (TimeIt.GetTimer())
             {
                 dynamic dynamicKeyboard = new Keyboard()
                 {
@@ -73,6 +73,7 @@ namespace DynamicXmlTests
         {
             var sets = action().ToList();
             var maybe = sets.ToMaybe();
+            sets.Dump();
             //maybe.Case(
             //    some: values => values.Dump(),
             //    none: () => Console.WriteLine($"No values of type '{nameof(EnumerableSets)}' discovered.."));

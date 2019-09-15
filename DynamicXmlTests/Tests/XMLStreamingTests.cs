@@ -1,6 +1,5 @@
 ﻿using DynamicXml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Shared;
 using Shared.Diagnostics;
 using System.Collections.Generic;
 using System.Diagnostics;

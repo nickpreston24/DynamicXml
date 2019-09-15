@@ -10,7 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ObjectExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Print.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Diagnostics\TimeIt.cs" />
   </ItemGroup>

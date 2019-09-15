@@ -1,5 +1,4 @@
 ﻿using DynamicXml.Extensions;
-using Shared;
 using Shared.Diagnostics;
 using System;
 using System.Collections;
