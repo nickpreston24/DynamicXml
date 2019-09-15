@@ -1,4 +1,4 @@
-﻿namespace DynamicXmlTests
+﻿namespace Shared.Classes
 {
     internal static class XmlData
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace DynamicXmlTests
+namespace Shared.Classes
 {
     internal class Store : IEquatable<Store>
     {

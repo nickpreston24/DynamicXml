@@ -1,8 +1,6 @@
 ﻿using DynamicXml;
-using DynamicXmlTests.Classes.Extractables;
-using DynamicXmlTests.TestClasses;
-using Maybe;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Shared.Classes;
 using Shared.Diagnostics;
 using Shared.Maybe;
 using System;
@@ -10,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Utilities.Shared.Extensions;
 
 namespace DynamicXmlTests
 {
@@ -73,7 +72,7 @@ namespace DynamicXmlTests
         {
             var sets = action().ToList();
             var maybe = sets.ToMaybe();
-            sets.Dump();
+            //sets.Dump();
             //maybe.Case(
             //    some: values => values.Dump(),
             //    none: () => Console.WriteLine($"No values of type '{nameof(EnumerableSets)}' discovered.."));

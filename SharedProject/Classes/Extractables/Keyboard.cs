@@ -1,4 +1,4 @@
-﻿namespace DynamicXmlTests.TestClasses
+﻿namespace Shared.Classes
 {
     public class Keyboard
     {

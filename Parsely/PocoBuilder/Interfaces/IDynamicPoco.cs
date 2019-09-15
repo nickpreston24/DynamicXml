@@ -1,4 +1,4 @@
-﻿namespace DynamicXml
+﻿namespace Parsely.Builders
 {
     public interface IDynamicPoco<in T>
          where T : class

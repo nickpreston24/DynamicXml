@@ -10,6 +10,7 @@ namespace DynamicXml
     public class XmlStreamer
     {
         public string FilePath { get; }
+
         public FileInfo XmlFile { get; private set; }
 
         public XmlStreamer(string xmlFilePath)

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DynamicXmlTests.Classes.Extractables
+namespace Shared.Classes
 {
     public class EnumerableSets
     {
@@ -19,5 +19,4 @@ namespace DynamicXmlTests.Classes.Extractables
         double[] DoubleSet { get; set; }
         float[] FloatSet { get; set; }
     }
-
 }

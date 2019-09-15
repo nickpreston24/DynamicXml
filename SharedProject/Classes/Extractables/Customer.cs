@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DynamicXmlTests
+namespace Shared.Classes
 {
     internal class Customer : IEquatable<Customer>
     {

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 
-namespace DynamicXml
+namespace Parsely.Builders
 {
     public interface IWrite
     {

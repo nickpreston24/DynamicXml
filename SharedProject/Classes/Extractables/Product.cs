@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DynamicXmlTests
+namespace Shared.Classes
 {
     public sealed class Product : IEquatable<Product>
     {

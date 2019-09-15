@@ -1,10 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shared.Helpers;
+using Shared.Maybe;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Shared.Maybe.Tests
+namespace MaybeExtensionsTests
 {
     [TestClass()]
     public class MaybeExtensionsTests
