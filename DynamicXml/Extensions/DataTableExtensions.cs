@@ -1,5 +1,4 @@
-﻿using Shared.Diagnostics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -161,65 +160,63 @@ namespace DynamicXml
             where T : class, new()
         {
             var list = new List<T>();
-            using (var timer = TimeIt.GetTimer())
+
+            if (table == null || table.Rows.Count == 0)
             {
-                if (table == null || table.Rows.Count == 0)
+                return list;
+            }
+
+            var properties = _properties[typeof(T)];
+
+            if (properties == null || properties.Length == 0)
+            {
+                return list;
+            }
+
+            var tableColumnNames = table.GetColumnNames();
+
+            string propertyName = "";
+
+            foreach (var row in table.AsEnumerable())
+            {
+                var item = new T();
+
+                foreach (var property in properties ?? Enumerable.Empty<PropertyInfo>())
                 {
-                    return list;
-                }
-
-                var properties = _properties[typeof(T)];
-
-                if (properties == null || properties.Length == 0)
-                {
-                    return list;
-                }
-
-                var tableColumnNames = table.GetColumnNames();
-
-                string propertyName = "";
-
-                foreach (var row in table.AsEnumerable())
-                {
-                    var item = new T();
-
-                    foreach (var property in properties ?? Enumerable.Empty<PropertyInfo>())
+                    try
                     {
-                        try
-                        {
-                            propertyName = property.Name;
+                        propertyName = property.Name;
 
-                            if (!tableColumnNames.Contains(propertyName, StringComparer.OrdinalIgnoreCase))
-                            {
-                                continue;
-                            }
-
-                            object value = row[propertyName];
-
-                            if (value == DBNull.Value)
-                            {
-                                property.SetValue(item, null, null);
-                            }
-
-                            //TODO: place a condition for handling Enums, here.
-                            else if (property.PropertyType.Equals(typeof(SqlDbType)))
-                            {
-                                var dbType = (SqlDbType)Enum.Parse(typeof(SqlDbType), value.ToString(), true);
-                                property.SetValue(item, dbType, null);
-                            }
-                            else
-                            {
-                                property.SetValue(item, Convert.ChangeType(value, property.PropertyType), null);
-                            }
-                        }
-                        catch (Exception)
+                        if (!tableColumnNames.Contains(propertyName, StringComparer.OrdinalIgnoreCase))
                         {
                             continue;
                         }
-                    }
 
-                    list.Add(item);
+                        object value = row[propertyName];
+
+                        if (value == DBNull.Value)
+                        {
+                            property.SetValue(item, null, null);
+                        }
+
+                        //TODO: place a condition for handling Enums, here.
+                        else if (property.PropertyType.Equals(typeof(SqlDbType)))
+                        {
+                            var dbType = (SqlDbType)Enum.Parse(typeof(SqlDbType), value.ToString(), true);
+                            property.SetValue(item, dbType, null);
+                        }
+                        else
+                        {
+                            property.SetValue(item, Convert.ChangeType(value, property.PropertyType), null);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
                 }
+
+                list.Add(item);
             }
 
             return list;
@@ -259,7 +256,6 @@ namespace DynamicXml
         {
             try
             {
-                using (var timer = TimeIt.GetTimer())
                 using (var da = new SqlDataAdapter(selectQuery, connectionString))
                 {
                     da.SelectCommand.CommandTimeout = 180;

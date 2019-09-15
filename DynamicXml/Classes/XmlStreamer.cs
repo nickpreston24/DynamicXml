@@ -50,7 +50,6 @@ namespace DynamicXml
             string xmlFilePath = file.FullName;
             var streamIterator = from element in StreamXElementsFromFile(xmlFilePath, typeof(T).Name)
                                  select element;
-
             foreach (var rootElement in streamIterator)
             {
                 yield return (rootElement.ToDynamic() as ExpandoObject).ToInstance<T>();

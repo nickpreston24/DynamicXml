@@ -1,5 +1,4 @@
 ﻿using DynamicXml.Extensions;
-using Shared.Diagnostics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,23 +34,20 @@ namespace DynamicXml
         {
             T result;
 
-            using (TimeIt.GetTimer())
-            {
-                if (string.IsNullOrWhiteSpace(xml))
-                    return default;
+            if (string.IsNullOrWhiteSpace(xml))
+                return default;
 
-                string className = typeof(T).Name;
-                var xmlDocument = XDocument.Parse(xml);
-                string node = xmlDocument.GetFirstNode(className);
+            string className = typeof(T).Name;
+            var xmlDocument = XDocument.Parse(xml);
+            string node = xmlDocument.GetFirstNode(className);
 
-                if (node == null)
-                    throw new Exception($"Could not find element '{className}' in xml");
+            if (node == null)
+                throw new Exception($"Could not find element '{className}' in xml");
 
-                xmlDocument = XDocument.Parse(node);
+            xmlDocument = XDocument.Parse(node);
 
-                var dictionary = xmlDocument.Root.ToDynamic() as ExpandoObject;
-                result = dictionary.ToInstance<T>();
-            }
+            var dictionary = xmlDocument.Root.ToDynamic() as ExpandoObject;
+            result = dictionary.ToInstance<T>();
 
             return result;
         }
@@ -68,12 +64,8 @@ namespace DynamicXml
         public static T ToInstance<T>(this IDictionary<string, object> dictionary) where T : class
         {
             T instance;
-            using (TimeIt.GetTimer())
-            {
-                var type = typeof(T);
-                instance = (T)ToInstance(Activator.CreateInstance(type, true), dictionary, type);
-            }
-
+            var type = typeof(T);
+            instance = (T)ToInstance(Activator.CreateInstance(type, true), dictionary, type);
             return instance;
         }
 

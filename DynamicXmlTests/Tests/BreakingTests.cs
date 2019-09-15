@@ -2,13 +2,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shared.Classes;
 using Shared.Diagnostics;
-using Shared.Maybe;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Utilities.Shared.Extensions;
 
 namespace DynamicXmlTests
 {
@@ -16,6 +14,11 @@ namespace DynamicXmlTests
     public class BreakingTests
     {
         private readonly Scenario Scenario1 = new Scenario("Containers.xml");
+
+        [TestMethod]
+        public void CanUseCustomNugetPkg()
+        {
+        }
 
         [TestMethod]
         public void CanStreamArrays()
@@ -71,8 +74,7 @@ namespace DynamicXmlTests
         private void Validate<T>(Func<IEnumerable<T>> action)
         {
             var sets = action().ToList();
-            var maybe = sets.ToMaybe();
-            //sets.Dump();
+            //var maybe = sets.ToMaybe();
             //maybe.Case(
             //    some: values => values.Dump(),
             //    none: () => Console.WriteLine($"No values of type '{nameof(EnumerableSets)}' discovered.."));
