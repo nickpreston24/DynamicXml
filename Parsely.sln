@@ -3,47 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicXml", "DynamicXml\DynamicXml.csproj", "{7EA28498-12CB-465C-A535-43DE488734E5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicXmlTests", "DynamicXmlTests\DynamicXmlTests.csproj", "{F12B3790-68B2-4CBB-B721-30483B49DF54}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Utilities", "SharedProject\Utilities.shproj", "{A41CF97B-495E-48A6-8218-A9555EEA18F8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parsely", "Parsely\Parsely.csproj", "{553FB90B-FD7C-49CA-BB80-D9F178AECC9E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegexBuilder", "Regex\RegexBuilder.csproj", "{77799BBB-38C8-4133-9502-9E7111E31CF9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{07AD62E0-EBB7-4899-832E-41FBBD7CC249}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parsely.Test", "Paresly.Test\Parsely.Test.csproj", "{A41977F8-9595-45F6-A270-EDC6E72C9C58}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		..\DesignPatterns\Maybe\Maybe.projitems*{7ea28498-12cb-465c-a535-43de488734e5}*SharedItemsImports = 4
-		SharedProject\SharedProject.projitems*{7ea28498-12cb-465c-a535-43de488734e5}*SharedItemsImports = 4
 		SharedProject\SharedProject.projitems*{a41cf97b-495e-48a6-8218-a9555eea18f8}*SharedItemsImports = 13
-		SharedProject\SharedProject.projitems*{f12b3790-68b2-4cbb-b721-30483b49df54}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7EA28498-12CB-465C-A535-43DE488734E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7EA28498-12CB-465C-A535-43DE488734E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7EA28498-12CB-465C-A535-43DE488734E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7EA28498-12CB-465C-A535-43DE488734E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F12B3790-68B2-4CBB-B721-30483B49DF54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F12B3790-68B2-4CBB-B721-30483B49DF54}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F12B3790-68B2-4CBB-B721-30483B49DF54}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F12B3790-68B2-4CBB-B721-30483B49DF54}.Release|Any CPU.Build.0 = Release|Any CPU
 		{553FB90B-FD7C-49CA-BB80-D9F178AECC9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{553FB90B-FD7C-49CA-BB80-D9F178AECC9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{553FB90B-FD7C-49CA-BB80-D9F178AECC9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{553FB90B-FD7C-49CA-BB80-D9F178AECC9E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{77799BBB-38C8-4133-9502-9E7111E31CF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{77799BBB-38C8-4133-9502-9E7111E31CF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{77799BBB-38C8-4133-9502-9E7111E31CF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{77799BBB-38C8-4133-9502-9E7111E31CF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A41977F8-9595-45F6-A270-EDC6E72C9C58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A41977F8-9595-45F6-A270-EDC6E72C9C58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A41977F8-9595-45F6-A270-EDC6E72C9C58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A41977F8-9595-45F6-A270-EDC6E72C9C58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A41977F8-9595-45F6-A270-EDC6E72C9C58} = {07AD62E0-EBB7-4899-832E-41FBBD7CC249}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {33515FAC-1596-45BE-BB43-9F17CD4827BF}

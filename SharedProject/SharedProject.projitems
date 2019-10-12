@@ -6,11 +6,21 @@
     <SharedGUID>a41cf97b-495e-48a6-8218-a9555eea18f8</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>SharedProject</Import_RootNamespace>
+    <Import_RootNamespace>Utilities</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Extractables\Containers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Extractables\Customer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Extractables\Keyboard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Extractables\Person.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Extractables\Product.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Extractables\ScenarioDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Extractables\Store.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Extractables\Town.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\IContainer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\XmlData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Dump.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ObjectExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Print.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Diagnostics\TimeIt.cs" />
   </ItemGroup>
