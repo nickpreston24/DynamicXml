@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Files\Containers.xml" />
+    <None Remove="Files\Details.xml" />
+    <None Remove="Files\Store.xml" />
+    <None Remove="Files\Town.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Files\Containers.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Files\Details.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Files\Store.xml" />
+    <EmbeddedResource Include="Files\Town.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Parsely\Parsely.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\SharedProject\SharedProject.projitems" Label="Shared" />
+
+</Project>
