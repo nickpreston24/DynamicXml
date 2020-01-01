@@ -13,5 +13,11 @@ namespace Parsely.Test
                .Extract(XmlData.Keyboards)
                .ToFile("Product.cs");
         }
+
+        [Fact]
+        public void CanReuseBuilder()
+        {
+
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace Parsely.Builders
     {
         void FromFile(string filePath);
 
-        Task FromFileAsync(string filePath);
+        // Task FromFileAsync(string filePath);
 
         void FromStream(Stream stream);
 

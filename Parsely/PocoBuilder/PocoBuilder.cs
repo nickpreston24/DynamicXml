@@ -12,62 +12,62 @@ namespace Parsely.Builders
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="IDynamicPoco{T}" />
-    /// <seealso cref="ISerializeAction{T}" />
+    /// <seealso cref="IExtract{T}" />
     /// <seealso cref="IWrite" />
     /// <seealso cref="IRead" />
-    public sealed class PocoBuilder<T> : IDynamicPoco<T>, ISerializeAction<T>, IWrite, IRead
+    public sealed class PocoBuilder<T> : IExtract<T>, IWrite, IRead
         where T : class
     {
-        private readonly Type pocoType;
-        private string FilePath {
-            set {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Value cannot be null or whitespace.", nameof(FilePath));
-                FilePath = value; 
-            }
+        private string saveFilePath;
+        private string sourceFilePath;
+        private T instance;
+        ActionQueue queue = new ActionQueue();
+
+        // Where to save Poco
+        string SaveFilePath
+        {
+            get => saveFilePath;
+            set => saveFilePath = !string.IsNullOrWhiteSpace(value) 
+                ? value
+                : throw new ArgumentException("Value cannot be null or whitespace.", nameof(SaveFilePath));
         }
-        private StreamAction action;
-        public T Value { get; private set; }
-        //private string xml;
-        //private string json;
-        //private string cs;
 
-        private PocoBuilder(Type type) => pocoType = type;
+        // Where to get XML | JSON | Markdown
+        string SourceFilePath
+        {
+            get =>  sourceFilePath;
+            set => sourceFilePath = !string.IsNullOrWhiteSpace(value) 
+                ? value
+                : throw new ArgumentException("Value cannot be null or whitespace.", nameof(SourceFilePath));
+        }
 
-        public static ISerializeAction<T> Create() => new PocoBuilder<T>(typeof(T));
+        public T Instance
+        {
+            get => instance;
+            set => instance = value ?? throw new ArgumentNullException(nameof(Instance));
+        }
+
+        private PocoBuilder()
+        {
+        }
+
+        public static IExtract<T> Create() => new PocoBuilder<T>();
 
         public IRead Extract(string text)
         {
-            action = StreamAction.Download;
-            Value = DynamicExtensions.Extract<T>(text);
-
+            queue.Add(() => Instance = DynamicExtensions.Extract<T>(text));
             return this;
         }
 
-        public void FromFile(string filePath)
-        {
-            if (string.IsNullOrWhiteSpace(filePath))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(filePath));
-            
-            this.FilePath = filePath;
-            
-            throw new NotImplementedException(MethodBase.GetCurrentMethod().Name);
-        }
+        public void FromFile(string filePath) => SourceFilePath = filePath;
 
-        public Task FromFileAsync(string filePath)
+        public void FromStream(Stream stream)
         {
-            if (string.IsNullOrWhiteSpace(filePath))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(filePath));
-            
-            this.FilePath = filePath;
-            
-            return Task.Run(() =>
+            queue.Add(() =>
             {
-                throw new NotImplementedException(MethodBase.GetCurrentMethod().Name);
+                throw new NotImplementedException();
             });
         }
-
-        public void FromStream(Stream stream) => throw new NotImplementedException();
 
         public Task FromStreamAsync(Stream stream)
         {
@@ -77,37 +77,43 @@ namespace Parsely.Builders
             });
         }
 
-        ISerializeAction<T> IDynamicPoco<T>.OnInstance(T poco)
-        {
-            Value = poco;
-            throw new NotImplementedException();
-        }
+        // IExtract<T> IDynamicPoco<T>.OnInstance(T poco)
+        // {
+        //     Instance = poco;
+        //     throw new NotImplementedException();
+        // }
 
-        public IWrite Serialize(T poco)
+        private IWrite Serialize(T poco)
         {
-            if (poco == null) throw new ArgumentNullException(nameof(poco));
-
+            Instance = poco;
             throw new NotImplementedException();
         }
 
         public void ToFile(string filePath)
         {
-            this.FilePath = filePath;
-            var file = File.CreateText(filePath);
-            // file.WriteLine("Dummy");
-            //TODO: switch on the output type.
+            SaveFilePath = filePath;
+            queue.Add(() => File.WriteAllText(filePath, "Test"));
         }
 
-        public Task ToFileAsync(string filePath)
+        public async Task ToFileAsync(string filePath)
         {
-            if (string.IsNullOrWhiteSpace(filePath))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(filePath));
-            
-            throw new NotImplementedException();
+            SaveFilePath = filePath;
+            queue.Add(() => File.WriteAllTextAsync(filePath, "Test"));
         }
 
         public void ToStream(Stream stream) => throw new NotImplementedException();
 
         public Task ToStreamAsync(Stream stream) => throw new NotImplementedException();
+
+        public async Task<T> RunAsync()
+        {
+            while (!queue.IsEmpty)
+            {
+                var action = queue.Pop();
+                await Task.Run(action);
+            }
+            
+            return instance;
+        }
     }
 }
