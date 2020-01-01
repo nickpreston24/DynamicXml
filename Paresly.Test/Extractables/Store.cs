@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Shared.Classes
+namespace Parsely.Test.Extractables
 {
     internal class Store : IEquatable<Store>
     {

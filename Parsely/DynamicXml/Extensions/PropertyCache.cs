@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 
-namespace DynamicXml
+namespace Parsely
 {
     public class PropertyCache
     {

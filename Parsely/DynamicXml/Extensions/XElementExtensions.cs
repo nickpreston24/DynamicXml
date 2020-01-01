@@ -2,7 +2,7 @@
 using System.Xml;
 using System.Xml.Linq;
 
-namespace DynamicXml.Extensions
+namespace Parsely.Extensions
 {
     public static partial class DynamicExtensions
     {

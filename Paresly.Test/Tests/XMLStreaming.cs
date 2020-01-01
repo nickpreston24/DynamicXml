@@ -1,12 +1,10 @@
-﻿using DynamicXml;
-using Shared.Classes;
-using Shared.Diagnostics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Parsely.Test.Extractables;
 using Xunit;
 
 namespace Parsely.Test
@@ -76,32 +74,28 @@ namespace Parsely.Test
             var xmlStreamer = new XmlStreamer(xmlFilePath);
 
             //Act
-            using (var timer = TimeIt.GetTimer())
-            {
-                IEnumerable<Store> stores = xmlStreamer.StreamInstances<Store>();
-                //Assert:
-                Assert.NotNull(stores);
-                Assert.True(stores.Any());
-                Debug.WriteLine(stores.Count());
-                return stores;
-            }
+            IEnumerable<Store> stores = xmlStreamer.StreamInstances<Store>();
+            
+            //Assert:
+            Assert.NotNull(stores);
+            Assert.True(stores.Any());
+            Debug.WriteLine(stores.Count());
+            return stores;
         }
 
         private static IEnumerable<Store> StreamFromString()
         {
-            string xml = XmlData.Stores;
-            using (var timer = TimeIt.GetTimer())
+            string filePath = "Stores.xml";
+            string xml = "";
+            var stores = XmlStreamer.StreamInstances<Store>(xml);
+
+            foreach (var store in stores)
             {
-                var stores = XmlStreamer.StreamInstances<Store>(xml);
-
-                foreach (var store in stores)
-                {
-                    Debug.WriteLine(store?.ToString());
-                }
-
-                Debug.WriteLine(stores.Count());
-                return stores;
+                Debug.WriteLine(store?.ToString());
             }
+
+            Debug.WriteLine(stores.Count());
+            return stores;
         }
 
         #region IDisposable Support
@@ -114,30 +108,15 @@ namespace Parsely.Test
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects).
                 }
-
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
 
                 disposedValue = true;
             }
         }
 
-        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~XMLStreamingTests()
-        // {
-        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-        //   Dispose(false);
-        // }
-
-        // This code added to correctly implement the disposable pattern.
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
-            // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
         }
 
         #endregion IDisposable Support

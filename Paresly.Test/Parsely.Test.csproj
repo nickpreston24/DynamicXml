@@ -39,7 +39,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Parsely\Parsely.csproj" />
   </ItemGroup>
-
-  <Import Project="..\SharedProject\SharedProject.projitems" Label="Shared" />
-
 </Project>

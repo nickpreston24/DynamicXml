@@ -7,7 +7,7 @@ using System.Xml;
 using System.Xml.Linq;
 using Parsely.Builders;
 
-namespace DynamicXml
+namespace Parsely
 {
     public class XmlStreamer
     {

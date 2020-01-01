@@ -1,6 +1,4 @@
-﻿using Shared.Diagnostics;
-using System;
-using Xunit;
+﻿using Xunit;
 using Xunit.Abstractions;
 
 namespace RegexBuilder.Tests
@@ -23,13 +21,11 @@ namespace RegexBuilder.Tests
                 GPA = 3.4,
                 Country = "USA",
             };
-            using (TimeIt.GetTimer())
-            {
-                Print(expected.ToString());
-                Person mike = lineItem.Extract<Person>(pattern);
-                Print(mike.ToString());
-                Assert.Equal(mike, expected);
-            }
+            
+            Print(expected.ToString());
+            Person mike = lineItem.Extract<Person>(pattern);
+            Print(mike.ToString());
+            Assert.Equal(mike, expected);
         }
 
         [Fact]
@@ -42,15 +38,13 @@ namespace RegexBuilder.Tests
                 Country = "USA",
                 GPA = 3.4,
             };
-            using (TimeIt.GetTimer())
-            {
-                string pattern = expected.GenerateRegex();
-                Print(pattern);
-                Assert.NotNull(pattern);
+            
+            string pattern = expected.GenerateRegex();
+            Print(pattern);
+            Assert.NotNull(pattern);
 
-                var actual = lineItem.Extract<Person>(pattern);
-                Assert.Equal(expected, actual);
-            }
+            var actual = lineItem.Extract<Person>(pattern);
+            Assert.Equal(expected, actual);
         }
 
         [Fact]

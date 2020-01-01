@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DynamicXml
+namespace Parsely
 {
     public static class FunctionalExtensions
     {

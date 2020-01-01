@@ -4,7 +4,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 
-namespace DynamicXml.Extensions
+namespace Parsely.Extensions
 {
     public static class ExpandoObjectExtensions
     {

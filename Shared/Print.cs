@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
-namespace Shared.Helpers
+namespace Shared
 {
     public static class PrintHelpers
     {
         public static void Print<T>(this IEnumerable<T> collection) => Print(collection.ToList());
+
+        public static Action<string> PrintAction { get; set; } = Console.WriteLine;
 
         private static void Print<T>(List<T> list)
         {
@@ -41,11 +42,11 @@ namespace Shared.Helpers
             }
         }
 
-        private static void Print<T>(T item, bool debug = false)
+        private static void Print<T>(T item, Action<string> customPrint = null)
         {
+            if (customPrint != null) PrintAction = customPrint;
             string text = item?.ToString();
-            Console.WriteLine(text);
-            Debug.WriteLineIf(debug, text);
+            PrintAction(text);
         }
     }
 }

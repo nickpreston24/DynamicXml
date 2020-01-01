@@ -1,4 +1,4 @@
-﻿namespace Shared.Classes
+﻿namespace Parsely.Test.Extractables
 {
     public class Person
     {

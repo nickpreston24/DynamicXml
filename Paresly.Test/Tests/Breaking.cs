@@ -1,12 +1,9 @@
-﻿using DynamicXml;
-using Shared.Classes;
-using Shared.Diagnostics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Utilities.Shared.Extensions;
+using Parsely.Test.Extractables;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -43,27 +40,25 @@ namespace Parsely.Test
         //https://dotnetcodr.com/2017/02/07/convert-a-dynamic-type-to-a-concrete-object-in-net-c/
         public void DynamicToConcrete()
         {
-            using (TimeIt.GetTimer())
+            dynamic dynamicKeyboard = new Keyboard()
             {
-                dynamic dynamicKeyboard = new Keyboard()
-                {
-                    Name = "Corsair K70",
-                    Price = 255,
-                    Company = "Corsair",
-                    SwitchType = "topre red"
-                };
-                Keyboard convertedKeyboard = dynamicKeyboard as dynamic;
-                Assert.NotNull(convertedKeyboard);
-                Assert.False(convertedKeyboard.HasNullProperties());
-                convertedKeyboard.Dump();
-            }
+                Name = "Corsair K70",
+                Price = 255,
+                Company = "Corsair",
+                SwitchType = "topre red"
+            };
+            Keyboard convertedKeyboard = dynamicKeyboard as dynamic;
+            Assert.NotNull(convertedKeyboard);
+            Assert.False(convertedKeyboard.HasNullProperties());
         }
 
         [Fact]
         public void HappyPathTest()
         {
-            var keyboard = XmlStreamer.StreamInstances<Keyboard>(XmlData.Keyboards).First();
+            string fileName = "Keyboards.xml";
+            string xml = "";
 
+            var keyboard = XmlStreamer.StreamInstances<Keyboard>(xml).First();
             Debug.WriteLine(keyboard.Name);
             Debug.WriteLine(keyboard.Price);
             Assert.NotNull(keyboard);

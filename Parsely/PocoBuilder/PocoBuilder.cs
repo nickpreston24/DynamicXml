@@ -23,7 +23,7 @@ namespace Parsely.Builders
             switch (pocoFormat)
             {
                 case PocoFormat.Xml:
-                    extractor = new DynamicXml.PocoExtractor<T>();
+                    extractor = new Parsely.PocoExtractor<T>();
                     break;
                 case PocoFormat.Json:
                 case PocoFormat.Poco:
@@ -33,6 +33,8 @@ namespace Parsely.Builders
                     throw new NotSupportedException($@"{pocoFormat.ToString()} format not yet supported!");
             }
 
+            var result = MP.StdLib.MathUtils.Square(2);
+            // var result = 2.0.Square();
             return this;
         }
 

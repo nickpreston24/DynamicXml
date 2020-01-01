@@ -1,0 +1,9 @@
+/home/michael/Desktop/CodeProjects/Parsely/Shared/obj/Debug/netstandard2.0/Shared.csprojAssemblyReference.cache
+/home/michael/Desktop/CodeProjects/Parsely/Shared/obj/Debug/netstandard2.0/Shared.csproj.CoreCompileInputs.cache
+/home/michael/Desktop/CodeProjects/Parsely/Shared/obj/Debug/netstandard2.0/Shared.AssemblyInfoInputs.cache
+/home/michael/Desktop/CodeProjects/Parsely/Shared/obj/Debug/netstandard2.0/Shared.AssemblyInfo.cs
+/home/michael/Desktop/CodeProjects/Parsely/Shared/bin/Debug/netstandard2.0/Shared.deps.json
+/home/michael/Desktop/CodeProjects/Parsely/Shared/bin/Debug/netstandard2.0/Shared.dll
+/home/michael/Desktop/CodeProjects/Parsely/Shared/bin/Debug/netstandard2.0/Shared.pdb
+/home/michael/Desktop/CodeProjects/Parsely/Shared/obj/Debug/netstandard2.0/Shared.dll
+/home/michael/Desktop/CodeProjects/Parsely/Shared/obj/Debug/netstandard2.0/Shared.pdb

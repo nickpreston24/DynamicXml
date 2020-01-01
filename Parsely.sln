@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Utilities", "SharedProject\Utilities.shproj", "{A41CF97B-495E-48A6-8218-A9555EEA18F8}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parsely", "Parsely\Parsely.csproj", "{553FB90B-FD7C-49CA-BB80-D9F178AECC9E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{07AD62E0-EBB7-4899-832E-41FBBD7CC249}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parsely.Test", "Paresly.Test\Parsely.Test.csproj", "{A41977F8-9595-45F6-A270-EDC6E72C9C58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{8F3B2048-D116-4DE1-A6AA-F2AD532B457C}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -28,6 +28,10 @@ Global
 		{A41977F8-9595-45F6-A270-EDC6E72C9C58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A41977F8-9595-45F6-A270-EDC6E72C9C58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A41977F8-9595-45F6-A270-EDC6E72C9C58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F3B2048-D116-4DE1-A6AA-F2AD532B457C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3B2048-D116-4DE1-A6AA-F2AD532B457C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3B2048-D116-4DE1-A6AA-F2AD532B457C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3B2048-D116-4DE1-A6AA-F2AD532B457C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

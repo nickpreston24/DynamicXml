@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Shared.Classes
+namespace Parsely.Test.Extractables
 {
     public class Town
     {

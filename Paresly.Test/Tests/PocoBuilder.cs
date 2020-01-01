@@ -1,8 +1,6 @@
 using System.IO;
 using Parsely.Builders;
-using Shared.Classes;
-using Shared.Diagnostics;
-using Utilities.Shared.Extensions;
+using Parsely.Test.Extractables;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -17,10 +15,11 @@ namespace Parsely.Test
         [Fact]
         public void CanBuildExtractor()
         {
+            string inputFile = "Keyboards.xml";
+            
             var extractor = PocoBuilder<Keyboard>
                 .Create()
-                .Extract(XmlData.Keyboards)
-                .Instance;
+                .Extract(inputFile);
            
            Assert.NotNull(extractor);
         }
@@ -38,7 +37,8 @@ namespace Parsely.Test
                 .Create(PocoFormat.Xml);
             
             var keyboard = pocoBuilder.Extract(xml);
-            keyboard.Dump("Keyboard", print: Print);
+            // keyboard.Dump("Keyboard", print: Print);
+            // xml.Dump("test");
         }
 
         private void Print(string text) => debugger.WriteLine(text);

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shared.Classes
+namespace Parsely.Test.Extractables
 {
     internal class Customer : IEquatable<Customer>
     {

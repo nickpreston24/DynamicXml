@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace DynamicXml.Extensions
+namespace Parsely.Extensions
 {
     public static partial class DynamicExtensions
     {
