@@ -2,12 +2,10 @@
 {
     public class FullName
     {
-        [RegexPattern(@"\d+^[,!?]")]
-        public string FirstName { get; set; }
-
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
-        public string Suffix { get; set; }
+        [RegexPattern(@"\b\d+^[,!?]\b")] public string FirstName { get; set; }
+        [RegexPattern(@"\b\d+^[,!?]\b")] public string MiddleName { get; set; }
+        [RegexPattern(@"\b\d+^[,!?]\b")] public string LastName { get; set; }
+        [RegexPattern(@"(Mr|Ms|Jr|Sr)\.")]  public string Suffix { get; set; }
 
         public override string ToString()
             => $"{FirstName} {MiddleName} {LastName} {Suffix}";

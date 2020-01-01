@@ -19,7 +19,13 @@ namespace Parsely.Builders
         where T : class
     {
         private readonly Type pocoType;
-        private string filePath;
+        private string FilePath {
+            set {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Value cannot be null or whitespace.", nameof(FilePath));
+                FilePath = value; 
+            }
+        }
         private StreamAction action;
         public T Value { get; private set; }
         //private string xml;
@@ -40,12 +46,21 @@ namespace Parsely.Builders
 
         public void FromFile(string filePath)
         {
-            this.filePath = filePath;
+            if (string.IsNullOrWhiteSpace(filePath))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(filePath));
+            
+            this.FilePath = filePath;
+            
+            throw new NotImplementedException(MethodBase.GetCurrentMethod().Name);
         }
 
         public Task FromFileAsync(string filePath)
         {
-            this.filePath = filePath;
+            if (string.IsNullOrWhiteSpace(filePath))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(filePath));
+            
+            this.FilePath = filePath;
+            
             return Task.Run(() =>
             {
                 throw new NotImplementedException(MethodBase.GetCurrentMethod().Name);
@@ -68,16 +83,28 @@ namespace Parsely.Builders
             throw new NotImplementedException();
         }
 
-        public IWrite Serialize(T poco) => throw new NotImplementedException();
+        public IWrite Serialize(T poco)
+        {
+            if (poco == null) throw new ArgumentNullException(nameof(poco));
+
+            throw new NotImplementedException();
+        }
 
         public void ToFile(string filePath)
         {
+            this.FilePath = filePath;
             var file = File.CreateText(filePath);
-            file.WriteLine("Dummy");
+            // file.WriteLine("Dummy");
             //TODO: switch on the output type.
         }
 
-        public Task ToFileAsync(string filePath) => throw new NotImplementedException();
+        public Task ToFileAsync(string filePath)
+        {
+            if (string.IsNullOrWhiteSpace(filePath))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(filePath));
+            
+            throw new NotImplementedException();
+        }
 
         public void ToStream(Stream stream) => throw new NotImplementedException();
 

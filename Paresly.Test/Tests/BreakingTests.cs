@@ -6,27 +6,28 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Utilities.Shared.Extensions;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Parsely.Test
 {
     //[TestClass]
     public class BreakingTests
     {
+        private readonly ITestOutputHelper testOutputHelper;
         private readonly Scenario Scenario1 = new Scenario("Containers.xml");
 
-        [Fact]
-        public void CanUseCustomNugetPkg()
+        public BreakingTests(ITestOutputHelper testOutputHelper)
         {
+            this.testOutputHelper = testOutputHelper;
         }
 
         [Fact]
         public void CanStreamArrays()
         {
             string xml = Scenario1.Xml;
-            Validate(action: () =>
-                 XmlStreamer.StreamInstances<ArraySets>(xml)
-            );
+            Validate(action: () => XmlStreamer.StreamInstances<ArraySets>(xml));
             Debug.WriteLine(xml);
         }
 
@@ -34,9 +35,7 @@ namespace Parsely.Test
         public void CanStreamEnumerables()
         {
             string xml = Scenario1.Xml;
-            Validate(action: () =>
-                XmlStreamer.StreamInstances<EnumerableSets>(xml)
-            );
+            Validate(action: () => XmlStreamer.StreamInstances<EnumerableSets>(xml));
             Debug.WriteLine(xml);
         }
 
@@ -54,10 +53,9 @@ namespace Parsely.Test
                     SwitchType = "topre red"
                 };
                 Keyboard convertedKeyboard = dynamicKeyboard as dynamic;
-
                 Assert.NotNull(convertedKeyboard);
                 Assert.False(convertedKeyboard.HasNullProperties());
-                //convertedKeyboard.Dump();
+                convertedKeyboard.Dump();
             }
         }
 
@@ -73,19 +71,14 @@ namespace Parsely.Test
 
         private void Validate<T>(Func<IEnumerable<T>> action)
         {
-            var sets = action().ToList();
-            //var maybe = sets.ToMaybe();
-            //maybe.Case(
-            //    some: values => values.Dump(),
-            //    none: () => Console.WriteLine($"No values of type '{nameof(EnumerableSets)}' discovered.."));
-            Assert.NotNull(sets);
-            Assert.True(sets.Any());
-            //Assert.False(sets.HasNullProperties());
+            var collection = action().ToList();
+            Assert.NotNull(collection);
+            Assert.True(collection.Any());
         }
 
         private class Scenario
         {
-            private const string testDirectory = @"..\..\Files";
+            private const string testDirectory = "Files";
 
             public Scenario(string fileName) => FileName = fileName;
 
@@ -93,7 +86,7 @@ namespace Parsely.Test
 
             public string FileName { get; }
 
-            public string TestFilePath => $@"{testDirectory}\{FileName}";
+            public string TestFilePath => $@"{TestDirectory}\{FileName}";
             public string Xml => File.ReadAllText(TestFilePath);
         }
     }

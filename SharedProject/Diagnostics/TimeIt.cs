@@ -15,6 +15,8 @@ namespace Shared.Diagnostics
 
         public TimeSpan Elapsed => elapsed;
 
+        public static TimeIt Instance => GetTimer();
+        
         public static TimeIt GetTimer(
             TimeSpanUnit timeSpanUnit = TimeSpanUnit.Milliseconds,
             [CallerMemberName] string name = ""
