@@ -5,12 +5,12 @@ namespace Parsely.Builders
 {
     public interface IRead
     {
-        void ToFile(string filePath);
+        // IExtract FromFile(string filePath);
 
-        Task ToFileAsync(string filePath);
+        // Task FromFileAsync(string filePath);
 
-        void ToStream(Stream stream);
+        // IExtract FromStream(Stream stream);
 
-        Task ToStreamAsync(Stream stream);
+        // Task FromStreamAsync(Stream stream);
     }
 }

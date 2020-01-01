@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -6,8 +7,10 @@ namespace Utilities.Shared.Extensions
 {
     public static class ObjectExtensions
     {
-        public static T Dump<T>(this T obj, string displayName = null, bool ignoreNulls = false)
+        public static T Dump<T>(this T obj, string displayName = null, bool ignoreNulls = false, Action<string> print = null)
         {
+            if (print == null) print = str => Debug.WriteLine(str);
+
             if (obj != null)
             {
                 if (string.IsNullOrWhiteSpace(displayName))
@@ -22,17 +25,12 @@ namespace Utilities.Shared.Extensions
                         NullValueHandling = (ignoreNulls) ? NullValueHandling.Ignore : NullValueHandling.Include,
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                     });
-                Debug.WriteLine($"{displayName}:\n{prettyJson}");
+                print($"{displayName}:\n{prettyJson}");
             }
             else
             {
                 if (!string.IsNullOrWhiteSpace(displayName))
-                {
-                    Debug.WriteLine($"'{displayName}' is null.");
-                    return obj;
-                }
-
-                return obj;
+                    print($"'{displayName}' is null.");
             }
 
             return obj;

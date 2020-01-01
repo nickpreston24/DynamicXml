@@ -1,12 +1,16 @@
 ﻿using Shared.Diagnostics;
 using System;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace RegexBuilder.Tests
 {
     public class RegexExtractorTests
     {
-        private static readonly string text = "Michael 30 USA 3.4";
+        private readonly ITestOutputHelper debugger;
+        private static readonly string lineItem = "Michael     30     USA     3.4 abdc!xi#45?          ";
+
+        public RegexExtractorTests(ITestOutputHelper debugger) => this.debugger = debugger;
 
         [Fact]
         public void ExtractTest()
@@ -21,9 +25,9 @@ namespace RegexBuilder.Tests
             };
             using (TimeIt.GetTimer())
             {
-                Console.WriteLine(expected);
-                Person mike = text.Extract<Person>(pattern);
-                Console.WriteLine(mike.ToString());
+                Print(expected.ToString());
+                Person mike = lineItem.Extract<Person>(pattern);
+                Print(mike.ToString());
                 Assert.Equal(mike, expected);
             }
         }
@@ -41,10 +45,10 @@ namespace RegexBuilder.Tests
             using (TimeIt.GetTimer())
             {
                 string pattern = expected.GenerateRegex();
-                Console.WriteLine(pattern);
+                Print(pattern);
                 Assert.NotNull(pattern);
 
-                var actual = text.Extract<Person>(pattern);
+                var actual = lineItem.Extract<Person>(pattern);
                 Assert.Equal(expected, actual);
             }
         }
@@ -54,14 +58,16 @@ namespace RegexBuilder.Tests
         {
             string fullNameText = "Michael Nicholas Preston";
             FullName fullname = fullNameText;
-            Console.WriteLine(fullname.ToString());
+            Print(fullname.ToString());
             var builder = new PatternBuilder<Person>();
             var regex = builder.Add<FullName>()
                 //.Add<Email>()
                 .Pattern;
             string pattern = regex.ToString();
-            Console.WriteLine(pattern);
+            Print(pattern);
             Assert.NotNull(pattern);
         }
+        
+        private void Print(string text) => debugger.WriteLine(text);
     }
 }

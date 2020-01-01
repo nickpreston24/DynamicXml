@@ -1,25 +1,36 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Parsely.Builders;
 
 namespace Parsely
 {
-    public class ActionQueue
+    public class ActionQueue : IRunTasks
     {
-        Queue<Action> actions;
+        Queue<Action> queue;
 
-        public bool IsEmpty => (actions.Count == 0);
+        public bool IsEmpty => queue.Count == 0;
 
-        public ActionQueue() => actions = new Queue<Action>();
+        public ActionQueue() => queue = new Queue<Action>();
 
-        public bool Contains(Action action) => actions.Contains(action);
+        public bool Contains(Action action) => queue.Contains(action);
 
-        public Action Pop() => actions.Dequeue();
+        public Action Pop() => queue.Dequeue();
 
-        public void Add(Action action) => actions.Enqueue(action);
+        public void Add(Action action) => queue.Enqueue(action);
 
         // public void Add(Func<object, bool> function)
         // {
         //     actions.Enqueue(function);
         // }
+
+        public async Task RunAsync()
+        {
+            while (!IsEmpty)
+            {
+                var action = Pop();
+                await Task.Run(action);
+            }
+        }
     }
 }

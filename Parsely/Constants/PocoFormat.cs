@@ -1,10 +1,11 @@
 ﻿namespace Parsely
 {
-    public enum TextFormat
+    public enum PocoFormat
     {
         Json,
         Xml,
         Poco,
         Markdown,
+        Yaml,
     }
 }

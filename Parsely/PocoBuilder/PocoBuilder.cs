@@ -1,8 +1,4 @@
-﻿using DynamicXml;
-using System;
-using System.IO;
-using System.Reflection;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace Parsely.Builders
 {
@@ -11,109 +7,65 @@ namespace Parsely.Builders
     /// I may refactor this into smaller builders, templates, etc. but for now I'm composing.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <seealso cref="IDynamicPoco{T}" />
-    /// <seealso cref="IExtract{T}" />
-    /// <seealso cref="IWrite" />
+    /// <seealso cref="IExtract" />
     /// <seealso cref="IRead" />
-    public sealed class PocoBuilder<T> : IExtract<T>, IWrite, IRead
+    /// <seealso cref="IWrite" />
+    public sealed class PocoBuilder<T>
         where T : class
     {
-        private string saveFilePath;
-        private string sourceFilePath;
-        private T instance;
-        ActionQueue queue = new ActionQueue();
+        private IExtract<T> extractor { get; set; }
+        public T Instance { get; private set; }
 
-        // Where to save Poco
-        string SaveFilePath
+        private PocoBuilder(PocoFormat pocoFormat) => SetFormat(pocoFormat);
+
+        public PocoBuilder<T> SetFormat(PocoFormat pocoFormat)
         {
-            get => saveFilePath;
-            set => saveFilePath = !string.IsNullOrWhiteSpace(value) 
-                ? value
-                : throw new ArgumentException("Value cannot be null or whitespace.", nameof(SaveFilePath));
-        }
+            switch (pocoFormat)
+            {
+                case PocoFormat.Xml:
+                    extractor = new DynamicXml.PocoExtractor<T>();
+                    break;
+                case PocoFormat.Json:
+                case PocoFormat.Poco:
+                case PocoFormat.Markdown:
+                case PocoFormat.Yaml:
+                default:
+                    throw new NotSupportedException($@"{pocoFormat.ToString()} format not yet supported!");
+            }
 
-        // Where to get XML | JSON | Markdown
-        string SourceFilePath
-        {
-            get =>  sourceFilePath;
-            set => sourceFilePath = !string.IsNullOrWhiteSpace(value) 
-                ? value
-                : throw new ArgumentException("Value cannot be null or whitespace.", nameof(SourceFilePath));
-        }
-
-        public T Instance
-        {
-            get => instance;
-            set => instance = value ?? throw new ArgumentNullException(nameof(Instance));
-        }
-
-        private PocoBuilder()
-        {
-        }
-
-        public static IExtract<T> Create() => new PocoBuilder<T>();
-
-        public IRead Extract(string text)
-        {
-            queue.Add(() => Instance = DynamicExtensions.Extract<T>(text));
             return this;
         }
 
-        public void FromFile(string filePath) => SourceFilePath = filePath;
+        public static PocoBuilder<T> Create(PocoFormat pocoFormat = PocoFormat.Json) => new PocoBuilder<T>(pocoFormat);
 
-        public void FromStream(Stream stream)
+        public PocoBuilder<T> Extract(string text)
         {
-            queue.Add(() =>
-            {
-                throw new NotImplementedException();
-            });
+            Instance = extractor.Extract(text);
+            return this;
         }
 
-        public Task FromStreamAsync(Stream stream)
+        class FilePaths
         {
-            return Task.Run(() =>
-            {
-                throw new NotImplementedException(MethodBase.GetCurrentMethod().Name);
-            });
-        }
-
-        // IExtract<T> IDynamicPoco<T>.OnInstance(T poco)
-        // {
-        //     Instance = poco;
-        //     throw new NotImplementedException();
-        // }
-
-        private IWrite Serialize(T poco)
-        {
-            Instance = poco;
-            throw new NotImplementedException();
-        }
-
-        public void ToFile(string filePath)
-        {
-            SaveFilePath = filePath;
-            queue.Add(() => File.WriteAllText(filePath, "Test"));
-        }
-
-        public async Task ToFileAsync(string filePath)
-        {
-            SaveFilePath = filePath;
-            queue.Add(() => File.WriteAllTextAsync(filePath, "Test"));
-        }
-
-        public void ToStream(Stream stream) => throw new NotImplementedException();
-
-        public Task ToStreamAsync(Stream stream) => throw new NotImplementedException();
-
-        public async Task<T> RunAsync()
-        {
-            while (!queue.IsEmpty)
-            {
-                var action = queue.Pop();
-                await Task.Run(action);
-            }
+            private string saveFilePath;
+            private string sourceFilePath;
             
-            return instance;
+            // Where to save Poco
+            string SaveFilePath
+            {
+                get => saveFilePath;
+                set => saveFilePath = !string.IsNullOrWhiteSpace(value) 
+                    ? value
+                    : throw new ArgumentException("Value cannot be null or whitespace.", nameof(SaveFilePath));
+            }
+
+            // Where to get XML | JSON | Markdown
+            string SourceFilePath
+            {
+                get =>  sourceFilePath;
+                set => sourceFilePath = !string.IsNullOrWhiteSpace(value) 
+                    ? value
+                    : throw new ArgumentException("Value cannot be null or whitespace.", nameof(SourceFilePath));
+            }
         }
     }
 }

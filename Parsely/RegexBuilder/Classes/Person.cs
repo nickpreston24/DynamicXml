@@ -20,7 +20,7 @@ namespace RegexBuilder
             && FirstName == other.FirstName
             && Age == other.Age
             && Country == other.Country
-            && GPA == other.GPA;
+            && GPA.Equals(other.GPA);
 
         public override int GetHashCode() => HashCode.Combine(FirstName, Age, Country, GPA);
 

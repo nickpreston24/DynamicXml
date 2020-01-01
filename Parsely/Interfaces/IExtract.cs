@@ -1,8 +1,7 @@
 ﻿namespace Parsely.Builders
 {
-    public interface IExtract<in T>
+    public interface IExtract<out T>
     {
-        IRead Extract(string text); //text To Pocos
-
+        T Extract(string text); //text To Pocos
     }
 }
