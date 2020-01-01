@@ -6,10 +6,6 @@ namespace Parsely.Test
 {
     public class PocoBuilderTests : IBuildExtractors
     {
-        public PocoBuilderTests()
-        {
-        }
-
         [Fact]
         public void CanBuildExtractor()
         {

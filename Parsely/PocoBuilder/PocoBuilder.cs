@@ -70,8 +70,6 @@ namespace Parsely.Builders
 
         public IWrite Serialize(T poco) => throw new NotImplementedException();
 
-        public IWrite Serialize<T>(T poco) => throw new NotImplementedException();
-
         public void ToFile(string filePath)
         {
             var file = File.CreateText(filePath);

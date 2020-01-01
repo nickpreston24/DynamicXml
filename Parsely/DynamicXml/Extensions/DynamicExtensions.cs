@@ -32,24 +32,20 @@ namespace DynamicXml
         /// </summary>
         public static T Extract<T>(string xml) where T : class
         {
-            T result;
-
             if (string.IsNullOrWhiteSpace(xml))
                 return default;
 
             string className = typeof(T).Name;
             var xmlDocument = XDocument.Parse(xml);
-            string node = xmlDocument.GetFirstNode(className);
+            string firstNode = xmlDocument.GetFirstNode(className);
 
-            if (node == null)
+            if (firstNode == null)
                 throw new Exception($"Could not find element '{className}' in xml");
 
-            xmlDocument = XDocument.Parse(node);
+            xmlDocument = XDocument.Parse(firstNode);
 
             var dictionary = xmlDocument.Root.ToDynamic() as ExpandoObject;
-            result = dictionary.ToInstance<T>();
-
-            return result;
+            return dictionary.ToInstance<T>();
         }
 
         public static dynamic ToDynamic(this XDocument xDocument) =>
@@ -63,14 +59,19 @@ namespace DynamicXml
 
         public static T ToInstance<T>(this IDictionary<string, object> dictionary) where T : class
         {
-            T instance;
+            if (dictionary.Count == 0)
+                return default;
+            
             var type = typeof(T);
-            instance = (T)ToInstance(Activator.CreateInstance(type, true), dictionary, type);
+            var instance = (T)ToInstance(Activator.CreateInstance(type, true), dictionary, type);
             return instance;
         }
 
         public static object ToInstance(this IDictionary<string, object> dictionary, Type type)
         {
+            if (dictionary.Count == 0)
+                return default;
+            
             return (type.IsClass)
                 ? ToInstance(Activator.CreateInstance(type, true), dictionary, type)
                 : new Dictionary<string, object>(0);
@@ -105,23 +106,24 @@ namespace DynamicXml
                 property.SetValue(parent, nextChildInstance);
             }
             else switch (nextChildInstance)
+            {
+                case IList list:
                 {
-                    case IList list:
-                        {
-                            var classList = childElementType.ToListType() ?? default(IList);
+                    var classList = childElementType.ToListType() ?? default(IList);
 
-                            foreach (object product in list)
-                            {
-                                classList?.Add(product);
-                            }
+                    for (var index = 0; index < list.Count; index++)
+                    {
+                        object product = list[index];
+                        classList?.Add(product);
+                    }
 
-                            property?.SetValue(parent, classList);
-                            break;
-                        }
-                    default:
-                        property?.SetValue(parent, nextChildInstance);
-                        break;
+                    property?.SetValue(parent, classList);
+                    break;
                 }
+                default:
+                    property?.SetValue(parent, nextChildInstance);
+                    break;
+            }
         }
 
         private static object CreateChild(IDictionary<string, object> childDictionary, Type childType)
@@ -205,11 +207,13 @@ namespace DynamicXml
 
         private static object ToInstance(object parent, IDictionary<string, object> dictionary, Type childType)
         {
+            if (parent == null)
+                return default;
+            
             var parentType = parent.GetType();
             string parentTypeName = parentType.Name;
 
             var childProperties = _properties[childType];
-            var errorMessages = new StringBuilder();
 
             foreach (var pair in dictionary ?? new Dictionary<string, object>(0))
             {

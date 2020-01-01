@@ -20,22 +20,10 @@ namespace Shared.Classes
 
         public override bool Equals(object obj)
         {
-            if (obj is null)
-            {
+            if (obj is null || obj.GetType() != GetType())
                 return false;
-            }
 
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals(obj as Store);
+            return ReferenceEquals(this, obj) || Equals(obj as Store);
         }
 
         public override string ToString()
