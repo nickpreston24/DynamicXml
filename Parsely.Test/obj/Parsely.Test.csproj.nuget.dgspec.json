@@ -1,0 +1,204 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/michael/Desktop/CodeProjects/Parsely/Parsely.Test/Parsely.Test.csproj": {}
+  },
+  "projects": {
+    "/home/michael/Desktop/CodeProjects/Parsely/Parsely.Test/Parsely.Test.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/michael/Desktop/CodeProjects/Parsely/Parsely.Test/Parsely.Test.csproj",
+        "projectName": "Parsely.Test",
+        "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/Parsely.Test/Parsely.Test.csproj",
+        "packagesPath": "/home/michael/.nuget/packages/",
+        "outputPath": "/home/michael/Desktop/CodeProjects/Parsely/Parsely.Test/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/opt/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/home/michael/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "/home/michael/Desktop/CodeProjects/nuget_repo": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "/home/michael/Desktop/CodeProjects/Parsely/Parsely/Parsely.csproj": {
+                "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/Parsely/Parsely.csproj"
+              },
+              "/home/michael/Desktop/CodeProjects/Parsely/Shared/Shared.csproj": {
+                "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/Shared/Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.4.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "/home/michael/Desktop/CodeProjects/Parsely/Parsely/Parsely.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/michael/Desktop/CodeProjects/Parsely/Parsely/Parsely.csproj",
+        "projectName": "Parsely",
+        "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/Parsely/Parsely.csproj",
+        "packagesPath": "/home/michael/.nuget/packages/",
+        "outputPath": "/home/michael/Desktop/CodeProjects/Parsely/Parsely/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/opt/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/home/michael/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "/home/michael/Desktop/CodeProjects/nuget_repo": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "FakeItEasy": {
+              "target": "Package",
+              "version": "[5.5.0, )"
+            },
+            "MP.StdLib": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "xunit.extensibility.core": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "/home/michael/Desktop/CodeProjects/Parsely/Shared/Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/michael/Desktop/CodeProjects/Parsely/Shared/Shared.csproj",
+        "projectName": "Shared",
+        "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/Shared/Shared.csproj",
+        "packagesPath": "/home/michael/.nuget/packages/",
+        "outputPath": "/home/michael/Desktop/CodeProjects/Parsely/Shared/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/opt/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/home/michael/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "/home/michael/Desktop/CodeProjects/nuget_repo": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/home/michael/Desktop/CodeProjects/Parsely/Parsely.Test/Parsely.Test.csproj",
+    "projectName": "Parsely.Test",
+    "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/Parsely.Test/Parsely.Test.csproj",
+    "outputPath": "/home/michael/Desktop/CodeProjects/Parsely/Parsely.Test/obj/",
+    "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "/opt/dotnet/sdk/NuGetFallbackFolder"
+    ],
+    "originalTargetFrameworks": [
+      "netcoreapp2.2"
+    ],
+    "sources": {
+      "/home/michael/Desktop/CodeProjects/nuget_repo": {},
+      "https://api.nuget.org/v3/index.json": {}
+    },
+    "frameworks": {
+      "netcoreapp2.2": {
+        "projectReferences": {
+          "/home/michael/Desktop/CodeProjects/Parsely/Parsely/Parsely.csproj": {
+            "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/Parsely/Parsely.csproj"
+          },
+          "/home/michael/Desktop/CodeProjects/Parsely/Shared/Shared.csproj": {
+            "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/Shared/Shared.csproj"
+          }
+        }
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netcoreapp2.2": {
+      "dependencies": {
+        "Microsoft.NET.Test.Sdk": {
+          "target": "Package",
+          "version": "[16.4.0, )"
+        },
+        "Microsoft.NETCore.App": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.2.0, )",
+          "autoReferenced": true
+        },
+        "xunit": {
+          "target": "Package",
+          "version": "[2.4.1, )"
+        },
+        "xunit.runner.visualstudio": {
+          "target": "Package",
+          "version": "[2.4.1, )"
+        }
+      },
+      "imports": [
+        "net461"
+      ],
+      "assetTargetFallback": true,
+      "warn": true
+    }
+  }
+}
