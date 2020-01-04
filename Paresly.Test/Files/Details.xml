@@ -1,9 +1,0 @@
-﻿<Root>
-  <ScenarioDetails AliasReference="Details_CashStore_P3">
-    <Name>TI2_14DayInstallmentCash_Scenario1</Name>
-    <Groups>
-      <string>Accounting</string>
-      <string>Accounting</string>
-    </Groups>
-  </ScenarioDetails>
-</Root>
