@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a49f247d-561d-44b7-8a25-41b4db76097c" name="Default Changelist" comment="Simplified the PocoBuilder class.">
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Parsely/.idea/contentModel.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Parsely/.idea/dictionaries/michael.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Parsely/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Parsely/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Parsely/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Parsely/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Parsely/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Parsely/riderModule.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MarkdownTest.Client/MarkdownTest.Client.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MarkdownTest.Client/Program.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parsely.Test/Tests/MarkdownTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parsely.sln" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parsely/MarkdownBuilder/MarkdownBuilder.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parsely/bin/Debug/netcoreapp2.2/Parsely.deps.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parsely/bin/Debug/netcoreapp2.2/Parsely.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parsely/bin/Debug/netcoreapp2.2/Parsely.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parsely/bin/Debug/netcoreapp2.2/Parsely.runtimeconfig.dev.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parsely/bin/Debug/netcoreapp2.2/Parsely.runtimeconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parsely/obj/Debug/netcoreapp2.2/Parsely.AssemblyInfoInputs.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parsely/obj/Debug/netcoreapp2.2/Parsely.assets.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parsely/obj/Debug/netcoreapp2.2/Parsely.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parsely/obj/Debug/netcoreapp2.2/Parsely.csprojAssemblyReference.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parsely/obj/Debug/netcoreapp2.2/Parsely.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parsely/obj/Debug/netcoreapp2.2/Parsely.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parsely/obj/Parsely.csproj.nuget.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parsely/obj/project.assets.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RegexBuilder.Client/Extensions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RegexBuilder.Client/FSGrep.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RegexBuilder.Client/Program.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RegexBuilder.Client/RegexBuilder.Client.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RegexBuilder.Client/TestFiles/12345-AlternateImport-File-20200102.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RegexBuilder.Client/TestFiles/12345_My-Import File_20200102.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TimeIt/TimeIt.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DynamicXml.v3.ncrunchsolution" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/Extractables/Car.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/Extractables/Car.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/Extractables/Containers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/Extractables/Containers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/Extractables/Keyboard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/Extractables/Keyboard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/Extractables/ScenarioDetails.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/Extractables/ScenarioDetails.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/Extractables/Store.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/Extractables/Store.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/Extractables/Town.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/Extractables/Town.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/Parsely.Test.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/Parsely.Test.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/Tests/Breaking.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/Tests/Breaking.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/Tests/PocoBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/Tests/PocoBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/Tests/RegexExtractor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/Tests/RegexExtractor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/Tests/XMLStreaming.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/Tests/XMLStreaming.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/bin/Debug/netcoreapp2.2/Parsely.Test.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/bin/Debug/netcoreapp2.2/Parsely.Test.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/bin/Debug/netcoreapp2.2/Parsely.Test.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/bin/Debug/netcoreapp2.2/Parsely.Test.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/bin/Debug/netcoreapp2.2/Parsely.Test.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/bin/Debug/netcoreapp2.2/Parsely.Test.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/bin/Debug/netcoreapp2.2/Parsely.Test.runtimeconfig.dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/bin/Debug/netcoreapp2.2/Parsely.Test.runtimeconfig.dev.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/bin/Debug/netcoreapp2.2/Parsely.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/bin/Debug/netcoreapp2.2/Parsely.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/bin/Debug/netcoreapp2.2/Parsely.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/bin/Debug/netcoreapp2.2/Parsely.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/obj/Debug/netcoreapp2.2/Parsely.Test.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/obj/Debug/netcoreapp2.2/Parsely.Test.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/obj/Debug/netcoreapp2.2/Parsely.Test.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/obj/Debug/netcoreapp2.2/Parsely.Test.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/obj/Debug/netcoreapp2.2/Parsely.Test.csproj.CoreCompileInputs.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/obj/Debug/netcoreapp2.2/Parsely.Test.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/obj/Debug/netcoreapp2.2/Parsely.Test.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/obj/Debug/netcoreapp2.2/Parsely.Test.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/obj/Debug/netcoreapp2.2/Parsely.Test.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/obj/Debug/netcoreapp2.2/Parsely.Test.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/obj/Debug/netcoreapp2.2/Parsely.Test.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/obj/Debug/netcoreapp2.2/Parsely.Test.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/obj/Debug/netcoreapp2.2/Parsely.Test.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/obj/Parsely.Test.csproj.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/obj/Parsely.Test.csproj.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/obj/Parsely.Test.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/obj/Parsely.Test.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/obj/Parsely.Test.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/obj/Parsely.Test.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely.Test/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely.Test/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely/ActionQueue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely/ActionQueue.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely/DynamicXml/Extensions/DynamicExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely/DynamicXml/Extensions/DynamicExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely/DynamicXml/Extensions/MiscExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely/DynamicXml/Extensions/MiscExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely/Parsely.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely/Parsely.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely/PocoBuilder/PocoBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely/PocoBuilder/PocoBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely/RegexBuilder/PatternBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely/RegexBuilder/PatternBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely/RegexBuilder/RegexExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely/RegexBuilder/RegexExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely/RegexBuilder/RegexPatternAttribute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely/RegexBuilder/RegexPatternAttribute.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely/RegexBuilder/SubPatterns/Email.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely/RegexBuilder/Prebabs/Email.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsely/RegexBuilder/SubPatterns/FullName.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely/RegexBuilder/Prebabs/FullName.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/Dump.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/Dump.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/Print.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/Print.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/Shared.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/Utils.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/TimeIt.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TimeIt/Debugging/TimeIt.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/obj/Debug/netstandard2.0/Shared.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely/obj/Debug/netcoreapp2.2/Parsely.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/obj/Shared.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely/obj/Parsely.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/obj/Shared.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely/obj/Parsely.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/obj/Shared.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely/obj/Parsely.csproj.nuget.g.targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/obj/project.assets.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Parsely/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestClasses/Extractables/Customer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TestClasses/Extractables/Customer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestClasses/Properties/AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestClasses/TestClasses.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TestClasses/TestClasses.csproj" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Parsely/DynamicXml/Extensions/EmbeddedResources.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/DynamicXml/Extensions/MiscExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/884FE515-60A0-413C-B1FB-0796D2F729F9/49/55103abc/RequiredAttributeAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/.config/NuGet/NuGet.Config" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely.Test/Tests/MarkdownTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/DynamicXml/Classes/XmlStreamer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/DynamicXml/Extensions/DynamicExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AC077180-CB10-481E-9243-DF9D4FF8A0BF/32/bb0d161b/Attribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RegexBuilder.Client/Extensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B8B10B82-47CB-413E-AB51-75C26A5956A7/cc/6b2a5a66/ITestOutputHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AC077180-CB10-481E-9243-DF9D4FF8A0BF/f1/7d2316ca/Path.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch-test.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/DynamicXml/Classes/PocoExtractor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/Interfaces/IO/IRunTasks.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TestClasses/Extractables/Product.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F9983402-2CF8-45EF-8679-CD8D8CA3CF26/d6/57b80e0c/Task.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F4C06C3C-D7EF-4060-817B-51C1134579BD/8f/4d024882/Match.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MarkdownTest.Client/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F9983402-2CF8-45EF-8679-CD8D8CA3CF26/fc/b2340b3a/Debug.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8E07EFFB-E66A-47EB-8942-13AF07099D44/65/0871eeee/Maybe`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8E07EFFB-E66A-47EB-8942-13AF07099D44/28/e90225aa/MaybeExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.4.0/build/netcoreapp2.1/Microsoft.NET.Test.Sdk.Program.fs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/RegexBuilder/IRegexable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/RegexBuilder/PatternBuilder.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/RegexBuilder/RegexPatternAttribute.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/PocoBuilder/PocoBuilder.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/RegexBuilder/RegexExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/Interfaces/IO/IRead.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/Interfaces/IO/IExtract.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/Interfaces/IO/IWrite.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/Constants/PocoFormat.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RegexBuilder.Client/FSGrep.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/Maybe/Maybe.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/Constants/StreamAction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/Maybe/MaybeExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely.Test/Tests/XMLStreaming.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AC077180-CB10-481E-9243-DF9D4FF8A0BF/ba/a5384e13/String.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/MarkdownBuilder/MarkdownBuilder.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely.Test/Extractables/Town.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely.Test/Extractables/Store.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/568AAB7C-B92D-4F2F-A8BC-2585B879CD9D/1c/a3eb9a05/Maybe`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely.Test/Tests/Extensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely.Test/Tests/RegexExtractor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely.Test/Tests/Breaking.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely.Test/Tests/PocoBuilder.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely.Test/Extractables/Containers.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely.Test/Extractables/Keyboard.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely.Test/Extractables/ScenarioDetails.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Utils/Print.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely.Test/Extractables/Car.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RegexBuilder.Client/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D86B8F64-0C83-4EC9-B243-8B03ACD6253B/93/9cc22940/Queue`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AC077180-CB10-481E-9243-DF9D4FF8A0BF/32/5a8f97b9/StringBuilder.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8E07EFFB-E66A-47EB-8942-13AF07099D44/0a/3107f8f8/Maybe.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Utils/Dump.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TimeIt/Debugging/TimeIt.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F9983402-2CF8-45EF-8679-CD8D8CA3CF26/0c/41f296ea/Stream.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/RegexBuilder/Prebabs/Email.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/RegexBuilder/Prebabs/FullName.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/Interfaces/Converters/IConvertToMarkdown.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/Interfaces/Converters/IConvertToXml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/ActionQueue.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/RegexBuilder/Classes/Person.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/Interfaces/Converters/IConvertToJson.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8F616A42-9A46-4DAC-80D6-EC4429F013D4/39/e0350c3f/File.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/DynamicXml/Extensions/FunctionalExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Parsely/DynamicXml/Extensions/ExpandoObjectExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Parsely/Interfaces/IWrite.cs" />
+        <option value="$PROJECT_DIR$/Parsely/Constants/PocoFormat.cs" />
+        <option value="$PROJECT_DIR$/Parsely/DynamicXml/Classes/XmlStreamer.cs" />
+        <option value="$PROJECT_DIR$/Parsely/Interfaces/IExtract.cs" />
+        <option value="$PROJECT_DIR$/Parsely/Interfaces/IRead.cs" />
+        <option value="$PROJECT_DIR$/Parsely/Interfaces/IRunTasks.cs" />
+        <option value="$PROJECT_DIR$/Paresly.Test/Tests/PocoBuilderTests.cs" />
+        <option value="$PROJECT_DIR$/Paresly.Test/Tests/RegexExtractorTests.cs" />
+        <option value="$PROJECT_DIR$/Parsely/RegexBuilder/Classes/Person.cs" />
+        <option value="$PROJECT_DIR$/SharedProject/Classes/Extractables/Keyboard.cs" />
+        <option value="$PROJECT_DIR$/SharedProject/Helpers/Dump.cs" />
+        <option value="$PROJECT_DIR$/Paresly.Test/Extractables/Classes.cs" />
+        <option value="$PROJECT_DIR$/Paresly.Test/Extractables/Customer.cs" />
+        <option value="$PROJECT_DIR$/Parsely/Parsely.csproj" />
+        <option value="$PROJECT_DIR$/Paresly.Test/Parsely.Test.csproj" />
+        <option value="$PROJECT_DIR$/Paresly.Test/Files/Keyboards.xml" />
+        <option value="$PROJECT_DIR$/Paresly.Test/Tests/Breaking.cs" />
+        <option value="$PROJECT_DIR$/Paresly.Test/Tests/RegexExtractor.cs" />
+        <option value="$PROJECT_DIR$/Paresly.Test/Tests/XMLStreaming.cs" />
+        <option value="$PROJECT_DIR$/Shared/Class1.cs" />
+        <option value="$PROJECT_DIR$/Shared/PrintHelpers.cs" />
+        <option value="$PROJECT_DIR$/Shared/Dump.cs" />
+        <option value="$PROJECT_DIR$/Parsely/PocoBuilder/PocoBuilder.cs" />
+        <option value="$PROJECT_DIR$/Shared/Print.cs" />
+        <option value="$PROJECT_DIR$/Parsely.sln" />
+        <option value="$PROJECT_DIR$/Paresly.Test/Tests/PocoBuilder.cs" />
+        <option value="$PROJECT_DIR$/Parsely/Interfaces/IO/IExtract.cs" />
+        <option value="$PROJECT_DIR$/Parsely/DynamicXml/Classes/PocoExtractor.cs" />
+        <option value="$PROJECT_DIR$/TestClasses/Class1.cs" />
+        <option value="$PROJECT_DIR$/Shared/TimeIt.cs" />
+        <option value="$PROJECT_DIR$/Utils/TimeIt.cs" />
+        <option value="$PROJECT_DIR$/UtilsA/Class1.cs" />
+        <option value="$PROJECT_DIR$/Parsely.Test/Tests/Breaking.cs" />
+        <option value="$PROJECT_DIR$/TimeIt/Debugging/TimeIt.cs" />
+        <option value="$PROJECT_DIR$/Parsely.Test/Tests/RegexExtractor.cs" />
+        <option value="$PROJECT_DIR$/Parsely.Test/Extractables/Car.cs" />
+        <option value="$PROJECT_DIR$/Parsely.Test/Extractables/Containers.cs" />
+        <option value="$PROJECT_DIR$/Parsely.Test/Extractables/Town.cs" />
+        <option value="$PROJECT_DIR$/Parsely.Test/Extractables/Keyboard.cs" />
+        <option value="$PROJECT_DIR$/Parsely.Test/Extractables/Store.cs" />
+        <option value="$PROJECT_DIR$/Parsely.Test/Extractables/ScenarioDetails.cs" />
+        <option value="$PROJECT_DIR$/Parsely.Test/Tests/MarkdownTests.cs" />
+        <option value="$PROJECT_DIR$/MarkdownTestClient/Program.cs" />
+        <option value="$PROJECT_DIR$/Parsely/MarkdownBuilder/MarkdownBuilder.cs" />
+        <option value="$PROJECT_DIR$/Parsely/RegexBuilder/RegexPatternAttribute.cs" />
+        <option value="$PROJECT_DIR$/Parsely/ActionQueue.cs" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/Utils/Dump.cs" />
+        <option value="$PROJECT_DIR$/RegexBuilder.Client/FSGrep.cs" />
+        <option value="$PROJECT_DIR$/Parsely/RegexBuilder/RegexExtensions.cs" />
+        <option value="$PROJECT_DIR$/RegexBuilder.Client/Program.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1VmZFlQLh15l9hq0koIWU2QWqEq" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TWShift.4" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="full.screen.before.presentation.mode" value="false" />
+    <property name="idea.background.editor" value="$USER_HOME$/Pictures/Wallpapers/90s-Arch-Linux.png,15,scale,center" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/TestClasses/TestClasses.csproj" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RunManager" selected=".NET Project.RegexBuilder.Client">
+    <configuration name="MarkdownTestClient" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/MarkdownTest.Client/bin/Debug/netcoreapp3.1/MarkdownTest.Client.dll" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MarkdownTest.Client/bin/Debug/netcoreapp3.1" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/MarkdownTest.Client/MarkdownTest.Client.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value=".NETCoreApp,Version=v3.1" />
+      <method v="2">
+        <option name="Build" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegexBuilder.Client" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/RegexBuilder.Client/bin/Debug/netcoreapp3.1/RegexBuilder.Client.dll" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/RegexBuilder.Client/bin/Debug/netcoreapp3.1" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/RegexBuilder.Client/RegexBuilder.Client.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value=".NETCoreApp,Version=v3.1" />
+      <method v="2">
+        <option name="Build" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/RegexBuilder.Client/bin/Debug/netcoreapp3.1/RegexBuilder.Client.dll" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/RegexBuilder.Client/bin/Debug/netcoreapp3.1" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/RegexBuilder.Client/RegexBuilder.Client.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value=".NETCoreApp,Version=v3.1" />
+      <method v="2">
+        <option name="Build" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue=".NET Project.MarkdownTestClient" />
+      <item itemvalue=".NET Project.RegexBuilder.Client" />
+    </list>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a49f247d-561d-44b7-8a25-41b4db76097c" name="Default Changelist" comment="" />
+      <created>1577860129473</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1577860129473</updated>
+      <workItem from="1577860135308" duration="10477000" />
+      <workItem from="1577899205303" duration="8286000" />
+      <workItem from="1577910721189" duration="4691000" />
+      <workItem from="1577915912378" duration="76000" />
+      <workItem from="1577917054400" duration="890000" />
+      <workItem from="1578105869259" duration="50000" />
+      <workItem from="1578105957124" duration="51000" />
+      <workItem from="1578106076004" duration="31000" />
+      <workItem from="1578106154671" duration="11000" />
+      <workItem from="1578106205328" duration="53000" />
+      <workItem from="1578106281528" duration="20000" />
+      <workItem from="1578106538730" duration="1126000" />
+      <workItem from="1578191230622" duration="636000" />
+      <workItem from="1578192033871" duration="120000" />
+      <workItem from="1578803746959" duration="62000" />
+      <workItem from="1581135823339" duration="10918000" />
+      <workItem from="1581558288596" duration="3617000" />
+      <workItem from="1581563299550" duration="9053000" />
+    </task>
+    <task id="LOCAL-00001" summary="Simplified the PocoBuilder class.">
+      <created>1577907934942</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1577907934942</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Simplified the PocoBuilder class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Simplified the PocoBuilder class." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="418" y="198" width="1093" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581566206638">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="418" y="198" width="1093" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581566206638" />
+    <state width="462" height="466" key="DebuggerActiveHint" timestamp="1581567462936">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="462" height="466" key="DebuggerActiveHint/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567462936" />
+    <state x="890" y="362" key="FileChooserDialogImpl" timestamp="1578106668353">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="890" y="362" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1578106668353" />
+    <state width="1874" height="275" key="GridCell.Tab.0.bottom" timestamp="1581572188842">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="275" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581572188842" />
+    <state width="1874" height="275" key="GridCell.Tab.0.center" timestamp="1581572188842">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="275" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581572188842" />
+    <state width="1874" height="275" key="GridCell.Tab.0.left" timestamp="1581572188842">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="275" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581572188842" />
+    <state width="1874" height="275" key="GridCell.Tab.0.right" timestamp="1581572188842">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="275" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581572188842" />
+    <state width="1874" height="354" key="GridCell.Tab.1.bottom" timestamp="1581567716797">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="354" key="GridCell.Tab.1.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567716797" />
+    <state width="1874" height="354" key="GridCell.Tab.1.center" timestamp="1581567716797">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="354" key="GridCell.Tab.1.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567716797" />
+    <state width="1874" height="354" key="GridCell.Tab.1.left" timestamp="1581567716797">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="354" key="GridCell.Tab.1.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567716797" />
+    <state width="1874" height="354" key="GridCell.Tab.1.right" timestamp="1581567716797">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="354" key="GridCell.Tab.1.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567716797" />
+    <state width="1874" height="354" key="GridCell.Tab.2.bottom" timestamp="1581567716797">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="354" key="GridCell.Tab.2.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567716797" />
+    <state width="1874" height="354" key="GridCell.Tab.2.center" timestamp="1581567716797">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="354" key="GridCell.Tab.2.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567716797" />
+    <state width="1874" height="354" key="GridCell.Tab.2.left" timestamp="1581567716797">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="354" key="GridCell.Tab.2.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567716797" />
+    <state width="1874" height="354" key="GridCell.Tab.2.right" timestamp="1581567716797">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="354" key="GridCell.Tab.2.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567716797" />
+    <state width="1874" height="354" key="GridCell.Tab.3.bottom" timestamp="1581567716797">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="354" key="GridCell.Tab.3.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567716797" />
+    <state width="1874" height="354" key="GridCell.Tab.3.center" timestamp="1581567716797">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="354" key="GridCell.Tab.3.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567716797" />
+    <state width="1874" height="354" key="GridCell.Tab.3.left" timestamp="1581567716797">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="354" key="GridCell.Tab.3.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567716797" />
+    <state width="1874" height="354" key="GridCell.Tab.3.right" timestamp="1581567716797">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="354" key="GridCell.Tab.3.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567716797" />
+    <state width="1874" height="354" key="GridCell.Tab.4.bottom" timestamp="1581567716798">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="354" key="GridCell.Tab.4.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567716798" />
+    <state width="1874" height="354" key="GridCell.Tab.4.center" timestamp="1581567716798">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="354" key="GridCell.Tab.4.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567716798" />
+    <state width="1874" height="354" key="GridCell.Tab.4.left" timestamp="1581567716797">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="354" key="GridCell.Tab.4.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567716797" />
+    <state width="1874" height="354" key="GridCell.Tab.4.right" timestamp="1581567716798">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="354" key="GridCell.Tab.4.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581567716798" />
+    <state x="555" y="275" width="800" height="528" key="Rider.ProjectTemplateDialog.Size" timestamp="1581558880945">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="555" y="275" width="800" height="528" key="Rider.ProjectTemplateDialog.Size/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581558880945" />
+    <state x="700" y="253" width="509" height="572" key="RollbackChangesDialog" timestamp="1581566942283">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="700" y="253" width="509" height="572" key="RollbackChangesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581566942283" />
+    <state x="268" y="139" width="1149" height="730" key="SettingsEditor" timestamp="1581566352271">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="268" y="139" width="1149" height="730" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581566352271" />
+    <state x="555" y="276" width="800" height="526" key="Vcs.Push.Dialog.v2" timestamp="1581564889901">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="555" y="276" width="800" height="526" key="Vcs.Push.Dialog.v2/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581564889901" />
+    <state x="570" y="149" width="770" height="779" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1577914612206">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="570" y="149" width="770" height="779" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1577914612206" />
+    <state x="306" y="0" width="1390" height="696" maximized="true" key="dock-window-1" timestamp="1577866336586">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="306" y="0" width="1390" height="696" maximized="true" key="dock-window-1/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1577866336586" />
+    <state x="1983" y="0" width="1391" height="1035" key="dock-window-2" timestamp="1577867086338">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1983" y="0" width="1391" height="1035" key="dock-window-2/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1577867086338" />
+    <state x="585" y="271" width="805" height="538" key="find.popup" timestamp="1581569504300">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="585" y="271" width="805" height="538" key="find.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581569504300" />
+    <state width="600" height="424" key="javadoc.popup" timestamp="1577867130447">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="600" height="424" key="javadoc.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1577867130447" />
+    <state x="707" y="481" width="919" height="356" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1577861961819">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="707" y="481" width="919" height="356" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1577861961819" />
+    <state x="622" y="239" width="673" height="678" key="search.everywhere.popup" timestamp="1581569527211">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="622" y="239" width="673" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581569527211" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Parsely/MarkdownBuilder/MarkdownBuilder.cs</url>
+          <line>64</line>
+          <properties documentPath="$PROJECT_DIR$/Parsely/MarkdownBuilder/MarkdownBuilder.cs" initialLine="64">
+            <startOffsets>
+              <option value="2132" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2166" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

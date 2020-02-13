@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using Parsely.RegexBuilder;
 
 namespace RegexBuilder
 {
@@ -12,7 +13,7 @@ namespace RegexBuilder
     /// </summary>
     public class PatternBuilder<T> where T : IRegexable
     {
-        private static Dictionary<Type, string> naiveRegexPatterns = new Dictionary<Type, string>()
+        static Dictionary<Type, string> naiveRegexPatterns = new Dictionary<Type, string>()
         {
             [typeof(string)] = "[a-zA-Z]+",
             [typeof(char*)] = "[a-zA-Z]+",
@@ -22,9 +23,10 @@ namespace RegexBuilder
             [typeof(double)] = @"\d+.\d{1,2}",
         };
 
-        private StringBuilder builder = new StringBuilder();
-        private Regex pattern;
-        private PropertyInfo[] properties = typeof(T).GetProperties();
+        StringBuilder builder = new StringBuilder();
+        Regex pattern;
+
+        PropertyInfo[] properties = typeof(T).GetProperties();
         //private Type type = typeof(T);
 
         public PatternBuilder(StringBuilder builder) => this.builder = builder ?? new StringBuilder();
@@ -53,7 +55,7 @@ namespace RegexBuilder
             return this;
         }
 
-        private string GenerateRegex()
+        string GenerateRegex()
         {
             foreach (var property in properties)
                 builder.Append($@"(?<{property.Name}>{naiveRegexPatterns[property.PropertyType]})\s*");
@@ -62,6 +64,6 @@ namespace RegexBuilder
             return builder.ToString();
         }
 
-        private Regex ToRegex() => pattern = new Regex(GenerateRegex());
+        Regex ToRegex() => pattern = new Regex(GenerateRegex());
     }
 }

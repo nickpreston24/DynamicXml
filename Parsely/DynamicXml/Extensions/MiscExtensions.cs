@@ -7,7 +7,7 @@ namespace Parsely
 {
     public static partial class DynamicExtensions
     {
-        private static PropertyCache _properties { get; } = new PropertyCache();
+        static PropertyCache _properties { get; } = new PropertyCache();
 
         public static bool HasNullProperties(this object instance)
         {

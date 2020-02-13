@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Parsely.Builders;
+
 
 namespace Parsely
 {
-    public class ActionQueue : IRunTasks
+    public class ActionQueue
     {
         Queue<Action> queue;
 
@@ -17,7 +17,7 @@ namespace Parsely
 
         public Action Pop() => queue.Dequeue();
 
-        public void Add(Action action) => queue.Enqueue(action);
+        public void Enqueue(Action action) => queue.Enqueue(action);
 
         // public void Add(Func<object, bool> function)
         // {

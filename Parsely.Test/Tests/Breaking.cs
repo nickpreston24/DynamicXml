@@ -12,8 +12,8 @@ namespace Parsely.Test
     //[TestClass]
     public class BreakingTests
     {
-        private readonly ITestOutputHelper testOutputHelper;
-        private readonly Scenario Scenario1 = new Scenario("Containers.xml");
+        readonly ITestOutputHelper testOutputHelper;
+        readonly Scenario Scenario1 = new Scenario("Containers.xml");
 
         public BreakingTests(ITestOutputHelper testOutputHelper)
         {
@@ -64,16 +64,16 @@ namespace Parsely.Test
             Assert.NotNull(keyboard);
         }
 
-        private void Validate<T>(Func<IEnumerable<T>> action)
+        void Validate<T>(Func<IEnumerable<T>> action)
         {
             var collection = action().ToList();
             Assert.NotNull(collection);
             Assert.True(collection.Any());
         }
 
-        private class Scenario
+        class Scenario
         {
-            private const string testDirectory = "Files";
+            const string testDirectory = "Files";
 
             public Scenario(string fileName) => FileName = fileName;
 

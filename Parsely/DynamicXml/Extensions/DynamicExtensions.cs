@@ -24,7 +24,7 @@ namespace Parsely
     /// </summary>
     public static partial class DynamicExtensions
     {
-        private static StringComparison comparison = StringComparison.OrdinalIgnoreCase;
+        static StringComparison comparison = StringComparison.OrdinalIgnoreCase;
 
         /// <summary>
         /// Caches xml inside an XDocument, creating some overhead.
@@ -77,7 +77,7 @@ namespace Parsely
                 : new Dictionary<string, object>(0);
         }
 
-        private static void AddProperty(dynamic parent, string name, object value)
+        static void AddProperty(dynamic parent, string name, object value)
         {
             switch (parent)
             {
@@ -91,7 +91,7 @@ namespace Parsely
             }
         }
 
-        private static void AssignChild(object parent, PropertyInfo property,
+        static void AssignChild(object parent, PropertyInfo property,
             IDictionary<string, object> childDictionary)
         {
             var childType = property?.PropertyType;
@@ -126,7 +126,7 @@ namespace Parsely
             }
         }
 
-        private static object CreateChild(IDictionary<string, object> childDictionary, Type childType)
+        static object CreateChild(IDictionary<string, object> childDictionary, Type childType)
         {
             var baseType = childType.BaseType ?? childType;
             var parent = Activator.CreateInstance(childType, true);
@@ -165,9 +165,9 @@ namespace Parsely
             return child;
         }
 
-        private static object GetDefaultValue(Type type) => (type.IsValueType) ? Activator.CreateInstance(type) : null;
+        static object GetDefaultValue(Type type) => (type.IsValueType) ? Activator.CreateInstance(type) : null;
 
-        private static dynamic ToDynamic(this XElement node, dynamic parent)
+        static dynamic ToDynamic(this XElement node, dynamic parent)
         {
             if (!node.HasElements)
             {
@@ -205,7 +205,7 @@ namespace Parsely
             return parent;
         }
 
-        private static object ToInstance(object parent, IDictionary<string, object> dictionary, Type childType)
+        static object ToInstance(object parent, IDictionary<string, object> dictionary, Type childType)
         {
             if (parent == null)
                 return default;

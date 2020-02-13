@@ -5,9 +5,9 @@ namespace Parsely.Test.Extractables
 {
     internal class Store : IEquatable<Store>
     {
-        public string Name { get; set; }
-        public Product[] Products { get; set; }
-        public Customer[] Customers { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public Product[] Products { get; set; } = { };
+        public Customer[] Customers { get; set; } = { };
 
         public bool Equals(Store other)
         {
@@ -18,12 +18,15 @@ namespace Parsely.Test.Extractables
                 && Name.Equals(other?.Name);
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object store)
         {
-            if (obj is null || obj.GetType() != GetType())
+            if (store == null)
+                throw new ArgumentNullException(nameof(store));
+            
+            if (store.GetType() != GetType())
                 return false;
 
-            return ReferenceEquals(this, obj) || Equals(obj as Store);
+            return ReferenceEquals(this, store) || Equals(store as Store);
         }
 
         public override string ToString()

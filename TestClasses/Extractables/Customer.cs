@@ -2,9 +2,9 @@
 {        
     public partial class Customer
     {
-        private string city;
-        private uint age;
-        private string state;
+        string city;
+        uint age;
+        string state;
 
         public string Name { get; set; }
         public string City { get => city; set => city = value; }

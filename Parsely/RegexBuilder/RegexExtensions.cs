@@ -5,12 +5,13 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using Utils.Debugging;
 
-namespace RegexBuilder
+namespace Parsely.RegexBuilder
 {
     public static partial class Extensions
     {
-        private static Dictionary<Type, string> naiveRegexPatterns = new Dictionary<Type, string>()
+        static Dictionary<Type, string> naiveRegexPatterns = new Dictionary<Type, string>()
         {
             [typeof(string)] = "[a-zA-Z]+",
             [typeof(char*)] = "[a-zA-Z]+",
@@ -23,7 +24,9 @@ namespace RegexBuilder
         /// <summary>
         /// Extracts a class object from the specified regex pattern.
         /// </summary>
-        public static T Extract<T>(this string text, string regexPattern,
+        public static T Extract<T>(
+            this string text,
+            string regexPattern,
             bool matchStrict = false)
         {
             if (string.IsNullOrWhiteSpace(text))
@@ -37,33 +40,36 @@ namespace RegexBuilder
 
             var errors = new StringBuilder();
             var regex = new Regex(regexPattern, RegexOptions.Singleline);
+            regex.GetGroupNames().Dump("GroupNames");
             var match = regex.Match(text);
 
             if (!match.Success)
             {
-                errors.AppendLine($"No matches found! Could not extract a '{typeof(T).Name}' instance from regex pattern:\n{regexPattern}.\n");
+                errors.AppendLine(
+                    $"No matches found! Could not extract a '{typeof(T).Name}' instance from regex pattern:\n{regexPattern}.\n");
                 errors.AppendLine(text);
 
-                var missing = properties.Select(property => property.Name)
-                        .Except(regex.GetGroupNames());
-                if (missing.Any())
+                var missing = properties
+                    .Select(property => property.Name)
+                    .Except(regex.GetGroupNames())
+                    .ToArray();
+
+                if (missing.Length > 0)
                 {
                     errors.AppendLine("Properties without a mapped Group:");
                     missing.Aggregate(errors, (result, name) => result.AppendLine(name));
                 }
 
                 if (errors.Length > 0)
-                {
                     throw new Exception(errors.ToString());
-                }
             }
 
             if (matchStrict && match.Groups.Count - 1 != properties.Length)
             {
                 errors.AppendLine($"{MethodBase.GetCurrentMethod().Name}() " +
-                    $"WARNING: Number of Matched Groups ({match.Groups.Count}) " +
-                    $"does not equal the number of properties for the given class '{typeof(T).Name}'({properties.Length})!  " +
-                    $"Check the class type and regex pattern for errors and try again.");
+                                  $"WARNING: Number of Matched Groups ({match.Groups.Count}) " +
+                                  $"does not equal the number of properties for the given class '{typeof(T).Name}'({properties.Length})!  " +
+                                  $"Check the class type and regex pattern for errors and try again.");
 
                 errors.AppendLine("Values Parsed Successfully:");
 
@@ -71,7 +77,9 @@ namespace RegexBuilder
                 {
                     errors.Append($"{match.Groups[groupIndex].Value}\t");
                 }
+
                 errors.AppendLine();
+
                 throw new Exception(errors.ToString());
             }
 
@@ -82,9 +90,10 @@ namespace RegexBuilder
 
             foreach (var property in properties)
             {
-                string value = match?
-                    .Groups[property.Name]?
-                    .Value?
+                string value = match
+                    .Groups.SingleOrDefault(group => group.Name
+                        .Equals(property.Name, StringComparison.OrdinalIgnoreCase))
+                    ?.Value
                     .Trim();
 
                 if (!string.IsNullOrWhiteSpace(value))
@@ -99,7 +108,7 @@ namespace RegexBuilder
                 }
             }
 
-            return (T)instance;
+            return (T) instance;
         }
 
         public static string GenerateRegex<T>()

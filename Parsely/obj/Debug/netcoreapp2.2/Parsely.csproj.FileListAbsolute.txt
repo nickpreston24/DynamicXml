@@ -1,0 +1,13 @@
+/home/michael/Desktop/CodeProjects/Parsely/Parsely/bin/Debug/netcoreapp2.2/Parsely.deps.json
+/home/michael/Desktop/CodeProjects/Parsely/Parsely/bin/Debug/netcoreapp2.2/Parsely.runtimeconfig.json
+/home/michael/Desktop/CodeProjects/Parsely/Parsely/bin/Debug/netcoreapp2.2/Parsely.runtimeconfig.dev.json
+/home/michael/Desktop/CodeProjects/Parsely/Parsely/bin/Debug/netcoreapp2.2/Parsely.dll
+/home/michael/Desktop/CodeProjects/Parsely/Parsely/bin/Debug/netcoreapp2.2/Parsely.pdb
+/home/michael/Desktop/CodeProjects/Parsely/Parsely/obj/Debug/netcoreapp2.2/Parsely.csprojAssemblyReference.cache
+/home/michael/Desktop/CodeProjects/Parsely/Parsely/obj/Debug/netcoreapp2.2/Parsely.AssemblyInfoInputs.cache
+/home/michael/Desktop/CodeProjects/Parsely/Parsely/obj/Debug/netcoreapp2.2/Parsely.AssemblyInfo.cs
+/home/michael/Desktop/CodeProjects/Parsely/Parsely/obj/Debug/netcoreapp2.2/Parsely.dll
+/home/michael/Desktop/CodeProjects/Parsely/Parsely/obj/Debug/netcoreapp2.2/Parsely.pdb
+/home/michael/Desktop/CodeProjects/Parsely/Parsely/bin/Debug/netcoreapp2.2/Utils.dll
+/home/michael/Desktop/CodeProjects/Parsely/Parsely/bin/Debug/netcoreapp2.2/Utils.pdb
+/home/michael/Desktop/CodeProjects/Parsely/Parsely/obj/Debug/netcoreapp2.2/Parsely.csproj.CopyComplete

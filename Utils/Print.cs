@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Shared
+namespace Utils.Debugging
 {
     public static class PrintHelpers
     {
@@ -10,7 +10,7 @@ namespace Shared
 
         public static Action<string> PrintAction { get; set; } = Console.WriteLine;
 
-        private static void Print<T>(List<T> list)
+        static void Print<T>(List<T> list)
         {
             foreach (var obj in list)
                 Print(obj);
@@ -42,7 +42,7 @@ namespace Shared
             }
         }
 
-        private static void Print<T>(T item, Action<string> customPrint = null)
+        static void Print<T>(T item, Action<string> customPrint = null)
         {
             if (customPrint != null) PrintAction = customPrint;
             string text = item?.ToString();

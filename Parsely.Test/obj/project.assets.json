@@ -1206,6 +1206,7 @@
           "FakeItEasy": "5.5.0",
           "MP.StdLib": "1.0.0",
           "Newtonsoft.Json": "12.0.3",
+          "Utils": "1.0.0",
           "xunit": "2.4.1",
           "xunit.extensibility.core": "2.4.1"
         },
@@ -1216,17 +1217,30 @@
           "bin/placeholder/Parsely.dll": {}
         }
       },
-      "Shared/1.0.0": {
+      "TimeIt/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "Newtonsoft.Json": "12.0.3"
         },
         "compile": {
-          "bin/placeholder/Shared.dll": {}
+          "bin/placeholder/TimeIt.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Shared.dll": {}
+          "bin/placeholder/TimeIt.dll": {}
+        }
+      },
+      "Utils/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "compile": {
+          "bin/placeholder/Utils.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Utils.dll": {}
         }
       }
     }
@@ -4436,10 +4450,15 @@
       "path": "../Parsely/Parsely.csproj",
       "msbuildProject": "../Parsely/Parsely.csproj"
     },
-    "Shared/1.0.0": {
+    "TimeIt/1.0.0": {
       "type": "project",
-      "path": "../Shared/Shared.csproj",
-      "msbuildProject": "../Shared/Shared.csproj"
+      "path": "../TimeIt/TimeIt.csproj",
+      "msbuildProject": "../TimeIt/TimeIt.csproj"
+    },
+    "Utils/1.0.0": {
+      "type": "project",
+      "path": "../Utils/Utils.csproj",
+      "msbuildProject": "../Utils/Utils.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4447,14 +4466,14 @@
       "Microsoft.NET.Test.Sdk >= 16.4.0",
       "Microsoft.NETCore.App >= 2.2.0",
       "Parsely >= 1.0.0",
-      "Shared >= 1.0.0",
+      "TimeIt >= 1.0.0",
+      "Utils >= 1.0.0",
       "xunit >= 2.4.1",
       "xunit.runner.visualstudio >= 2.4.1"
     ]
   },
   "packageFolders": {
-    "/home/michael/.nuget/packages/": {},
-    "/opt/dotnet/sdk/NuGetFallbackFolder": {}
+    "/home/michael/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
@@ -4465,9 +4484,6 @@
       "packagesPath": "/home/michael/.nuget/packages/",
       "outputPath": "/home/michael/Desktop/CodeProjects/Parsely/Parsely.Test/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "/opt/dotnet/sdk/NuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "/home/michael/.config/NuGet/NuGet.Config"
       ],
@@ -4484,8 +4500,11 @@
             "/home/michael/Desktop/CodeProjects/Parsely/Parsely/Parsely.csproj": {
               "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/Parsely/Parsely.csproj"
             },
-            "/home/michael/Desktop/CodeProjects/Parsely/Shared/Shared.csproj": {
-              "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/Shared/Shared.csproj"
+            "/home/michael/Desktop/CodeProjects/Parsely/TimeIt/TimeIt.csproj": {
+              "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/TimeIt/TimeIt.csproj"
+            },
+            "/home/michael/Desktop/CodeProjects/Parsely/Utils/Utils.csproj": {
+              "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/Utils/Utils.csproj"
             }
           }
         }
@@ -4519,10 +4538,16 @@
           }
         },
         "imports": [
-          "net461"
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
         ],
         "assetTargetFallback": true,
-        "warn": true
+        "warn": true,
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.100/RuntimeIdentifierGraph.json"
       }
     }
   }

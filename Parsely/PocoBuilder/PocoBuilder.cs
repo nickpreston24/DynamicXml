@@ -13,10 +13,10 @@ namespace Parsely.Builders
     public sealed class PocoBuilder<T>
         where T : class
     {
-        private IExtract<T> extractor { get; set; }
+        IExtract<T> extractor { get; set; }
         public T Instance { get; private set; }
 
-        private PocoBuilder(PocoFormat pocoFormat) => SetFormat(pocoFormat);
+        PocoBuilder(PocoFormat pocoFormat) => SetFormat(pocoFormat);
 
         public PocoBuilder<T> SetFormat(PocoFormat pocoFormat)
         {
@@ -48,8 +48,8 @@ namespace Parsely.Builders
 
         class FilePaths
         {
-            private string saveFilePath;
-            private string sourceFilePath;
+            string saveFilePath;
+            string sourceFilePath;
             
             // Where to save Poco
             string SaveFilePath

@@ -11,8 +11,8 @@ namespace Parsely.Test
 {
     public partial class XMLStreamingTests : IDisposable
     {
-        private Assembly assembly = Assembly.GetExecutingAssembly();
-        private string[] testFiles;
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        string[] testFiles;
 
         public XMLStreamingTests()
         {
@@ -67,7 +67,7 @@ namespace Parsely.Test
             Assert.True(storesFromXmlFile.SequenceEqual(storesFromXmlString));
         }
 
-        private IEnumerable<Store> StreamFromFile()
+        IEnumerable<Store> StreamFromFile()
         {
             //Assemble
             string xmlFilePath = testFiles.First(fileName => fileName.Contains("Store.xml"));
@@ -83,7 +83,7 @@ namespace Parsely.Test
             return stores;
         }
 
-        private static IEnumerable<Store> StreamFromString()
+        static IEnumerable<Store> StreamFromString()
         {
             string filePath = "Stores.xml";
             string xml = "";
@@ -100,7 +100,7 @@ namespace Parsely.Test
 
         #region IDisposable Support
 
-        private bool disposedValue = false; // To detect redundant calls
+        bool disposedValue = false; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
         {

@@ -3,45 +3,42 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace Shared
+namespace TimeIt.Debugging
 {
     public class TimeIt : IDisposable
     {
-        private readonly string name;
-        private readonly TimeSpanUnit timeSpanUnit;
-        private readonly Stopwatch watch;
-        private TimeSpan elapsed;
-        private int units;
-
+        readonly string name;
+        readonly TimeSpanUnit timeSpanUnit;
+        readonly Stopwatch watch;
+        TimeSpan elapsed;
+        int units;
+        Action callback;
         public TimeSpan Elapsed => elapsed;
 
-        public static TimeIt Instance => GetTimer();
+        public static TimeIt Instance => Start();
         
-        public static TimeIt GetTimer(
+        public static TimeIt Start(
             TimeSpanUnit timeSpanUnit = TimeSpanUnit.Milliseconds,
+            Action callback = null,
             [CallerMemberName] string name = ""
-        ) => new TimeIt(timeSpanUnit, name);
-
-        private TimeIt()
-        {
-        }
-
-        private TimeIt(TimeSpanUnit timeSpanUnit = TimeSpanUnit.Milliseconds, [CallerMemberName] string name = "")
+        ) => new TimeIt(timeSpanUnit, callback, name);
+        
+        TimeIt(TimeSpanUnit timeSpanUnit = TimeSpanUnit.Milliseconds, Action callback = null, [CallerMemberName] string name = "")
         {
             this.name = name;
             this.timeSpanUnit = timeSpanUnit;
             watch = Stopwatch.StartNew();
         }
 
-        private static Dictionary<TimeSpanUnit, Func<TimeSpan, int>> spans = new Dictionary<TimeSpanUnit, Func<TimeSpan, int>>()
+        static Dictionary<TimeSpanUnit, Func<TimeSpan, int>> spans = new Dictionary<TimeSpanUnit, Func<TimeSpan, int>>()
         {
-            [TimeSpanUnit.Default] = ts => ts.Milliseconds,
-            [TimeSpanUnit.Minutes] = ts => ts.Days,
-            [TimeSpanUnit.Hours] = ts => ts.Hours,
-            [TimeSpanUnit.Minutes] = ts => ts.Minutes,
-            [TimeSpanUnit.Seconds] = ts => ts.Seconds,
-            [TimeSpanUnit.Milliseconds] = ts => ts.Milliseconds,
-            //[TimeSpanUnit.Ticks] = ts => ts.Ticks, //TODO: add a cast to long in this dictionary somehow
+            [TimeSpanUnit.Default] = timeSpan => timeSpan.Milliseconds,
+            [TimeSpanUnit.Minutes] = timeSpan => timeSpan.Days,
+            [TimeSpanUnit.Hours] = timeSpan => timeSpan.Hours,
+            [TimeSpanUnit.Minutes] = timeSpan => timeSpan.Minutes,
+            [TimeSpanUnit.Seconds] = timeSpan => timeSpan.Seconds,
+            [TimeSpanUnit.Milliseconds] = timeSpan => timeSpan.Milliseconds,
+            //[TimeSpanUnit.Ticks] = timeSpan => timeSpan.Ticks, //TODO: add a cast to long in this dictionary somehow
         };
 
         public void Dispose()
@@ -49,17 +46,18 @@ namespace Shared
             watch.Stop();
             elapsed = watch.Elapsed;
             units = spans[timeSpanUnit](elapsed);
+            callback();
             Print();
         }
 
-        private void Print()
+        void Print()
         {
             //Don't print zeroes:
             if (units == 0)
                 return;
 
             Console.WriteLine(ToString());
-            Debug.WriteLine(ToString());
+            System.Diagnostics.Debug.WriteLine(ToString());
         }
 
         public override string ToString()
@@ -84,21 +82,19 @@ namespace Shared
         /* Basic support for diagnosing funcs, lambdas, etc. */
         public static void WithTimer(this Action action)
         {
-            using (TimeIt.GetTimer())
+            using (TimeIt.Start())
                 action();
         }
-        public static T WithTimer<T>(this Func<T> action)
+        public static A WithTimer<A>(this Func<A> action)
         {
-            using (TimeIt.GetTimer())
+            using (TimeIt.Start())
                 return action();
         }
 
-        public static TResult WithTimer<T, TResult>(this Func<T, TResult> action, T value)
+        public static R WithTimer<A, R>(this Func<A, R> action, A value)
         {
-            using (TimeIt.GetTimer())
-            {
+            using (TimeIt.Start())
                 return action(value);
-            }
         }
     }
 }

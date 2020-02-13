@@ -6,12 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Maybe\**" />
-    <EmbeddedResource Remove="Maybe\**" />
-    <None Remove="Maybe\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FakeItEasy" Version="5.5.0" />
     <PackageReference Include="MP.StdLib" Version="1.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
@@ -21,5 +15,22 @@
 
   <ItemGroup>
     <Folder Include="MarkdownBuilder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Maybe\Maybe.cs" />
+    <Compile Remove="Maybe\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Maybe\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Maybe\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
 </Project>

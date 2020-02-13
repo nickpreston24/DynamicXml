@@ -5,9 +5,11 @@
 
     <IsPackable>false</IsPackable>
 
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8</LangVersion>
 
     <Authors>Michael Preston</Authors>
+
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -38,6 +40,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Parsely\Parsely.csproj" />
-    <ProjectReference Include="..\Shared\Shared.csproj" />
+    <ProjectReference Include="..\TimeIt\TimeIt.csproj" />
+    <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
 </Project>

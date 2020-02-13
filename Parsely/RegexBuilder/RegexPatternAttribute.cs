@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace RegexBuilder
 {
     public class RegexPatternAttribute : Attribute
     {
-        private string patternText;
+        string patternText;
 
         public RegexPatternAttribute(string patternText)
         {
@@ -13,6 +14,6 @@ namespace RegexBuilder
                 throw new Exception(nameof(patternText));
         }
 
-        private bool IsValid() => true;
+        bool IsValid() => throw new NotImplementedException();
     }
 }

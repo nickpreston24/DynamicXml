@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Newtonsoft.Json;
 using Formatting = System.Xml.Formatting;
 
-namespace Shared
+namespace Utils.Debugging
 {
-    public static class Dumper
+    public static partial class Dumper
     {
         public static T Dump<T>(this T obj, string displayName = null, bool ignoreNulls = false, Action<string> print = null)
         {
-            if (print == null) print = str => Debug.WriteLine(str);
+            if (print == null) print = str => Console.WriteLine(str);
 
             if (obj != null)
             {

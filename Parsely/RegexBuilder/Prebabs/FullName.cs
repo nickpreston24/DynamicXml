@@ -1,4 +1,6 @@
-﻿namespace RegexBuilder
+﻿using Parsely.RegexBuilder;
+
+namespace RegexBuilder
 {
     public class FullName
     {

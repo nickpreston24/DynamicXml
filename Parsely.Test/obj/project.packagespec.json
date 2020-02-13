@@ -6,9 +6,6 @@
     "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/Parsely.Test/Parsely.Test.csproj",
     "outputPath": "/home/michael/Desktop/CodeProjects/Parsely/Parsely.Test/obj/",
     "projectStyle": "PackageReference",
-    "fallbackFolders": [
-      "/opt/dotnet/sdk/NuGetFallbackFolder"
-    ],
     "originalTargetFrameworks": [
       "netcoreapp2.2"
     ],
@@ -22,8 +19,11 @@
           "/home/michael/Desktop/CodeProjects/Parsely/Parsely/Parsely.csproj": {
             "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/Parsely/Parsely.csproj"
           },
-          "/home/michael/Desktop/CodeProjects/Parsely/Shared/Shared.csproj": {
-            "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/Shared/Shared.csproj"
+          "/home/michael/Desktop/CodeProjects/Parsely/TimeIt/TimeIt.csproj": {
+            "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/TimeIt/TimeIt.csproj"
+          },
+          "/home/michael/Desktop/CodeProjects/Parsely/Utils/Utils.csproj": {
+            "projectPath": "/home/michael/Desktop/CodeProjects/Parsely/Utils/Utils.csproj"
           }
         }
       }
@@ -57,10 +57,16 @@
         }
       },
       "imports": [
-        "net461"
+        "net461",
+        "net462",
+        "net47",
+        "net471",
+        "net472",
+        "net48"
       ],
       "assetTargetFallback": true,
-      "warn": true
+      "warn": true,
+      "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.100/RuntimeIdentifierGraph.json"
     }
   }
 }

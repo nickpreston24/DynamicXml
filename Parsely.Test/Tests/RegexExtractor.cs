@@ -1,12 +1,13 @@
-﻿using Xunit;
+﻿using Parsely.RegexBuilder;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace RegexBuilder.Tests
 {
     public class RegexExtractorTests
     {
-        private readonly ITestOutputHelper debugger;
-        private static readonly string lineItem = "Michael     30     USA     3.4 abdc!xi#45?          ";
+        readonly ITestOutputHelper debugger;
+        static readonly string lineItem = "Michael     30     USA     3.4 abdc!xi#45?          ";
 
         public RegexExtractorTests(ITestOutputHelper debugger) => this.debugger = debugger;
 
@@ -22,9 +23,9 @@ namespace RegexBuilder.Tests
                 Country = "USA",
             };
             
-            Print(expected.ToString());
-            Person mike = lineItem.Extract<Person>(pattern);
-            Print(mike.ToString());
+            WriteLine(expected.ToString());
+            var mike = lineItem.Extract<Person>(pattern);
+            WriteLine(mike.ToString());
             Assert.Equal(mike, expected);
         }
 
@@ -40,7 +41,7 @@ namespace RegexBuilder.Tests
             };
             
             string pattern = expected.GenerateRegex();
-            Print(pattern);
+            WriteLine(pattern);
             Assert.NotNull(pattern);
 
             var actual = lineItem.Extract<Person>(pattern);
@@ -52,16 +53,17 @@ namespace RegexBuilder.Tests
         {
             string fullNameText = "Michael Nicholas Preston";
             FullName fullname = fullNameText;
-            Print(fullname.ToString());
+            WriteLine(fullname.ToString());
             var builder = new PatternBuilder<Person>();
             var regex = builder.Add<FullName>()
                 //.Add<Email>()
                 .Pattern;
             string pattern = regex.ToString();
-            Print(pattern);
+            WriteLine(pattern);
             Assert.NotNull(pattern);
         }
+
         
-        private void Print(string text) => debugger.WriteLine(text);
+        void WriteLine(string text) => debugger.WriteLine(text);
     }
 }
