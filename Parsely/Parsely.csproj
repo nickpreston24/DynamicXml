@@ -1,36 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-    <LangVersion>7.3</LangVersion>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>net8;netcoreapp2.2</TargetFrameworks>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FakeItEasy" Version="5.5.0" />
-    <PackageReference Include="MP.StdLib" Version="1.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.extensibility.core" Version="2.4.1" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="FakeItEasy" Version="5.5.0"/>
+        <!--        <PackageReference Include="MP.StdLib" Version="1.0.0"/>-->
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.3"/>
+        <PackageReference Include="xunit" Version="2.4.1"/>
+        <PackageReference Include="xunit.extensibility.core" Version="2.4.1"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="MarkdownBuilder\" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="MarkdownBuilder\"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Compile Include="Maybe\Maybe.cs" />
-    <Compile Remove="Maybe\**" />
-  </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Maybe\Maybe.cs"/>
+        <Compile Remove="Maybe\**"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Remove="Maybe\**" />
-  </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Remove="Maybe\**"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Maybe\**" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Remove="Maybe\**"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Utils\Utils.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Utils\Utils.csproj"/>
+    </ItemGroup>
 </Project>

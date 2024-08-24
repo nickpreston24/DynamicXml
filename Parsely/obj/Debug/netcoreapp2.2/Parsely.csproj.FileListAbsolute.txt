@@ -11,3 +11,11 @@
 /home/michael/Desktop/CodeProjects/Parsely/Parsely/bin/Debug/netcoreapp2.2/Utils.dll
 /home/michael/Desktop/CodeProjects/Parsely/Parsely/bin/Debug/netcoreapp2.2/Utils.pdb
 /home/michael/Desktop/CodeProjects/Parsely/Parsely/obj/Debug/netcoreapp2.2/Parsely.csproj.CopyComplete
+/home/nick/Desktop/projects/personal/DynamicXml/Parsely/obj/Debug/netcoreapp2.2/Parsely.csproj.AssemblyReference.cache
+/home/nick/Desktop/projects/personal/DynamicXml/Parsely/obj/Debug/netcoreapp2.2/Parsely.GeneratedMSBuildEditorConfig.editorconfig
+/home/nick/Desktop/projects/personal/DynamicXml/Parsely/obj/Debug/netcoreapp2.2/Parsely.AssemblyInfoInputs.cache
+/home/nick/Desktop/projects/personal/DynamicXml/Parsely/obj/Debug/netcoreapp2.2/Parsely.AssemblyInfo.cs
+/home/nick/Desktop/projects/personal/DynamicXml/Parsely/obj/Debug/netcoreapp2.2/Parsely.csproj.CoreCompileInputs.cache
+/home/nick/Desktop/projects/personal/DynamicXml/Parsely/obj/Debug/netcoreapp2.2/Parsely.sourcelink.json
+/home/nick/Desktop/projects/personal/DynamicXml/Parsely/obj/Debug/netcoreapp2.2/Parsely.dll
+/home/nick/Desktop/projects/personal/DynamicXml/Parsely/obj/Debug/netcoreapp2.2/Parsely.pdb
