@@ -10,10 +10,10 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Michael Preston")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Nicholas Preston")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+05ee6c0875e1de06ab6303874cead37341fb3247")]
 [assembly: System.Reflection.AssemblyProductAttribute("Parsely.Test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Parsely.Test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
