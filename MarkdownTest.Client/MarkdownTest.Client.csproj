@@ -2,11 +2,11 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFrameworks>net8.0;netcoreapp3.1</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Parsely\Parsely.csproj" />
+        <ProjectReference Include="..\Parsely\Parsely.csproj"/>
     </ItemGroup>
 
 </Project>

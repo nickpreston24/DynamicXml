@@ -33,7 +33,7 @@ namespace Parsely.Builders
                     throw new NotSupportedException($@"{pocoFormat.ToString()} format not yet supported!");
             }
 
-            var result = MP.StdLib.MathUtils.Square(2);
+            // var result = MP.StdLib.MathUtils.Square(2);
             // var result = 2.0.Square();
             return this;
         }
@@ -50,12 +50,12 @@ namespace Parsely.Builders
         {
             string saveFilePath;
             string sourceFilePath;
-            
+
             // Where to save Poco
             string SaveFilePath
             {
                 get => saveFilePath;
-                set => saveFilePath = !string.IsNullOrWhiteSpace(value) 
+                set => saveFilePath = !string.IsNullOrWhiteSpace(value)
                     ? value
                     : throw new ArgumentException("Value cannot be null or whitespace.", nameof(SaveFilePath));
             }
@@ -63,8 +63,8 @@ namespace Parsely.Builders
             // Where to get XML | JSON | Markdown
             string SourceFilePath
             {
-                get =>  sourceFilePath;
-                set => sourceFilePath = !string.IsNullOrWhiteSpace(value) 
+                get => sourceFilePath;
+                set => sourceFilePath = !string.IsNullOrWhiteSpace(value)
                     ? value
                     : throw new ArgumentException("Value cannot be null or whitespace.", nameof(SourceFilePath));
             }
